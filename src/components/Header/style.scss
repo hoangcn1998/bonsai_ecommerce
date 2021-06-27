@@ -1,0 +1,251 @@
+$primary-color: #758A53;
+
+@mixin center($display: flex, $content: center, $items: center) {
+  display: $display;
+  justify-content: $content;
+  align-items: $items;
+}
+
+@keyframes example {
+  from {width: 0;}
+  to {width: 100%;}
+}
+
+.header {
+  font-family: 'Playfair Display', serif;
+  @include center($content: initial);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  height: 5rem;
+
+  & > .menu__overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    background-color: #1d1d1f99;
+    z-index: 1;
+    transition: background-color linear 0.3s;
+    cursor: pointer;
+  }
+
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    background-color: #1d1d1f99;
+    z-index: 1;
+    transition: background-color linear 0.3s;
+    cursor: pointer;
+  }
+
+  &__logo {
+    padding-right: 11rem;
+    padding-left: 1.5rem;
+    width: 7rem;
+    height: 5rem;
+  }
+
+  &__menu {
+    @include center;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    height: 100%;
+
+    & > * {
+      margin: 0 1.5rem;
+      height: 100%;
+      @include center($content: initial);
+      cursor: pointer;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        background-color: $primary-color;
+        height: 3px;
+        bottom: 0;
+      }
+
+      &:hover  {
+        color: $primary-color;
+        transition: color 0.3s;
+        &::before {
+          animation-name: example;
+          animation-duration: 1s;  
+          animation-fill-mode: both;
+        }
+      }
+    }
+  }
+
+  &-group {
+    @include center;
+    padding-right: 1rem;
+
+    &__cart {
+      position: relative;
+
+      &--count {
+        position: absolute;
+        left: 1rem;
+        top: 0.7rem;
+        width: 1rem;
+        height: 1rem;
+        background-color: $primary-color;
+        border-radius: 50%;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+
+    & i {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    & > div {
+      padding: 0 0.5rem;
+    }
+
+    & > span {
+      position: relative;
+      @include center;
+
+      &::before {
+        font-family: FontAwesome;
+        content: "\f002";
+        position: absolute;
+        right: 1rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+    }
+
+    &__search {
+      width: 15rem;
+      height: 3rem;
+      background-color: #F4F4F4;
+      border: none;
+      outline: none;
+      border-radius: 5rem;
+
+      &::-webkit-input-placeholder {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        right: 1rem;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    @include center($content: space-between);
+
+    &__menu {
+      display: none;
+    }
+
+    &-group {
+      & input {
+        display: none;
+
+        &::-webkit-input-placeholder {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .header {
+    @include center($content: space-between);
+
+    &__menu {
+      display: none;
+    }
+
+    &-group {
+      & input {
+        display: none;
+
+        &::-webkit-input-placeholder {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .header {
+    @include center;
+
+    &__menu {
+      display: none;
+    }
+
+    &-group {
+      & input {
+        display: block;
+        width: 12rem;  
+        height: 3rem;
+
+        &::-webkit-input-placeholder {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .header {
+    &__menu {
+      display: flex;
+
+      &--item {
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+    }
+
+    &-group {
+      & input {
+        display: block;
+        width: 9rem;  
+        height: 3rem;
+
+        &::-webkit-input-placeholder {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .header {
+    &-group {
+
+      & input {
+      width: 15rem;
+      height: 3rem;
+      background-color: #F4F4F4;
+      border: none;
+      outline: none;
+      border-radius: 5rem;
+
+      &::-webkit-input-placeholder {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        right: 1rem;
+      }
+      }
+    }
+  }
+}
