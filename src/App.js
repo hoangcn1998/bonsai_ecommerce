@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import Header from './components/Header';
-import Menu from './components/Menu';
+import Header from './components/Customer/Header';
+import Menu from './components/Customer/Header/Menu';
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);

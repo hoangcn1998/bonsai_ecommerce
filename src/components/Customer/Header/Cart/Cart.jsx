@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
-import product1 from "../../../assests/images/product-1.jpeg";
+import product1 from "../../../../assests/images/product-1.jpeg";
 
 Cart.propTypes = {
   showCart: PropTypes.bool,
