@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import logo from "../../assests/images/logo-header.jpeg";
+import logo from "../../../assests/images/logo-header.jpeg";
 import Cart from "./Cart/Cart";
 import "./style.scss";
 
