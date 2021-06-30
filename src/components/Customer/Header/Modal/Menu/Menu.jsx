@@ -2,28 +2,28 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./style.scss";
 
-Menu.propTypes = {
+ModalMenu.propTypes = {
   showMenu: PropTypes.bool,
   onHandleToggleMenu: PropTypes.func,
 }
 
-Menu.defaultProps = {
+ModalMenu.defaultProps = {
   showMenu: false,
   onHandleToggleMenu: null,
 }
 
-function Menu(props) {
+function ModalMenu(props) {
   const { showMenu, onHandleToggleMenu } = props;
 
   function setStyle() {
     if (showMenu) {
       return {
-        transform: "translateX(0%)",
+        transform: "translateX(-150%)",
         transition: "all 0.3s",
       }
     } else {
       return {
-        transform: "translateX(-100%)",
+        transform: "translateX(-250%)",
         transition: "all 0.3s",
       }
     }
@@ -52,4 +52,4 @@ function Menu(props) {
   )
 }
 
-export default Menu;
+export default ModalMenu;

@@ -1,22 +1,14 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import logo from "../../../assests/images/logo-header.jpeg";
-import Cart from "./Cart/Cart";
+import logo from '../../../assests/images/logo-header.jpeg';
+import ModalCart from "./Modal/Cart/Cart";
+import ModalMenu from "./Modal/Menu/Menu";
 import "./style.scss";
 
-Header.propTypes = {
-  onHandleToggleMenu: PropTypes.func,
-  showMenu: PropTypes.bool,
-}
-
-Header.defaultProps = {
-  onHandleToggleMenu: null,
-  showMenu: false,
-}
-
 function Header(props) {
-  const { onHandleToggleMenu, showMenu } = props;
+
   const [showCart, setShowCart] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   function onToggleCart() {
     setShowCart(!showCart);
@@ -28,10 +20,12 @@ function Header(props) {
     }
   }
 
+  function onHandleToggleMenu() {
+    setShowMenu(!showMenu);
+  }
+
   return (
     <div className="header">
-      <div className={showCart ? "header__overlay" : ""} onClick={onToggleCart}></div>
-      <div className={showMenu ? "menu__overlay" : ""} onClick={onToggleMenu}></div>
       <img src={logo} alt="Logo Header" className="header__logo" />
       <ul className="header__menu">
         <li className="header__menu--item">Home</li>
@@ -53,7 +47,8 @@ function Header(props) {
           <i className="fa fa-bars" aria-hidden="true" />
         </div>
       </div>
-      <Cart showCart={showCart} onToggleCart={onToggleCart} />
+      <ModalCart showCart={showCart} onToggleCart={onToggleCart} />
+      <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu} />
     </div>
   )
 }

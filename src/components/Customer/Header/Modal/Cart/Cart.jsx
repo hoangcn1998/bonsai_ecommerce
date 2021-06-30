@@ -1,20 +1,20 @@
 import React from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
-import product1 from "../../../../assests/images/product-1.jpeg";
+import product1 from '../../../../../assests/images/product-1.jpeg'
 
-Cart.propTypes = {
+ModalCart.propTypes = {
   showCart: PropTypes.bool,
   onToggleCart: PropTypes.func,
 }
 
-Cart.defaultProps = {
+ModalCart.defaultProps = {
   showCart: false,
   onToggleCart: null,
 }
 
 
-function Cart(props) {
+function ModalCart(props) {
   const { showCart, onToggleCart } = props;
 
   function setStyle() {
@@ -74,4 +74,4 @@ function Cart(props) {
   )
 }
 
-export default Cart;
+export default ModalCart;
