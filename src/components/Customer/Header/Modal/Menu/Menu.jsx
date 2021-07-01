@@ -18,12 +18,12 @@ function ModalMenu(props) {
   function setStyle() {
     if (showMenu) {
       return {
-        transform: "translateX(-150%)",
+        transform: "translateX(0%)",
         transition: "all 0.3s",
       }
     } else {
       return {
-        transform: "translateX(-250%)",
+        transform: "translateX(-100%)",
         transition: "all 0.3s",
       }
     }

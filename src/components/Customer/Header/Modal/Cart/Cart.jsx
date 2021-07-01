@@ -16,6 +16,7 @@ ModalCart.defaultProps = {
 
 function ModalCart(props) {
   const { showCart, onToggleCart } = props;
+  console.log(onToggleCart)
 
   function setStyle() {
     if (showCart) {
