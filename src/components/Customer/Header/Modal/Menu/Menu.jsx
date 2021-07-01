@@ -2,17 +2,17 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./style.scss";
 
-Menu.propTypes = {
+ModalMenu.propTypes = {
   showMenu: PropTypes.bool,
   onHandleToggleMenu: PropTypes.func,
 }
 
-Menu.defaultProps = {
+ModalMenu.defaultProps = {
   showMenu: false,
   onHandleToggleMenu: null,
 }
 
-function Menu(props) {
+function ModalMenu(props) {
   const { showMenu, onHandleToggleMenu } = props;
 
   function setStyle() {
@@ -52,4 +52,4 @@ function Menu(props) {
   )
 }
 
-export default Menu;
+export default ModalMenu;
