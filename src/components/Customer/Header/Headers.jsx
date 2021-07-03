@@ -33,31 +33,34 @@ function Header(props) {
   }
 
   return (
-    <div className="header">
-      <div className={showCart ? "header__overlay" : ""} onClick={onToggleCart}></div>
-      <div className={showMenu ? "menu__overlay" : ""} onClick={onToggleMenu}></div>
-      <div className={showSignIn ? "signin__overlay" : ""} onClick={onToggleSignIn}></div>
-      <img src={logo} alt="Logo Header" className="header__logo" />
-      <NavMenu></NavMenu>
-      <div className="header-group">
-        <span>
-          <input type="text" className="header-group__search" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Search..." />
-        </span>
-        <div className="header-group__cart" onClick={onToggleCart}>
-          <i className="fa fa-shopping-basket" aria-hidden="true" />
-          <div className="header-group__cart--count">2</div>
+      <div className="header ">
+        <div className={showCart ? "header__overlay" : ""} onClick={onToggleCart}></div>
+        <div className={showMenu ? "menu__overlay" : ""} onClick={onToggleMenu}></div>
+        <div className={showSignIn ? "signin__overlay" : ""} onClick={onToggleSignIn}></div>
+        <img src={logo} alt="Logo Header" className="header__logo" />
+        <NavMenu></NavMenu>
+        <div className="header-group">
+          <span>
+            <input type="text" className="header-group__search" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Search..." />
+          </span>
+          <div className="header-group__cart" onClick={onToggleCart}>
+            <i className="fa fa-shopping-basket" aria-hidden="true" />
+            <div className="header-group__cart--count">2</div>
+          </div>
+          <div className="header-group__collap" onClick={onToggleMenu}>
+            <i className="fa fa-bars" aria-hidden="true" />
+          </div>
+          <div className="header-group__collap">
+            Thong
+          </div>
+          <div className="header-group__collap" onClick={onToggleSignIn}>
+          <i className="fa fa-sign-in" aria-hidden="true"></i>
+          </div>
         </div>
-        <div className="header-group__collap" onClick={onToggleMenu}>
-          <i className="fa fa-bars" aria-hidden="true" />
-        </div>
-        <div className="header-group__collap" onClick={onToggleSignIn}>
-         <i className="fa fa-sign-in" aria-hidden="true"></i>
-        </div>
+        <LoginRegister showSignIn={showSignIn} onToggleSignIn={onToggleSignIn}></LoginRegister>
+        <ModalCart showCart={showCart} onToggleCart={onToggleCart}/>
+        <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu}/>
       </div>
-      <LoginRegister showSignIn={showSignIn} onToggleSignIn={onToggleSignIn}></LoginRegister>
-      <ModalCart showCart={showCart} onToggleCart={onToggleCart}/>
-      <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu}/>
-    </div>
   )
 }
 

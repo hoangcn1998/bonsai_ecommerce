@@ -1,14 +1,34 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 const FormRegister = () => {
 
     const { register, handleSubmit, formState: { errors }, reset, watch } = useForm();
 
-    const password = watch("password", "");
+    const password = watch("Password", "");
 
     function onSubmit (data) {
-        console.log(data)
+        const {FirstName, LastName, Email, Phone, Password, RetypePassword, BirthDay, Sex, Address, District, City} = data;
+        axios.post('https://project--ecomerce.herokuapp.com/api/users', {
+            FirstName,
+            LastName,
+            Email,
+            Phone,
+            Password,
+            RetypePassword,
+            BirthDay,
+            Sex,
+            Address, 
+            District,
+            City
+          })
+          .then(function (response) {
+         
+          })
+          .catch(function (error) {
+         
+          });
         reset({ example: "", exampleRequired: "" });
     }
    
@@ -38,10 +58,10 @@ const FormRegister = () => {
             {errors.Phone && <span>Please enter valid data !</span>}<br/>
 
             <input type="password" placeholder="Password"
-              {...register( 'password', {required: true, pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g})}
+              {...register( 'Password', {required: true, pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g})}
             />
-            {errors.password?.type === 'required' && <span>Please enter valid data !</span>}
-            {errors.password?.type === 'pattern' && <span>least 8 characters: letter, number, special characters!</span>}<br/>
+            {errors.Password?.type === 'required' && <span>Please enter valid data !</span>}
+            {errors.Password?.type === 'pattern' && <span>least 8 characters: letter, number, special characters!</span>}<br/>
 
             <input type="password" placeholder="Retype Password"
              {...register( 'RetypePassword', {required: true,
