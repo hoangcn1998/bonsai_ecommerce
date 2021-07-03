@@ -1,11 +1,10 @@
-import PropTypes from "prop-types";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import logo from '../../../assests/images/logo-header.jpeg';
+import ModalCart from "./Modal/Cart/Cart";
+import LoginRegister from "./Modal/Login/register/LoginRegister";
+import ModalMenu from "./Modal/Menu/Menu";
 import MyContext from "./Mycontext";
 import NavMenu from "./NavMenu/NavMenu";
-import ModalCart from "./Modal/Cart/Cart";
-import ModalMenu from "./Modal/Menu/Menu";
-import LoginRegister from "./Modal/Login/register/LoginRegister";
 import "./style.scss";
 
 function Header(props) {
@@ -61,12 +60,12 @@ function Header(props) {
             {nameAccount}
           </div>
           <div className="header-group__collap" onClick={onToggleSignIn}>
-          <i className="fa fa-sign-in" aria-hidden="true"></i>
+            <i className="fa fa-sign-in" aria-hidden="true"></i>
           </div>
         </div>
         <LoginRegister showSignIn={showSignIn} onToggleSignIn={onToggleSignIn}></LoginRegister>
-        <ModalCart showCart={showCart} onToggleCart={onToggleCart}/>
-        <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu}/>
+        <ModalCart showCart={showCart} onToggleCart={onToggleCart} />
+        <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu} />
       </div>
     </MyContext.Provider>
   )

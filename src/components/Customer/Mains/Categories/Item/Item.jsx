@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Item(props) {
-  const { categories } = props;
   const classes = useStyles();
 
   return (
