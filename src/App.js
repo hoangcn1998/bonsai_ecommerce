@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React from "react";
 import './App.css';
-import Customer from './components/Customer/Customer';
 import Admin from './components/Admin/Admin';
+import Customer from './components/Customer/Customer';
 
 function App() {
 
