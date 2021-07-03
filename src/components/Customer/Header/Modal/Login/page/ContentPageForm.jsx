@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import FormLogin from './FormLogin';
 import FormRegister from './FormRegister';
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
-const contentPage = () => {
+const ContentPageForm = () => {
     return (
         <>
             <Route exact path="/" component={FormLogin}></Route>
@@ -12,4 +12,4 @@ const contentPage = () => {
     );
 };
 
-export default contentPage;
+export default ContentPageForm;

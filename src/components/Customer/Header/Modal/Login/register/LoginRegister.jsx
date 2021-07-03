@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "./style.scss";
-import ContentPage from '../page/ContentPage';
+import ContentPageForm from '../page/ContentPageForm';
+import MyContext from '../../../Mycontext';
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 const LoginRegister = (prop) => {
@@ -40,7 +41,7 @@ const LoginRegister = (prop) => {
                         <button type="button" className="button__group--register">Register</button>
                     </Link>
                 </div>
-                <ContentPage></ContentPage>
+                <ContentPageForm></ContentPageForm>
                 <div className="login__faceBook">Or login with<a href="#">FaceBook</a></div>
            </div>
         </div>

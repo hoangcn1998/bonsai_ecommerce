@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import logo from '../../../assests/images/logo-header.jpeg';
+import MyContext from "./Mycontext";
 import NavMenu from "./NavMenu/NavMenu";
 import ModalCart from "./Modal/Cart/Cart";
 import ModalMenu from "./Modal/Menu/Menu";
 import LoginRegister from "./Modal/Login/register/LoginRegister";
-
 import "./style.scss";
 
 function Header(props) {
@@ -13,6 +13,7 @@ function Header(props) {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
+  const [nameAccount, setNameAccount] = useState('Thong');
 
   function onToggleCart() {
     setShowCart(!showCart);
@@ -33,6 +34,12 @@ function Header(props) {
   }
 
   return (
+    <MyContext.Provider value={
+      {
+        nameAccount,
+        setNameAccount,
+      }
+    } >
       <div className="header ">
         <div className={showCart ? "header__overlay" : ""} onClick={onToggleCart}></div>
         <div className={showMenu ? "menu__overlay" : ""} onClick={onToggleMenu}></div>
@@ -51,7 +58,7 @@ function Header(props) {
             <i className="fa fa-bars" aria-hidden="true" />
           </div>
           <div className="header-group__collap">
-            Thong
+            {nameAccount}
           </div>
           <div className="header-group__collap" onClick={onToggleSignIn}>
           <i className="fa fa-sign-in" aria-hidden="true"></i>
@@ -61,6 +68,7 @@ function Header(props) {
         <ModalCart showCart={showCart} onToggleCart={onToggleCart}/>
         <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu}/>
       </div>
+    </MyContext.Provider>
   )
 }
 
