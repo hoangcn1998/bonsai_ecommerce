@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Route, Switch, useLocation } from 'react-router-dom';
+import React from "react";
 import './App.css';
-import Customer from './components/Customer/Customer';
 import Admin from './components/Admin/Admin';
+import Customer from './components/Customer/Customer';
 
 function App() {
 

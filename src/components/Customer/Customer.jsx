@@ -7,7 +7,7 @@ import Footer from './Footer/Footer';
 const Customer = () => {
 
     return (
-      <div className="App">
+      <div className="customer">
         <Header/>
         <Mains></Mains>
         <Footer></Footer>
