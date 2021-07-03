@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import logo from '../../../assests/images/logo-header.jpeg';
+import NavMenu from "./NavMenu/NavMenu";
 import ModalCart from "./Modal/Cart/Cart";
 import ModalMenu from "./Modal/Menu/Menu";
 import LoginRegister from "./Modal/Login/register/LoginRegister";
@@ -37,14 +38,7 @@ function Header(props) {
       <div className={showMenu ? "menu__overlay" : ""} onClick={onToggleMenu}></div>
       <div className={showSignIn ? "signin__overlay" : ""} onClick={onToggleSignIn}></div>
       <img src={logo} alt="Logo Header" className="header__logo" />
-      <ul className="header__menu">
-        <li className="header__menu--item">Home</li>
-        <li className="header__menu--item">Shop</li>
-        <li className="header__menu--item">Features</li>
-        <li className="header__menu--item">Portfolio</li>
-        <li className="header__menu--item">Blog</li>
-        <li className="header__menu--item">About Us</li>
-      </ul>
+      <NavMenu></NavMenu>
       <div className="header-group">
         <span>
           <input type="text" className="header-group__search" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Search..." />
