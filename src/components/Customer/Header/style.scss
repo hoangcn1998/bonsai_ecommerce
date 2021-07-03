@@ -56,14 +56,13 @@ $primary-color: #758A53;
   &__logo {
     // padding-right: 11rem;
     // padding-left: 1.5rem;
-    margin-right: 4rem;
-    width: 7rem;
+    margin: 0 1rem;
     height: 5rem;
   }
 
   &__menu {
     @include center;
-    margin: 0 7rem;
+    margin: 0 auto;
     font-size: 1.1rem;
     height: 100%;
 
@@ -96,7 +95,7 @@ $primary-color: #758A53;
 
   &-group {
     @include center;
-    padding-right: 1rem;
+    margin: 0 1rem;
 
     &__cart {
       position: relative;
@@ -177,16 +176,15 @@ $primary-color: #758A53;
 
 @media only screen and (min-width: 576px) {
   .header {
-    @include center($content: space-between);
-
     &__menu {
       display: none;
     }
 
     &-group {
+      width: 80%;
       & input {
-        display: none;
-
+      display: block;
+  
         &::-webkit-input-placeholder {
           font-size: 1rem;
         }
@@ -204,9 +202,10 @@ $primary-color: #758A53;
     }
 
     &-group {
+      margin: 0 auto;
       & input {
         display: block;
-        width: 12rem;  
+        width: 25rem;  
         height: 3rem;
 
         &::-webkit-input-placeholder {
@@ -221,6 +220,7 @@ $primary-color: #758A53;
   .header {
     &__menu {
       display: flex;
+      width: 40%;
 
       &--item {
         font-size: 1rem;

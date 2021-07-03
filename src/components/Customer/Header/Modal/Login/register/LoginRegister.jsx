@@ -6,8 +6,6 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 const LoginRegister = (prop) => {
 
     const { showSignIn, onToggleSignIn } = prop;
-    console.log(showSignIn)
-    console.log(onToggleSignIn)
 
     function setStyle() {
       if (showSignIn) {
@@ -28,7 +26,7 @@ const LoginRegister = (prop) => {
         onToggleSignIn();
       }
     }
-  
+
     return (
         <div className="form__signin" style={setStyle()}>
             <i className="fa fa-times form__signin--close" aria-hidden="true" onClick={onHandleClick}></i>
@@ -43,7 +41,6 @@ const LoginRegister = (prop) => {
                     </Link>
                 </div>
                 <ContentPage></ContentPage>
-                <button type="button" className="button__submit">Login</button><br></br>
                 <div className="login__faceBook">Or login with<a href="#">FaceBook</a></div>
            </div>
         </div>
