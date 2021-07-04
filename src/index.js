@@ -1,5 +1,6 @@
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-slideshow-image/dist/styles.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
