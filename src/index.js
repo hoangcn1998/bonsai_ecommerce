@@ -1,5 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+<<<<<<< HEAD
 import 'font-awesome/css/font-awesome.min.css';
+=======
+import 'react-slideshow-image/dist/styles.css'
+>>>>>>> 4087f24 (Views Interface ProductDetails)
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
