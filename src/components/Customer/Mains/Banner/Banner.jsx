@@ -12,11 +12,13 @@ function Banner(props) {
         <button className="btn btn--primary banner__title-group">
           <div className="banner__title-group--overlay"></div>
           <span>Shop Now</span>
-          <span><i className="fa fa-long-arrow-right"></i></span>
+          <span>
+            <i className="fa fa-long-arrow-right"></i>
+          </span>
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 export default Banner;

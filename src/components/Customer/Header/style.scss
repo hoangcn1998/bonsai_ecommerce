@@ -172,6 +172,9 @@ $primary-color: #758A53;
       }
     }
   }
+   .cart {
+    width: 75%;
+  }
 }
 
 @media only screen and (min-width: 576px) {
@@ -190,6 +193,9 @@ $primary-color: #758A53;
         }
       }
     }
+  }
+  .cart {
+    width: 60%;
   }
 }
 
@@ -239,6 +245,9 @@ $primary-color: #758A53;
         }
       }
     }
+  }
+  .cart {
+    width: 40%;
   }
 }
 
