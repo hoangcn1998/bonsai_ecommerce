@@ -1,6 +1,26 @@
 import React from "react";
+import { useState } from "react";
 
 const ProductContent = () => {
+  const initial = parseInt(localStorage.getItem("countProductDetails") || 0);
+  const [countProductDetails, setCountProductDetails] = useState(initial);
+
+  function handlerClickMinus() {
+    const newCountProductDetails = countProductDetails - 1;
+    if (countProductDetails == 0) {
+      return countProductDetails;
+    } else {
+      setCountProductDetails(newCountProductDetails);
+      localStorage.setItem("countProductDetails", newCountProductDetails);
+    }
+  }
+
+  function handlerClickPlus() {
+    const newCountProductDetails = countProductDetails + 1;
+    localStorage.setItem("countProductDetails", newCountProductDetails);
+    setCountProductDetails(newCountProductDetails);
+  }
+
   return (
     <div className="productDetails__content">
       <h1 className="productDetails__title">Succulent Plant</h1>
@@ -31,13 +51,21 @@ const ProductContent = () => {
             role="group"
             aria-label="Second group"
           >
-            <button type="button" className="btn btn-light">
+            <button
+              type="button"
+              className="btn btn-light"
+              onClick={handlerClickMinus}
+            >
               -
             </button>
             <button disabled type="button" className="btn btn-light">
-              0
+              {countProductDetails}
             </button>
-            <button type="button" className="btn btn-light">
+            <button
+              type="button"
+              className="btn btn-light"
+              onClick={handlerClickPlus}
+            >
               +
             </button>
           </div>
