@@ -8,10 +8,13 @@ const ContentPageProducts = () => {
     <>
       <Route
         exact
-        path="/productDetails/Description"
+        path="/Products/productDetails/Description"
         component={DescriptionProducts}
       ></Route>
-      <Route path="/productDetails/Reviews" component={ReviewProducts}></Route>
+      <Route
+        path="/Products/productDetails/Reviews"
+        component={ReviewProducts}
+      ></Route>
     </>
   );
 };
@@ -21,10 +24,10 @@ const ProductContentTabs = () => {
     <div className="productDetails__content--tabs">
       <div className="producDetails__tabs">
         <ul>
-          <Link to="/productDetails/Description">
+          <Link to="/Products/productDetails/Description">
             <li>Description</li>
           </Link>
-          <Link to="/productDetails/Reviews">
+          <Link to="/Products/productDetails/Reviews">
             <li>Reviews(2)</li>
           </Link>
         </ul>

@@ -66,6 +66,16 @@ $primary-color: #758A53;
     font-size: 1.1rem;
     height: 100%;
 
+    li a {
+      text-decoration: none;
+      color: black;
+    }
+
+    li a:hover {
+      color: $primary-color;
+      transition: all .2s;
+    }
+
     & > * {
       margin: 0 1.5rem;
       height: 100%;

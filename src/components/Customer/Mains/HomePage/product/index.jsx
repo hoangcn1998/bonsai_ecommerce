@@ -13,7 +13,7 @@ function Products() {
       <h2 className="products__title">Popular Products</h2>
       <ItemProduct />
     </div>
-  )
+  );
 }
 
 export default Products;

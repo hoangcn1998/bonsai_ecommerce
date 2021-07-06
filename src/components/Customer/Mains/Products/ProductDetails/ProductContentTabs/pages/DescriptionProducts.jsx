@@ -16,14 +16,17 @@ const DescriptionProducts = () => {
       </p>
       <div className="images">
         <img
+          alt="img"
           className="img4"
           src="http://landing.engotheme.com/html/hamadryad/demo/images/product-detail/4.jpg"
         ></img>
         <img
+          alt="img"
           className="img1"
           src="http://landing.engotheme.com/html/hamadryad/demo/images/product-detail/1.jpg"
         ></img>
         <img
+          alt="img"
           className="img4"
           src="http://landing.engotheme.com/html/hamadryad/demo/images/product-detail/4.jpg"
         ></img>

@@ -2,6 +2,7 @@ import { Grid } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import React from "react";
 import product1 from "../../../../../../assests/images/product-1.jpeg";
+import { Link } from "react-router-dom";
 
 function ItemProduct(props) {
   const [value, setValue] = React.useState(2);
@@ -12,7 +13,9 @@ function ItemProduct(props) {
         <div className="products__main--overlay">
           <ul className="products__main--overlay--action">
             <li>
-              <i className="fa fa-eye" />
+              <Link to="/Products">
+                <i className="fa fa-eye" />
+              </Link>
             </li>
             <li>
               <i className="fa fa-heart-o" />
