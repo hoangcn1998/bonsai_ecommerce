@@ -14,17 +14,17 @@ const ProductSlideShow = () => {
       <Slide>
         <div className="each-slide">
           <div>
-            <img src={slideImages[0]}></img>
+            <img alt="img" src={slideImages[0]}></img>
           </div>
         </div>
         <div className="each-slide">
           <div>
-            <img src={slideImages[1]}></img>
+            <img alt="img" src={slideImages[1]}></img>
           </div>
         </div>
         <div className="each-slide">
           <div>
-            <img src={slideImages[2]}></img>
+            <img alt="img" src={slideImages[2]}></img>
           </div>
         </div>
       </Slide>

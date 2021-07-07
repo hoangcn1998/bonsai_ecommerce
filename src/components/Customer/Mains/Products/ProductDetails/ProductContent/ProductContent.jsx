@@ -7,7 +7,7 @@ const ProductContent = () => {
 
   function handlerClickMinus() {
     const newCountProductDetails = countProductDetails - 1;
-    if (countProductDetails == 0) {
+    if (countProductDetails === 0) {
       return countProductDetails;
     } else {
       setCountProductDetails(newCountProductDetails);
@@ -90,13 +90,13 @@ const ProductContent = () => {
       </div>
       <div className="productDetails__share">
         Share:
-        <a href="#">
+        <a href="facebook.com">
           <i className="fa fa-facebook" aria-hidden="true"></i>
         </a>
-        <a href="#">
+        <a href="twitter.com">
           <i className="fa fa-twitter" aria-hidden="true"></i>
         </a>
-        <a href="#">
+        <a href="instagram.com">
           <i className="fa fa-instagram" aria-hidden="true"></i>
         </a>
       </div>
