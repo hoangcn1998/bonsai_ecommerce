@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import logo from '../../../assests/images/logo-header.jpeg';
+import logo from "../../../assests/images/logo-header.jpeg";
 import ModalCart from "./Modal/Cart/Cart";
-import LoginRegister from "./Modal/Login/register/LoginRegister";
+import LoginRegister from "./Modal/register/LoginRegister";
 import ModalMenu from "./Modal/Menu/Menu";
-import MyContext from "./Mycontext";
 import NavMenu from "./NavMenu/NavMenu";
 import "./style.scss";
 
 function Header(props) {
-
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
-  const [nameAccount, setNameAccount] = useState('Thong');
 
   function onToggleCart() {
     setShowCart(!showCart);
@@ -25,7 +22,7 @@ function Header(props) {
   }
 
   function onToggleSignIn() {
-    setShowSignIn(!showSignIn)
+    setShowSignIn(!showSignIn);
   }
 
   function onHandleToggleMenu() {
@@ -33,42 +30,49 @@ function Header(props) {
   }
 
   return (
-    <MyContext.Provider value={
-      {
-        nameAccount,
-        setNameAccount,
-      }
-    } >
-      <div className="header ">
-        <div className={showCart ? "header__overlay" : ""} onClick={onToggleCart}></div>
-        <div className={showMenu ? "menu__overlay" : ""} onClick={onToggleMenu}></div>
-        <div className={showSignIn ? "signin__overlay" : ""} onClick={onToggleSignIn}></div>
-        <img src={logo} alt="Logo Header" className="header__logo" />
-        <NavMenu></NavMenu>
-        <div className="header-group">
-          <span>
-            <input type="text" className="header-group__search" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Search..." />
-          </span>
-          <div className="header-group__cart" onClick={onToggleCart}>
-            <i className="fa fa-shopping-basket" aria-hidden="true" />
-            <div className="header-group__cart--count">2</div>
-          </div>
-          <div className="header-group__collap" onClick={onToggleMenu}>
-            <i className="fa fa-bars" aria-hidden="true" />
-          </div>
-          <div className="header-group__collap">
-            {nameAccount}
-          </div>
-          <div className="header-group__collap" onClick={onToggleSignIn}>
-            <i className="fa fa-sign-in" aria-hidden="true"></i>
-          </div>
+    <div className="header ">
+      <div
+        className={showCart ? "header__overlay" : ""}
+        onClick={onToggleCart}
+      ></div>
+      <div
+        className={showMenu ? "menu__overlay" : ""}
+        onClick={onToggleMenu}
+      ></div>
+      <div
+        className={showSignIn ? "signin__overlay" : ""}
+        onClick={onToggleSignIn}
+      ></div>
+      <img src={logo} alt="Logo Header" className="header__logo" />
+      <NavMenu></NavMenu>
+      <div className="header-group">
+        <span>
+          <input
+            type="text"
+            className="header-group__search"
+            placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Search..."
+          />
+        </span>
+        <div className="header-group__cart" onClick={onToggleCart}>
+          <i className="fa fa-shopping-basket" aria-hidden="true" />
+          <div className="header-group__cart--count">2</div>
         </div>
-        <LoginRegister showSignIn={showSignIn} onToggleSignIn={onToggleSignIn}></LoginRegister>
-        <ModalCart showCart={showCart} onToggleCart={onToggleCart} />
-        <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu} />
+        <div className="header-group__collap" onClick={onToggleMenu}>
+          <i className="fa fa-bars" aria-hidden="true" />
+        </div>
+        <div className="header-group__collap">Thong</div>
+        <div className="header-group__collap" onClick={onToggleSignIn}>
+          <i className="fa fa-sign-in" aria-hidden="true"></i>
+        </div>
       </div>
-    </MyContext.Provider>
-  )
+      <LoginRegister
+        showSignIn={showSignIn}
+        onToggleSignIn={onToggleSignIn}
+      ></LoginRegister>
+      <ModalCart showCart={showCart} onToggleCart={onToggleCart} />
+      <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu} />
+    </div>
+  );
 }
 
 export default Header;
