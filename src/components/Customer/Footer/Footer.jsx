@@ -14,21 +14,21 @@ const Footer = () => {
             ></img>
           </div>
           <div className="footer__contact--address">
-            <i class="fa fa-home" aria-hidden="true"></i>
+            <i className="fa fa-home" aria-hidden="true"></i>
             <span>
               Address: PO Box 16122 Collins
               <br /> Street West Victoria 8007, Australia
             </span>
           </div>
           <div className="footer__contact--email">
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            <i className="fa fa-envelope-o" aria-hidden="true"></i>
             <span>
               Email:
               <br /> Contact@hamadryad.com
             </span>
           </div>
           <div className="footer__contact--phone">
-            <i class="fa fa-mobile" aria-hidden="true"></i>
+            <i className="fa fa-mobile" aria-hidden="true"></i>
             <span>
               Phone:
               <br /> (+84) 123 456 7890
@@ -49,16 +49,16 @@ const Footer = () => {
           <div className="footer__info--social">
             Follow us:
             <a href="#1111">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
+              <i className="fa fa-facebook" aria-hidden="true"></i>
             </a>
             <a href="#1111">
-              <i class="fa fa-instagram" aria-hidden="true"></i>
+              <i className="fa fa-instagram" aria-hidden="true"></i>
             </a>
             <a href="#1111">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
+              <i className="fa fa-twitter" aria-hidden="true"></i>
             </a>
             <a href="#1111">
-              <i class="fa fa-youtube-square" aria-hidden="true"></i>
+              <i className="fa fa-youtube-square" aria-hidden="true"></i>
             </a>
           </div>
         </div>

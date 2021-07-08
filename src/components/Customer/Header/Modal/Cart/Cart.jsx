@@ -1,21 +1,20 @@
 import React from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
-import product1 from '../../../../../assests/images/product-1.jpeg'
+import product1 from "../../../../../assests/images/product-1.jpeg";
+import { Link } from "react-router-dom";
 
 ModalCart.propTypes = {
   showCart: PropTypes.bool,
   onToggleCart: PropTypes.func,
-}
+};
 
 ModalCart.defaultProps = {
   showCart: false,
   onToggleCart: null,
-}
-
+};
 
 function ModalCart(props) {
-  
   const { showCart, onToggleCart } = props;
 
   function setStyle() {
@@ -23,12 +22,12 @@ function ModalCart(props) {
       return {
         transform: "translateX(0%)",
         transition: "all 0.3s",
-      }
+      };
     } else {
       return {
         transform: "translateX(100%)",
         transition: "all 0.3s",
-      }
+      };
     }
   }
 
@@ -41,7 +40,11 @@ function ModalCart(props) {
   return (
     <div className="cart" style={setStyle()}>
       <div className="cart__header">
-        <i className="fa fa-times cart__header--close" aria-hidden="true" onClick={onHandleClick}></i>
+        <i
+          className="fa fa-times cart__header--close"
+          aria-hidden="true"
+          onClick={onHandleClick}
+        ></i>
         <h3 className="cart__header--title">YOUR CART</h3>
         <p className="cart__header--count">2</p>
       </div>
@@ -68,11 +71,15 @@ function ModalCart(props) {
         <p className="cart__total--price">$190.000</p>
       </div>
       <div className="cart__action">
-        <button className="cart__action--view">VIEWCART</button>
-        <button className="cart__action--checkout">CHECKOUT</button>
+        <Link to="/ShoppingCart">
+          <button className="cart__action--view">VIEWCART</button>
+        </Link>
+        <Link to="/Checkout">
+          <button className="cart__action--checkout">CHECKOUT</button>
+        </Link>
       </div>
     </div>
-  )
+  );
 }
 
 export default ModalCart;

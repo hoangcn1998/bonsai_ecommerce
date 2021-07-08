@@ -86,23 +86,47 @@
     display: flex;
     height: 4rem;
 
-    & > * {
-      cursor: pointer;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: bold;
-    }
-
-    &--view {
+    a {
+      display: flex;
+      justify-content: center;
+      text-decoration: none;
       flex-grow: 1;
       background-color: #2A2A2A;
+
+      button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: bold;
+        background-color: #2A2A2A;
+      }
+
+      .cart__action--checkout {
+         flex-grow: 1;
+      background-color: #000;
+      }
     }
 
-    &--checkout {
-      flex-grow: 1;
-      background-color: #000;
-    }
+    // & > * {
+    //   cursor: pointer;
+    //   border: none;
+    //   outline: none;
+    //   color: #fff;
+    //   font-size: 0.7rem;
+    //   font-weight: bold;
+    // }
+
+    //    &--view {
+    //   flex-grow: 1;
+    //   background-color: #2A2A2A;
+    // }
+
+
+    // &--checkout {
+    //   flex-grow: 1;
+    //   background-color: #000;
+    // }
   }
 }
