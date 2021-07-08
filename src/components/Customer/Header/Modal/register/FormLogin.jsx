@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 import { useForm } from "react-hook-form";
 
 const FormLogin = () => {
@@ -11,6 +13,22 @@ const FormLogin = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    axios
+      .post("http://localhost:3000/api/signin", data)
+      .then((res) => {
+        const accessToken = res.data.accessToken;
+        const user = jwt_decode(accessToken);
+        console.log(user);
+        axios
+          .get(`http://localhost:3000/api/users/${user.sub}`)
+          .then((res) => {
+            const user = res.data;
+            console.log(`get user by id`, user);
+            console.log("user role", user.role);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
     reset({ example: "", exampleRequired: "" });
   };
 
@@ -18,21 +36,21 @@ const FormLogin = () => {
     <form className="form form__login" onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
-        placeholder="Phone number"
-        {...register("PhoneNumber", {
+        placeholder="Email"
+        {...register("email", {
           required: true,
-          pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
+          pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
         })}
       />
-      {errors.PhoneNumber && <span>Please enter valid data !</span>}
+      {errors.email && <span>Please enter valid data !</span>}
       <br />
 
       <input
         type="password"
         placeholder="Password"
-        {...register("Password", { required: true })}
+        {...register("password", { required: true })}
       />
-      {errors.Password && <span>Please enter valid data !</span>}
+      {errors.password && <span>Please enter valid data !</span>}
       <br />
 
       <button type="submit" className="button__submit">

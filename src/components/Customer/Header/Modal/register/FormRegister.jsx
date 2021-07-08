@@ -43,8 +43,6 @@ const FormRegister = () => {
       })
       .then(function (response) {})
       .catch(function (error) {});
-
-    setNameAccount(LastName);
     reset({ example: "", exampleRequired: "" });
   }
 
