@@ -16,7 +16,7 @@ const LoginRegister = (prop) => {
       };
     } else {
       return {
-        transform: "translateX(100%)",
+        transform: "translateX(150%)",
         transition: "all 0.3s",
       };
     }

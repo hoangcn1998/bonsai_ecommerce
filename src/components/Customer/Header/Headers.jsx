@@ -5,6 +5,7 @@ import LoginRegister from "./Modal/register/LoginRegister";
 import ModalMenu from "./Modal/Menu/Menu";
 import NavMenu from "./NavMenu/NavMenu";
 import "./style.scss";
+import { Link } from "react-router-dom";
 
 function Header(props) {
   const [showCart, setShowCart] = useState(false);
@@ -53,11 +54,17 @@ function Header(props) {
             placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Search..."
           />
         </span>
-        <div className="header-group__cart" onClick={onToggleCart}>
+        <div className="header-group__cart">
+          <Link to='/ShoppingCart'>
+          <i className="fa fa-shopping-basket" aria-hidden="true" />
+          </Link>
+          <div className="header-group__cart--count">2</div>
+        </div>
+        <div className="header-group__cart  header-group__cart-mobile" onClick={onToggleCart}>
           <i className="fa fa-shopping-basket" aria-hidden="true" />
           <div className="header-group__cart--count">2</div>
         </div>
-        <div className="header-group__collap" onClick={onToggleMenu}>
+        <div className="header-group__collap header-group__collap-mobile " onClick={onToggleMenu}>
           <i className="fa fa-bars" aria-hidden="true" />
         </div>
         <div className="header-group__collap">Thong</div>
