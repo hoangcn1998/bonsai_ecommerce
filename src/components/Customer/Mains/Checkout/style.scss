@@ -1,0 +1,55 @@
+.checkout {
+    margin: 3rem 0;
+    font-size: 1.5rem;
+    color: #758A53;
+
+    .userform {
+        padding: 0 3rem;
+        border-right: 2px solid rgba(0, 0, 0, 0.1);
+
+        h1 {
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            margin: 1rem 0;
+        }
+
+        button {
+            margin-top: 1rem;
+            width: 100%;
+            background-color: rgba(128, 128, 128, 0.199);
+        }
+
+         button:hover, button:active {
+            transition: all .3s;
+            background-color: #758A53 ;
+            color: white;
+         }
+    }
+
+    .OrderDetails {
+        padding-left: 1rem;
+
+        h1 {
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        &__title, &__item, .deliverycharges, .totalprice {
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 1.3rem;
+            margin: 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+            strong{
+                font-weight: bold;
+            }
+        }
+
+        
+    }
+}

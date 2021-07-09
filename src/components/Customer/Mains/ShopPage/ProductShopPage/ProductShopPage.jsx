@@ -1,10 +1,10 @@
 import React from "react";
-import ItemProduct from "../../HomePage/product/ItemProduct";
+import ItemProducts from "./ItemProducts/ItemProducts";
 
 const ProductShopPage = () => {
   return (
     <div>
-      <ItemProduct></ItemProduct>
+      <ItemProducts></ItemProducts>
     </div>
   );
 };

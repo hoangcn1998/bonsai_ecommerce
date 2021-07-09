@@ -24,17 +24,21 @@
             justify-content: space-between;
             list-style-type: none;
 
-            li {
-                content: '\e87a';
-                color: #fff;
-                font-size: 20px;
-                vertical-align: middle;
-                padding: 0 15px;
-            }
+            a{
+                text-decoration: none;
 
-            li:hover {
-                color:#758A53;
-                transition: all 0.3s;
+                li {
+                    content: '\e87a';
+                    color: #fff;
+                    font-size: 20px;
+                    vertical-align: middle;
+                    padding: 0 15px;
+                }
+
+                li:hover {
+                    color:#758A53;
+                    transition: all 0.3s;
+                }
             }
         }
     }

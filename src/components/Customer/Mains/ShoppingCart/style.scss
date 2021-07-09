@@ -1,0 +1,122 @@
+
+.ContentShoppingCart {
+    margin: 2rem 0;
+}
+.shoppingcart {
+
+    padding-right: 2rem;
+
+    &__title {
+
+        font-size: 1.5rem;
+        text-align: center;
+        font-weight: bold;
+
+        color: #758A53;
+        margin: 0;
+        border-top: 2px solid white;
+
+       
+        th {
+            padding: 0;
+            padding-bottom: 1rem;
+        }
+
+        &--product {
+            width: 50%;
+            text-align: start;
+        }
+
+        &--price {
+            width: 15%;
+        }
+
+        &--quantity {
+            width: 20%;
+        }
+
+        &--unitprice {
+            width: 15%;
+        }
+       
+    }
+
+    &__item {
+        font-size: 1.2rem;
+
+        &--product {
+            display: flex;
+            align-items: center;
+
+            button {
+             
+                border: none;
+                border-radius: 10px;
+            }
+
+            button:hover, button:active {
+                background-color: #758A53 ;
+                color: white;
+            }
+
+            img{
+                width: 150px;
+                height: 120px;
+            }
+
+        }   
+
+        &--price, &--total {
+        line-height: 6rem;
+        }
+
+        &--quantity {
+            margin-top: 2rem;
+           display: block;
+        }
+
+         &--total {
+             text-align: end;
+         }
+    }
+    
+}
+
+.cartTotal {
+    border-left: 2px solid rgba(0, 0, 0, 0.164);
+    padding-left: 2rem;
+
+    .total__price {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        color:#758A53 ;
+        font-weight: bold;
+        font-size: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.164);
+    }
+
+    .promocode {
+        margin: 2rem 0;
+        
+        input {
+            margin-bottom: .5rem;
+        }
+        
+        button {
+            width: 100%;
+        }
+    }
+
+    .btn-success {
+        width: 100%;
+        background-color: #758A53 ;
+        border: 1px
+    }
+}
+
+
+
