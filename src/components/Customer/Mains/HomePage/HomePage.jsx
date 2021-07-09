@@ -4,6 +4,7 @@ import Category from "./Categories";
 import Story from "./Story/Story";
 import Plants from "./Plants/Plants";
 import Products from "./product";
+import Instagram from "../Products/Instagram/Instagram";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <Story />
       <Plants />
       <Products />
+      <Instagram></Instagram>
     </div>
   );
 };

@@ -6,7 +6,9 @@
          .each-slide {
              height: 500px;
              img {
+                 width: 500px;
                  height: 500px;
+                 margin-left: 2rem;
                  object-fit: scale-down;
              }
          }
@@ -128,23 +130,16 @@
                 justify-content: space-evenly;
                 padding: 1rem 0;
 
-                a{
-                    text-decoration: none;
-                    color: black;
-
-                    li{
-                        font-size: 300%;
-                        font-weight: 700;
-                    }
-    
-                    li:hover, li:active {
-                        color: #758A53 ;
-                        transition: all .2s;
-                    }
+                li{
+                    font-size: 300%;
+                    font-weight: 700;
                 }
 
+                li:hover, li:active {
+                    color: #758A53 ;
+                    transition: all .2s;
+                }
             }
-
         }
 
         .tabs__content--description {

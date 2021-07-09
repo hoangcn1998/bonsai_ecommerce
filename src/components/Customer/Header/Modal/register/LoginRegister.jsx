@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import ContentPageForm from "../page/ContentPageForm";
+import { useState } from "react";
+import FormLogin from "../register/FormLogin";
+import FormRegister from "../register/FormRegister";
 import "./style.scss";
 
 const LoginRegister = (prop) => {
   const { showSignIn, onToggleSignIn } = prop;
+  const [showLogin, setShowLogin] = useState(true);
 
   function setStyle() {
     if (showSignIn) {
@@ -36,18 +38,23 @@ const LoginRegister = (prop) => {
       <p className="form__signin--title">Join With Ours</p>
       <div className="form__content">
         <div className="button__group">
-          <Link to="/HomePage/Login">
-            <button type="button" className="button__group--login">
-              Login
-            </button>
-          </Link>
-          <Link to="/HomePage/Register">
-            <button type="button" className="button__group--register">
-              Register
-            </button>
-          </Link>
+          <button
+            onClick={() => setShowLogin(true)}
+            type="button"
+            className="button__group--login"
+          >
+            Login
+          </button>
+          <button
+            onClick={() => setShowLogin(false)}
+            type="button"
+            className="button__group--register"
+          >
+            Register
+          </button>
         </div>
-        <ContentPageForm></ContentPageForm>
+        <div>{showLogin && <FormLogin />}</div>
+        <div>{!showLogin && <FormRegister />}</div>
         <div className="login__faceBook">
           Or login with<a href="facebook.com">FaceBook</a>
         </div>

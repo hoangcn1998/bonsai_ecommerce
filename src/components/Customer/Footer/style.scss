@@ -1,0 +1,67 @@
+.footer {
+
+    font-size: 1.1rem;
+
+    &__contact {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        &--logo {
+            margin-left: 1rem;
+            flex: 2 1 auto;
+        }
+
+        &--address, &--email, &--phone {
+            display: flex;
+            flex: 1 1 auto;
+
+            i{
+                align-self: start;
+                padding: .5rem;
+                background-color: rgba(128, 128, 128, 0.219);
+                border-radius: 8px;
+            }
+
+            span {
+                padding-left: .5rem;
+                line-height: 2rem;
+            }
+        }
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 2rem 0;
+
+        &--copyright {
+            margin-left: 1rem;
+            flex: 2 1 auto;
+        }
+
+        &--payment {
+             flex: 1 1 auto;
+            img{
+                margin-left: .5rem;
+                height: 20px;
+            }
+        }
+
+        &--social {
+            flex: 1 1 auto;
+            a{
+                color: black;
+            }
+
+            a:hover, a:active {
+                color: #758A53;
+            }
+
+            i{
+                margin-left: 1rem;
+            }
+        }
+    }
+}

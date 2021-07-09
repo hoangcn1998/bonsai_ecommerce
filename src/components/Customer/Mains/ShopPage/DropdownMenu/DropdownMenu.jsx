@@ -15,17 +15,17 @@ const DropdownMenu = () => {
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li>
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="#111">
               Categories 1
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="#111">
               Categories 2
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="#111">
               Categories 3
             </a>
           </li>
@@ -43,12 +43,12 @@ const DropdownMenu = () => {
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li>
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="#111">
               Price: low
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">
+            <a className="dropdown-item" href="#111">
               Price: hight
             </a>
           </li>

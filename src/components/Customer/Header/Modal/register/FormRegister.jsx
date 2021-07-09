@@ -1,11 +1,8 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import MyContext from "../../../Mycontext";
 
 const FormRegister = () => {
-  const { setNameAccount } = useContext(MyContext);
-
   const {
     register,
     handleSubmit,
@@ -46,8 +43,6 @@ const FormRegister = () => {
       })
       .then(function (response) {})
       .catch(function (error) {});
-
-    setNameAccount(LastName);
     reset({ example: "", exampleRequired: "" });
   }
 
