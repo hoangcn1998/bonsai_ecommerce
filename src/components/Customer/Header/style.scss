@@ -164,48 +164,85 @@ $primary-color: #758A53;
   }
 }
 
+.header-group__cart-mobile {
+  display: none;
+}
+
+.header-group__collap-mobile {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
+
+  .header-group__cart {
+    display: none;
+  }
+
+  .header-group__cart-mobile {
+  display: block;
+  }
+
+  .header-group__collap-mobile {
+  display: block;
+  }
+
   .header {
-    @include center($content: space-between);
+
+    display: flex;
+
+    &__logo {
+      justify-self: flex-start;
+    }
 
     &__menu {
       display: none;
     }
 
     &-group {
-      & input {
-        display: none;
+      margin-left: auto;
+      height: 100%;
 
-        &::-webkit-input-placeholder {
-          font-size: 1rem;
-        }
+      span {
+        display: none;
       }
+      // & input {
+      //   display: none;
+
+      //   &::-webkit-input-placeholder {
+      //     font-size: 1rem;
+      //   }
+      // }
     }
-  }
-   .cart {
-    width: 75%;
   }
 }
 
 @media only screen and (min-width: 576px) {
   .header {
+
+    
     &__menu {
       display: none;
     }
 
     &-group {
-      width: 80%;
-      & input {
-      display: block;
+
+      margin-left: auto;
+
+      span {
+        display: flex;
+        justify-content: center;
+        width: 60%;
+        margin: 0 1rem;
+
+        input {
+          width: 100%;
+        }
   
-        &::-webkit-input-placeholder {
+        ::-webkit-input-placeholder {
           font-size: 1rem;
         }
       }
     }
-  }
-  .cart {
-    width: 60%;
   }
 }
 
@@ -218,11 +255,15 @@ $primary-color: #758A53;
     }
 
     &-group {
-      margin: 0 auto;
-      & input {
+
+      width: 70%;
+      margin-right: 0;
+
+       span {
         display: block;
-        width: 25rem;  
-        height: 3rem;
+        display: flex;
+        justify-content: center;
+        width: 80%;  
 
         &::-webkit-input-placeholder {
           font-size: 1rem;
@@ -233,22 +274,29 @@ $primary-color: #758A53;
 }
 
 @media only screen and (min-width: 992px) {
+
   .header {
+
     &__menu {
       display: flex;
-      width: 40%;
+      justify-content: space-evenly;
+      width: 100%;
+      margin: 0;
 
       &--item {
         font-size: 1rem;
+        margin: 0;
         white-space: nowrap;
       }
     }
 
     &-group {
-      & input {
-        display: block;
-        width: 9rem;  
-        height: 3rem;
+      span {
+
+        input {
+          padding: 0 1rem;
+          font-size: 1rem;
+        }
 
         &::-webkit-input-placeholder {
           font-size: 1rem;
@@ -256,13 +304,11 @@ $primary-color: #758A53;
       }
     }
   }
-  .cart {
-    width: 40%;
-  }
 }
 
 @media only screen and (min-width: 1200px) {
   .header {
+
     &-group {
 
       & input {

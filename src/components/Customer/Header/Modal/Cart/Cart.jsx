@@ -66,14 +66,20 @@ function ModalCart(props) {
         </div>
         <div className="cart__main--close">X</div>
       </div>
+      <div className="cart__main">
+        <img src={product1} alt={product1} className="cart__main--img" />
+        <div className="cart-group">
+          <p className="cart-group__name">Candle Bowl</p>
+          <p className="cart-group__quantity">QTY: 1</p>
+          <p className="cart-group__price">$169.000</p>
+        </div>
+        <div className="cart__main--close">X</div>
+      </div>
       <div className="cart__total">
         <p className="cart__total--text">Total:</p>
         <p className="cart__total--price">$190.000</p>
       </div>
       <div className="cart__action">
-        <Link to="/ShoppingCart">
-          <button className="cart__action--view">VIEWCART</button>
-        </Link>
         <Link to="/Checkout">
           <button className="cart__action--checkout">CHECKOUT</button>
         </Link>

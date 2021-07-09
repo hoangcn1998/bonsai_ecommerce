@@ -1,5 +1,5 @@
+import React from "react";
 import axios from "axios";
-import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 
 const FormRegister = () => {
@@ -28,7 +28,7 @@ const FormRegister = () => {
       City,
     } = data;
     axios
-      .post("https://project--ecomerce.herokuapp.com/api/users", {
+      .post("http://localhost:3000/api/users", {
         FirstName,
         LastName,
         Email,
@@ -40,6 +40,7 @@ const FormRegister = () => {
         Address,
         District,
         City,
+        role: 'user'
       })
       .then(function (response) {})
       .catch(function (error) {});
