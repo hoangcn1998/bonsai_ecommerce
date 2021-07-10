@@ -1,0 +1,33 @@
+.table {
+    font-size: 1rem;
+
+    tr {
+        
+        th, td {
+            text-align: center;
+        }
+        
+    }
+
+    img{
+        width: 70px;
+        height: 70px;
+    }
+}
+
+.form__products--add {
+    width: 70%;
+    margin: 0 auto;
+    * {
+        margin-top: 1rem;
+    }
+
+    button {
+        width: 50%;
+        margin-left: 10rem;
+    }
+
+    textarea {
+        line-height: 1rem;
+    }
+}
