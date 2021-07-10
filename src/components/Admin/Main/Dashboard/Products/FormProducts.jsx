@@ -3,7 +3,7 @@ import React from "react";
 const FormProducts = () => {
   return (
     <form className="form__products--add">
-      <input type="text" className="form-control" placeholder="Categories" />
+      <input type="text" className="form-control" placeholder="Categories Id" />
       <input type="text" className="form-control" placeholder="Products Name" />
       <input
         type="text"
@@ -11,11 +11,27 @@ const FormProducts = () => {
         placeholder="Products Price"
       />
       <input type="text" className="form-control" placeholder="Big picture " />
-      <textarea
+      <input
+        type="text"
         className="form-control"
-        rows="5"
-        placeholder="thumbnail Url (4)"
-      ></textarea>
+        placeholder="thumbnail Url(1) "
+      />
+      <input
+        type="text"
+        className="form-control"
+        placeholder="thumbnail Url(2) "
+      />
+      <input
+        type="text"
+        className="form-control"
+        placeholder="thumbnail Url(3) "
+      />
+      <input
+        type="text"
+        className="form-control"
+        placeholder="thumbnail Url(4) "
+      />
+
       <textarea
         className="form-control"
         rows="5"

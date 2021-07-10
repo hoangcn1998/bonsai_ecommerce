@@ -5,9 +5,8 @@ import Tabs from "@material-ui/core/Tabs";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import { Paper } from "@material-ui/core";
-import ListProducts from "./ListProducts";
-import FormProducts from "./FormProducts";
-import "../style.scss";
+import FormCategories from "./FormCategories";
+import ListCategories from "./ListCategories";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Products() {
+export default function Categories() {
   const classes = useStyles();
   const [value, setValue] = React.useState("1");
 
@@ -34,14 +33,14 @@ export default function Products() {
             textColor="primary"
             centered
           >
-            <Tab label="List Products" value="1" />
-            <Tab label="Add Products" value="2" />
+            <Tab label="List Categories" value="1" />
+            <Tab label="Add Categories" value="2" />
           </Tabs>
           <TabPanel value="1">
-            <ListProducts></ListProducts>
+            <ListCategories />
           </TabPanel>
           <TabPanel value="2">
-            <FormProducts></FormProducts>
+            <FormCategories />
           </TabPanel>
         </Paper>
       </TabContext>

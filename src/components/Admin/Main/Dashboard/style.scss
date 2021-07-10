@@ -1,0 +1,39 @@
+// .table {
+//     font-size: 1rem;
+
+//     tr {
+        
+//         th, td {
+//             text-align: center;
+//         }
+        
+//     }
+
+//     img{
+//         width: 100px;
+//         height: 100px;
+//     }
+// }
+
+.form__products--add {
+    width: 70%;
+    margin: 0 auto;
+    * {
+        margin-top: 1rem;
+    }
+
+    button {
+        width: 50%;
+        margin-left: 10rem;
+    }
+
+    textarea {
+        line-height: 1rem;
+    }
+}
+
+img {
+    padding-top: 1rem;
+    width: 50px;
+    height: 70px;
+}

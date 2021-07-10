@@ -24,6 +24,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import PeopleIcon from "@material-ui/icons/People";
+import CategoryIcon from "@material-ui/icons/Category";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import clsx from "clsx";
 import React from "react";
@@ -32,6 +33,7 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Products from "./Products/Products";
+import Categories from "./Categories/Categories";
 
 const drawerWidth = 240;
 
@@ -225,6 +227,14 @@ function Dashboard(props) {
           </ListItem>
           <ListItem button>
             <ListItemIcon>
+              <CategoryIcon />
+            </ListItemIcon>
+            <Link to={`${url}/categories`} style={style}>
+              <ListItemText primary="Categories" />
+            </Link>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
               <CardGiftcardIcon />
             </ListItemIcon>
             <Link to={`${url}/products`} style={style}>
@@ -276,9 +286,14 @@ function Dashboard(props) {
           <Route path={`${url}/integrations`}>
             <h2>This is component Integrations</h2>
           </Route>
+          <Route path={`${url}/categories`}>
+            <Grid item xs={12} md={12} lg={12}>
+              <Categories />
+            </Grid>
+          </Route>
           <Route path={`${url}/products`}>
             <Grid item xs={12} md={12} lg={12}>
-              <Products></Products>
+              <Products />
             </Grid>
           </Route>
         </Container>
