@@ -13,27 +13,30 @@ import {
   ListItemText,
   Paper,
   Toolbar,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import LayersIcon from "@material-ui/icons/Layers";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import CardGiftcardIcon from "@material-ui/icons/CardGiftcard";
 import PeopleIcon from "@material-ui/icons/People";
 import CategoryIcon from "@material-ui/icons/Category";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import axios from "axios";
 import clsx from "clsx";
-import React from "react";
-import { Link, Switch, useRouteMatch, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Redirect, Route, useHistory, useRouteMatch } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Products from "./Products/Products";
 import Categories from "./Categories/Categories";
+
 
 const drawerWidth = 240;
 
@@ -124,7 +127,8 @@ const useStyles = makeStyles((theme) => ({
 function Dashboard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  let { path, url } = useRouteMatch();
+  let { url } = useRouteMatch();
+  const history = useHistory();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -133,11 +137,38 @@ function Dashboard(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const token = localStorage.getItem("token");
+  const status = localStorage.getItem("statusLogin");
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/admin", { token })
+      .then(res => {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }, [token]);
+
+  function onHandleLogout() {
+    localStorage.clear();
+
+    history.push("/");
+  }
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
+
+  const element = status === "true" ?
+    <React.Fragment><CssBaseline />
+      <ToastContainer />
       <AppBar
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
@@ -163,12 +194,13 @@ function Dashboard(props) {
             className={classes.title}
           >
             Dashboard
-          </Typography>
+      </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <button onClick={onHandleLogout}>Logout</button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -297,7 +329,11 @@ function Dashboard(props) {
             </Grid>
           </Route>
         </Container>
-      </main>
+      </main></React.Fragment> : <Redirect to="/" />
+
+  return (
+    <div className={classes.root}>
+      {element}
     </div>
   );
 }

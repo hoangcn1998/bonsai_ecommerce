@@ -1,63 +1,71 @@
-import React from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 
-const FormLogin = () => {
+const FormLogin = (props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    axios
-      .post("http://localhost:3000/api/signin", data)
+  const history = useHistory();
+
+  function onSubmitLogin(data) {
+    axios.post("http://localhost:5000/login", { data })
       .then((res) => {
-        const accessToken = res.data.accessToken;
-        const user = jwt_decode(accessToken);
-        console.log(user);
-        axios
-          .get(`http://localhost:3000/api/users/${user.sub}`)
-          .then((res) => {
-            const user = res.data;
-            console.log(`get user by id`, user);
-            console.log("user role", user.role);
-          })
-          .catch((err) => console.log(err));
+        if (res.data.status) {
+          localStorage.setItem("token", res.data.accessToken);
+          localStorage.setItem("statusLogin", true);
+          history.push("/admin");
+        } else {
+          toast.error(res.data.message, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       })
-      .catch((err) => console.log(err));
-    reset({ example: "", exampleRequired: "" });
-  };
+      .catch(error => console.log(error));
+  }
 
   return (
-    <form className="form form__login" onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        placeholder="Email"
-        {...register("email", {
-          required: true,
-          pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
-        })}
-      />
-      {errors.email && <span>Please enter valid data !</span>}
-      <br />
+    <React.Fragment>
+      <ToastContainer />
 
-      <input
-        type="password"
-        placeholder="Password"
-        {...register("password", { required: true })}
-      />
-      {errors.password && <span>Please enter valid data !</span>}
-      <br />
+      <form className="form form__login" onSubmit={handleSubmit(onSubmitLogin)}>
+        <input
+          type="text"
+          placeholder="Email"
+          {...register("email", {
+            required: true,
+            pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
+          })}
+        />
+        {errors.email && <span>Please enter valid data !</span>}
+        <br />
 
-      <button type="submit" className="button__submit">
-        Login
+        <input
+          type="password"
+          placeholder="Password"
+          {...register("password", { required: true })}
+        />
+        {errors.password && <span>Please enter valid data !</span>}
+        <br />
+
+        <button type="submit" className="button__submit">
+          Login
       </button>
-      <br />
-    </form>
+        <br />
+      </form>
+    </React.Fragment>
   );
 };
 

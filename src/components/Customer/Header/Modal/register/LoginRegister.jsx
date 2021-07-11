@@ -53,7 +53,7 @@ const LoginRegister = (prop) => {
             Register
           </button>
         </div>
-        <div>{showLogin && <FormLogin />}</div>
+        <div>{showLogin && <FormLogin onToggleSignIn={onToggleSignIn} />}</div>
         <div>{!showLogin && <FormRegister />}</div>
         <div className="login__faceBook">
           Or login with<a href="facebook.com">FaceBook</a>
