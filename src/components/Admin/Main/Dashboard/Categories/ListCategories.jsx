@@ -16,8 +16,9 @@ function ButtonGroup() {
 
 function ListCategories() {
   const columns = [
-    { field: "id", headerName: "ID", width: 200 },
-    { field: "name", headerName: "Name", width: 500 },
+    { field: "id", headerName: "ID", width: 100 },
+    { field: "idCategory", headerName: "IdCategory", width: 200 },
+    { field: "name", headerName: "Name", width: 200 },
     {
       field: "action",
       headerName: "Action",
