@@ -1,82 +1,15 @@
-// import React from "react";
-// import { useState } from "react";
-
-// const ListProducts = () => {
-//   const [stateProducts, setStateProducts] = useState([
-//     {
-//       image:
-//         "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-1.jpg",
-//       name: "Polyscias Fabian",
-//       price: "$60.000",
-//     },
-//     {
-//       image:
-//         "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-2.jpg",
-//       name: "Polyscias Fabian",
-//       price: "$70.000",
-//     },
-//     {
-//       image:
-//         "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-3.jpg",
-//       name: "Polyscias Fabian",
-//       price: "$80.000",
-//     },
-//     {
-//       image:
-//         "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-4.jpg",
-//       name: "Polyscias Fabian",
-//       price: "$90.000",
-//     },
-//   ]);
-
-//   let dataProducts = stateProducts.map((data, index) => (
-//     <tr key={index}>
-//       <th scope="row">{index + 1}</th>
-//       <td>
-//         <img src={data.image}></img>
-//       </td>
-//       <td>{data.name}</td>
-//       <td>{data.price}</td>
-//       <td>
-//         <div className="btn-group" role="group" aria-label="Basic example">
-//           <button type="button" className="btn btn-primary">
-//             Edit
-//           </button>
-//           <button type="button" className="btn btn-danger">
-//             Delete
-//           </button>
-//         </div>
-//       </td>
-//     </tr>
-//   ));
-
-//   return (
-//     <table className="table">
-//       <thead>
-//         <tr>
-//           <th scope="col">#</th>
-//           <th scope="col">Images</th>
-//           <th scope="col">Name</th>
-//           <th scope="col">Price</th>
-//           <th scope="col">Action</th>
-//         </tr>
-//       </thead>
-//       <tbody>{dataProducts}</tbody>
-//     </table>
-//   );
-// };
-
-// export default ListProducts;
-
 import React, { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import axios from "axios";
+import { useEffect } from "react";
 
-function Image() {
-  return (
-    <div>
-      <img src="http://landing.engotheme.com/html/hamadryad/demo/images/products/product-1.jpg"></img>
-    </div>
-  );
+function Image(image) {
+  let style = {
+    width: "50px",
+    height: "70px",
+  };
+
+  return <img style={style} src={image.src}></img>;
 }
 
 function ButtonGroup() {
@@ -94,82 +27,57 @@ function ButtonGroup() {
 
 function ListProducts() {
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: "id", headerName: "Id", width: 60 },
+    { field: "idCategory", headerName: "IdCategory", width: 150 },
+    { field: "idProduct", headerName: "IdProduct", width: 150 },
     {
       field: "image",
       headerName: "Image",
-      width: 200,
-      // renderCell: (params) => {
-      //   return <Image></Image>;
-      // },
+      width: 150,
+      renderCell: (params) => {
+        return <Image src={params.row.image}></Image>;
+      },
     },
-    { field: "name", headerName: "Name", width: 200 },
+    { field: "name", headerName: "Name", width: 150 },
     { field: "price", headerName: "Price", width: 150 },
     {
       field: "action",
       headerName: "Action",
       disableClickEventBubbling: true,
-      width: 300,
+      width: 150,
       renderCell: (params) => {
         return <ButtonGroup></ButtonGroup>;
       },
     },
   ];
 
-  const [stateProducts, setStateProduct] = useState([
-    {
-      id: "1",
-      image: (
-        <img src="http://landing.engotheme.com/html/hamadryad/demo/images/products/product-1.jpg"></img>
-      ),
-      name: "Polyscias Fabian 1",
-      price: "$60.000",
-    },
-    {
-      id: "2",
-      image:
-        "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-2.jpg",
-      name: "Polyscias Fabian 2",
-      price: "$70.000",
-    },
-    {
-      id: "3",
-      image:
-        "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-3.jpg",
-      name: "Polyscias Fabian 3",
-      price: "$80.000",
-    },
-    {
-      id: "4",
-      image:
-        "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-4.jpg",
-      name: "Polyscias Fabian 4",
-      price: "$90.000",
-    },
-    {
-      id: "5",
-      image:
-        "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-4.jpg",
-      name: "Polyscias Fabian 4",
-      price: "$90.000",
-    },
-    {
-      id: "6",
-      image:
-        "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-4.jpg",
-      name: "Polyscias Fabian 4",
-      price: "$90.000",
-    },
-    {
-      id: "7",
-      image:
-        "http://landing.engotheme.com/html/hamadryad/demo/images/products/product-4.jpg",
-      name: "Polyscias Fabian 4",
-      price: "$90.000",
-    },
-  ]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/products")
+      .then(function (response) {
+        const { categoryId, id, bigPicture, name, price } = response.data[0];
 
-  const rows = stateProducts;
+        let dataProducts = {
+          id: response.data.length + 1,
+          idCategory: categoryId,
+          idProduct: id,
+          image: bigPicture,
+          name,
+          price,
+        };
+
+        setStateProduct([...stateProducts, dataProducts]);
+
+        console.log(categoryId);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  }, []);
+
+  const [stateProducts, setStateProduct] = useState([]);
 
   return (
     <div style={{ height: 400, width: "100%" }}>
