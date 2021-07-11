@@ -1,16 +1,12 @@
 import React from "react";
-import HomePage from "../Customer/Mains/HomePage/HomePage";
-import ShopPage from "../Customer/Mains/ShopPage/ShopPage";
-import Products from "../Customer/Mains/Products/Products";
-import ShoppingCart from "../Customer/Mains/ShoppingCart/ShoppingCart";
-import Checkout from "../Customer/Mains/Checkout/Checkout";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
+  Redirect, Route
 } from "react-router-dom";
+import Checkout from "../Customer/Mains/Checkout/Checkout";
+import HomePage from "../Customer/Mains/HomePage/HomePage";
+import Products from "../Customer/Mains/Products/Products";
+import ShopPage from "../Customer/Mains/ShopPage/ShopPage";
+import ShoppingCart from "../Customer/Mains/ShoppingCart/ShoppingCart";
 
 const ContentPageCustomer = () => {
   return (
