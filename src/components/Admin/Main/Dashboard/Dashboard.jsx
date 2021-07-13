@@ -13,7 +13,7 @@ import {
   ListItemText,
   Paper,
   Toolbar,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BarChartIcon from "@material-ui/icons/BarChart";
@@ -29,14 +29,19 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import axios from "axios";
 import clsx from "clsx";
 import React, { useEffect } from "react";
-import { Link, Redirect, Route, useHistory, useRouteMatch } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
+import {
+  Link,
+  Redirect,
+  Route,
+  useHistory,
+  useRouteMatch,
+} from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Products from "./Products/Products";
 import Categories from "./Categories/Categories";
-
 
 const drawerWidth = 240;
 
@@ -140,23 +145,23 @@ function Dashboard(props) {
   const token = localStorage.getItem("token");
   const status = localStorage.getItem("statusLogin");
 
-  useEffect(() => {
-    axios.post("http://localhost:5000/admin", { token })
-      .then(res => {
-        toast.success(res.data.message, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      })
-  }, [token]);
+  // useEffect(() => {
+  //   // axios.post("http://localhost:5000/admin", { token })
+  //   //   .then(res => {
+  //   //     toast.success(res.data.message, {
+  //   //       position: "top-right",
+  //   //       autoClose: 2000,
+  //   //       hideProgressBar: false,
+  //   //       closeOnClick: true,
+  //   //       pauseOnHover: true,
+  //   //       draggable: true,
+  //   //       progress: undefined,
+  //   //     });
+  //   //   })
+  //   //   .catch(error => {
+  //   //     console.log(error);
+  //   //   })
+  // }, [token]);
 
   function onHandleLogout() {
     localStorage.clear();
@@ -165,177 +170,179 @@ function Dashboard(props) {
   }
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
-  const element = status === "true" ?
-    <React.Fragment><CssBaseline />
-      <ToastContainer />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Dashboard
-      </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <button onClick={onHandleLogout}>Logout</button>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <Link to={`${url}`} style={style}>
-              <ListItemText primary="Dashboard" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <Link to={`${url}/orders`} style={style}>
-              <ListItemText primary="Orders" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <Link to={`${url}/customers`} style={style}>
-              <ListItemText primary="Customers" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <Link to={`${url}/reports`} style={style}>
-              <ListItemText primary="Reports" style={style} />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <LayersIcon />
-            </ListItemIcon>
-            <Link to={`${url}/integrations`} style={style}>
-              <ListItemText primary="Integrations" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <CategoryIcon />
-            </ListItemIcon>
-            <Link to={`${url}/categories`} style={style}>
-              <ListItemText primary="Categories" />
-            </Link>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <CardGiftcardIcon />
-            </ListItemIcon>
-            <Link to={`${url}/products`} style={style}>
-              <ListItemText primary="Products" />
-            </Link>
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Route path="/admin" exact>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={8} lg={9}>
+  console.log(status);
+  const element =
+    status === "true" ? (
+      <React.Fragment>
+        <CssBaseline />
+        <ToastContainer />
+        <AppBar
+          position="absolute"
+          className={clsx(classes.appBar, open && classes.appBarShift)}
+        >
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(
+                classes.menuButton,
+                open && classes.menuButtonHidden
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Dashboard
+            </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <button onClick={onHandleLogout}>Logout</button>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <Link to={`${url}`} style={style}>
+                <ListItemText primary="Dashboard" />
+              </Link>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <Link to={`${url}/orders`} style={style}>
+                <ListItemText primary="Orders" />
+              </Link>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <Link to={`${url}/customers`} style={style}>
+                <ListItemText primary="Customers" />
+              </Link>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <Link to={`${url}/reports`} style={style}>
+                <ListItemText primary="Reports" style={style} />
+              </Link>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <LayersIcon />
+              </ListItemIcon>
+              <Link to={`${url}/integrations`} style={style}>
+                <ListItemText primary="Integrations" />
+              </Link>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CategoryIcon />
+              </ListItemIcon>
+              <Link to={`${url}/categories`} style={style}>
+                <ListItemText primary="Categories" />
+              </Link>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <CardGiftcardIcon />
+              </ListItemIcon>
+              <Link to={`${url}/products`} style={style}>
+                <ListItemText primary="Products" />
+              </Link>
+            </ListItem>
+          </List>
+          <Divider />
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" className={classes.container}>
+            <Route path="/admin" exact>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={8} lg={9}>
+                  <Paper className={fixedHeightPaper}>
+                    <Chart />
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper className={fixedHeightPaper}>
+                    <Deposits />
+                  </Paper>
+                </Grid>
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <Orders />
+                  </Paper>
+                </Grid>
+              </Grid>
+            </Route>
+            <Route path={`${url}/orders`}>
+              <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
-                  <Chart />
+                  <Orders />
                 </Paper>
               </Grid>
-              <Grid item xs={12} md={4} lg={3}>
+            </Route>
+            <Route path={`${url}/customers`}>
+              <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
                   <Deposits />
                 </Paper>
               </Grid>
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Orders />
-                </Paper>
+            </Route>
+            <Route path={`${url}/reports`}>
+              <h2>This is component Reports</h2>
+            </Route>
+            <Route path={`${url}/integrations`}>
+              <h2>This is component Integrations</h2>
+            </Route>
+            <Route path={`${url}/categories`}>
+              <Grid item xs={12} md={12} lg={12}>
+                <Categories />
               </Grid>
-            </Grid>
-          </Route>
-          <Route path={`${url}/orders`}>
-            <Grid item xs={12} md={12} lg={12}>
-              <Paper className={fixedHeightPaper}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Route>
-          <Route path={`${url}/customers`}>
-            <Grid item xs={12} md={12} lg={12}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-          </Route>
-          <Route path={`${url}/reports`}>
-            <h2>This is component Reports</h2>
-          </Route>
-          <Route path={`${url}/integrations`}>
-            <h2>This is component Integrations</h2>
-          </Route>
-          <Route path={`${url}/categories`}>
-            <Grid item xs={12} md={12} lg={12}>
-              <Categories />
-            </Grid>
-          </Route>
-          <Route path={`${url}/products`}>
-            <Grid item xs={12} md={12} lg={12}>
-              <Products />
-            </Grid>
-          </Route>
-        </Container>
-      </main></React.Fragment> : <Redirect to="/" />
+            </Route>
+            <Route path={`${url}/products`}>
+              <Grid item xs={12} md={12} lg={12}>
+                <Products />
+              </Grid>
+            </Route>
+          </Container>
+        </main>
+      </React.Fragment>
+    ) : (
+      <Redirect to="/" />
+    );
 
-  return (
-    <div className={classes.root}>
-      {element}
-    </div>
-  );
+  return <div className={classes.root}>{element}</div>;
 }
 
 export default Dashboard;

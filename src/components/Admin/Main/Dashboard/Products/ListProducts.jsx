@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios";
-import { useEffect } from "react";
 
 function Image(image) {
   let style = {
@@ -27,18 +26,18 @@ function ButtonGroup() {
 
 function ListProducts() {
   const columns = [
-    { field: "id", headerName: "Id", width: 60 },
-    { field: "idCategory", headerName: "IdCategory", width: 150 },
-    { field: "idProduct", headerName: "IdProduct", width: 150 },
+    { field: "categoryId", headerName: "IdCategory", width: 150 },
     {
-      field: "image",
+      field: "bigPicture",
       headerName: "Image",
       width: 150,
       renderCell: (params) => {
-        return <Image src={params.row.image}></Image>;
+        console.log(params);
+        return <Image src={params.row.bigPicture}></Image>;
       },
     },
-    { field: "name", headerName: "Name", width: 150 },
+    { field: "name", headerName: "Name", width: 200 },
+    { field: "id", headerName: "Id", width: 150 },
     { field: "price", headerName: "Price", width: 150 },
     {
       field: "action",
@@ -55,21 +54,10 @@ function ListProducts() {
     axios
       .get("http://localhost:3000/api/products")
       .then(function (response) {
-        const { categoryId, id, bigPicture, name, price } = response.data[0];
-
-        let dataProducts = {
-          id: response.data.length + 1,
-          idCategory: categoryId,
-          idProduct: id,
-          image: bigPicture,
-          name,
-          price,
-        };
-
-        setStateProduct([...stateProducts, dataProducts]);
-
-        console.log(categoryId);
-        console.log(response.data);
+        console.log(response);
+        const { data } = response;
+        const formatProducts = formatData(data);
+        setStateProduct(formatProducts);
       })
       .catch(function (error) {
         // handle error
@@ -78,6 +66,19 @@ function ListProducts() {
   }, []);
 
   const [stateProducts, setStateProduct] = useState([]);
+
+  const formatData = (products) => {
+    return products.map((item) => {
+      const { categoryId, name, bigPicture, price, id } = item;
+      return {
+        id,
+        categoryId,
+        bigPicture,
+        name,
+        price,
+      };
+    });
+  };
 
   return (
     <div style={{ height: 400, width: "100%" }}>

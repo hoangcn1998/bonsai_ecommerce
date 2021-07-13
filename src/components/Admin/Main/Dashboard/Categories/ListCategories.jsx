@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
+import axios from "axios";
 
 function ButtonGroup() {
   return (
@@ -17,8 +18,9 @@ function ButtonGroup() {
 function ListCategories() {
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
-    { field: "idCategory", headerName: "IdCategory", width: 200 },
     { field: "name", headerName: "Name", width: 200 },
+    { field: "createdAt", headerName: "CreatedAt", width: 250 },
+    { field: "updatedAt", headerName: "UpdatedAt", width: 250 },
     {
       field: "action",
       headerName: "Action",
@@ -30,36 +32,34 @@ function ListCategories() {
     },
   ];
 
-  const [stateCategories, setStateCategories] = useState([
-    {
-      id: "1",
-      name: "Polyscias Fabian 1",
-    },
-    {
-      id: "2",
-      name: "Polyscias Fabian 2",
-    },
-    {
-      id: "3",
-      name: "Polyscias Fabian 3",
-    },
-    {
-      id: "4",
-      name: "Polyscias Fabian 4",
-    },
-    {
-      id: "5",
-      name: "Polyscias Fabian 4",
-    },
-    {
-      id: "6",
-      name: "Polyscias Fabian 4",
-    },
-    {
-      id: "7",
-      name: "Polyscias Fabian 4",
-    },
-  ]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/categories")
+      .then(function (response) {
+        console.log(response);
+        const { data } = response;
+        const formatCategories = formatData(data);
+        setStateCategories(formatCategories);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  }, []);
+
+  const [stateCategories, setStateCategories] = useState([]);
+
+  const formatData = (categories) => {
+    return categories.map((item) => {
+      const { name, id, createdAt, updatedAt } = item;
+      return {
+        id,
+        name,
+        createdAt: new Date(createdAt).toDateString(),
+        updatedAt: new Date(updatedAt).toDateString(),
+      };
+    });
+  };
 
   return (
     <div style={{ height: 400, width: "100%" }}>
