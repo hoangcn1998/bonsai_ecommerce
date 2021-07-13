@@ -28,7 +28,7 @@ const FormRegister = () => {
       city,
     } = data;
     axios
-      .post("http://localhost:3000/api/register", {
+      .post("http://localhost:5000/api/users", {
         firstName,
         lastName,
         email,

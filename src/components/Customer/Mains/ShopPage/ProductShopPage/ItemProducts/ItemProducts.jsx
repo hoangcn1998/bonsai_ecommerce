@@ -36,8 +36,8 @@ function ItemProducts(props) {
         <img src={bigPicture} alt={bigPicture} />
         <p>{name}</p>
         <div className="products__main--main--group">
-          <p>{price}</p>
-          <p>{salePrice}</p>
+          <p>{price}$</p>
+          <p>{salePrice}$</p>
           <Rating
             name="simple-controlled"
             value={value}
