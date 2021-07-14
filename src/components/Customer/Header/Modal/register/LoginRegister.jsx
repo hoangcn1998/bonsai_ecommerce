@@ -62,9 +62,9 @@ const LoginRegister = (prop) => {
           )}
         </div>
         <div>{!showLogin && <FormRegister />}</div>
-        <div className="login__faceBook">
+        {/* <div className="login__faceBook">
           Or login with<a href="facebook.com">FaceBook</a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

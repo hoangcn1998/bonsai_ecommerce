@@ -16,7 +16,7 @@ const ModalProductDetails = () => {
                 <section className="productDetails__container container">
                     <div className="row">
                         <div className="col-lg-6">
-                         <ProductSlideShow/>
+                         {/* <ProductSlideShow thumbnailUrl={[]}/> */}
                         </div>
                         <div className="col-lg-6">
                           <ProductContent/>

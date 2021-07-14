@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import axios from "axios";
-import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../../../redux/actions/productAction";
 
@@ -60,7 +58,6 @@ function ListProducts({ products }) {
     dispatch(getProducts());
   }, []);
 
-  console.log(products);
 
   const formatData = dataProducts.map((item) => {
     const { categoryId, name, bigPicture, price, id } = item;

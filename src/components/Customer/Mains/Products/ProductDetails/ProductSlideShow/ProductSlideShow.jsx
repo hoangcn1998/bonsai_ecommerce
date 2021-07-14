@@ -2,31 +2,21 @@ import React from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
-const slideImages = [
-  "http://landing.engotheme.com/html/hamadryad/demo/images/product-detail/product-4.png",
-  "http://landing.engotheme.com/html/hamadryad/demo/images/product-detail/product-3.png",
-  "http://landing.engotheme.com/html/hamadryad/demo/images/product-detail/product-2.png",
-];
-
-const ProductSlideShow = () => {
+const ProductSlideShow = ({ thumbnailUrl }) => {
+  console.log(`thumbnailUrl`, thumbnailUrl)
+  const renderImage = thumbnailUrl.map((img, index) => (
+    <div key={index} className="each-slide">
+      <div>
+        <img alt="img" src={img}/>
+      </div>
+    </div>
+  ))
+  console.log(renderImage)
+    
   return (
     <div className="slide-container">
       <Slide>
-        <div className="each-slide">
-          <div>
-            <img alt="img" src={slideImages[0]}></img>
-          </div>
-        </div>
-        <div className="each-slide">
-          <div>
-            <img alt="img" src={slideImages[1]}></img>
-          </div>
-        </div>
-        <div className="each-slide">
-          <div>
-            <img alt="img" src={slideImages[2]}></img>
-          </div>
-        </div>
+        {renderImage}
       </Slide>
     </div>
   );

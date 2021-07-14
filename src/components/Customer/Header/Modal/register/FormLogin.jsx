@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import urlApi from '../../../../../urlApi'
 
 const FormLogin = ({ onCloseModal }) => {
   const {
@@ -26,19 +27,17 @@ const FormLogin = ({ onCloseModal }) => {
 
   function onSubmitLogin(data) {
     axios
-      .post("http://localhost:5000/api/login", data)
+      .post(`${urlApi}login`, data)
       .then((res) => {
         const {
           data: { status, accessToken },
         } = res || {};
-        console.log(res);
         if (status) {
           localStorage.setItem("token", accessToken);
           localStorage.setItem("statusLogin", true);
           const userInfo = jwt_decode(accessToken);
           const { role = "user" } = userInfo;
           checkNavigate(role);
-          console.log(`userInfo`, userInfo);
           onCloseModal();
         } else {
           toast.error(res.data.message, {
@@ -59,7 +58,6 @@ const FormLogin = ({ onCloseModal }) => {
   return (
     <React.Fragment>
       <ToastContainer />
-
       <form className="form form__login" onSubmit={handleSubmit(onSubmitLogin)}>
         <input
           type="text"

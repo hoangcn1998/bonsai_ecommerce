@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import url from "../../../../../urlApi";
 
 const FormCategories = () => {
   const {
@@ -11,10 +12,8 @@ const FormCategories = () => {
   } = useForm();
 
   function onSubmit(data) {
-    console.log(data.CategoriesName);
-
     axios
-      .post("http://localhost:3000/api/categories", {
+      .post(`${url}/categories`, {
         name: data.CategoriesName,
       })
       .then(function (response) {})
