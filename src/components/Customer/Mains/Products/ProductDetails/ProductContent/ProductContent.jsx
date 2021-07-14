@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Rating from "@material-ui/lab/Rating";
 
 const ProductContent = () => {
   const initial = parseInt(localStorage.getItem("countProductDetails") || 0);
@@ -30,11 +31,11 @@ const ProductContent = () => {
           <div className="productDetails__price--sale">$60.000</div>
         </div>
         <div className="productDetails__rating">
-          <i className="fa fa-star-o" aria-hidden="true"></i>
-          <i className="fa fa-star-o" aria-hidden="true"></i>
-          <i className="fa fa-star-o" aria-hidden="true"></i>
-          <i className="fa fa-star-o" aria-hidden="true"></i>
-          <i className="fa fa-star-o" aria-hidden="true"></i>
+           <Rating
+              name="simple-controlled"
+              value={5}
+              id="rating"
+            />
         </div>
       </div>
       <p className="productDetails__description">

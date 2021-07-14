@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios";
-import { useEffect } from "react";
+import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../../../../redux/actions/productAction";
 
 function Image(image) {
   let style = {
@@ -25,21 +27,20 @@ function ButtonGroup() {
   );
 }
 
-function ListProducts() {
+function ListProducts({ products }) {
   const columns = [
-    { field: "id", headerName: "Id", width: 60 },
-    { field: "idCategory", headerName: "IdCategory", width: 150 },
-    { field: "idProduct", headerName: "IdProduct", width: 150 },
+    { field: "categoryId", headerName: "CategoryName", width: 180 },
     {
-      field: "image",
+      field: "bigPicture",
       headerName: "Image",
       width: 150,
       renderCell: (params) => {
-        return <Image src={params.row.image}></Image>;
+        return <Image src={params.row.bigPicture}></Image>;
       },
     },
-    { field: "name", headerName: "Name", width: 150 },
-    { field: "price", headerName: "Price", width: 150 },
+    { field: "name", headerName: "Name", width: 200 },
+    { field: "id", headerName: "Id", width: 150 },
+    { field: "price", headerName: "Price", width: 120 },
     {
       field: "action",
       headerName: "Action",
@@ -51,38 +52,31 @@ function ListProducts() {
     },
   ];
 
+  const dispatch = useDispatch();
+
+  const dataProducts = useSelector((state) => state.products.data);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/products")
-      .then(function (response) {
-        const { categoryId, id, bigPicture, name, price } = response.data[0];
-
-        let dataProducts = {
-          id: response.data.length + 1,
-          idCategory: categoryId,
-          idProduct: id,
-          image: bigPicture,
-          name,
-          price,
-        };
-
-        setStateProduct([...stateProducts, dataProducts]);
-
-        console.log(categoryId);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+    dispatch(getProducts());
   }, []);
 
-  const [stateProducts, setStateProduct] = useState([]);
+  console.log(products);
+
+  const formatData = dataProducts.map((item) => {
+    const { categoryId, name, bigPicture, price, id } = item;
+    return {
+      id,
+      categoryId: `category${categoryId}`,
+      bigPicture,
+      name,
+      price,
+    };
+  });
 
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={stateProducts}
+        rows={formatData}
         columns={columns}
         pageSize={5}
         checkboxSelection
@@ -92,3 +86,12 @@ function ListProducts() {
 }
 
 export default ListProducts;
+
+// function mapStateToProps(state) {
+//   const {
+//     products: { data },
+//   } = state;
+//   return { products: data };
+// }
+
+// export default connect(mapStateToProps)(ListProducts);

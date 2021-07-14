@@ -11,36 +11,36 @@ const FormRegister = () => {
     watch,
   } = useForm();
 
-  const password = watch("Password", "");
+  const password = watch("password", "");
 
   function onSubmit(data) {
     const {
-      FirstName,
-      LastName,
-      Email,
-      Phone,
-      Password,
-      RetypePassword,
-      BirthDay,
-      Sex,
-      Address,
-      District,
-      City,
+      firstName,
+      lastName,
+      email,
+      phone,
+      password,
+      retypePassword,
+      birthDay,
+      sex,
+      address,
+      district,
+      city,
     } = data;
     axios
-      .post("http://localhost:3000/api/users", {
-        FirstName,
-        LastName,
-        Email,
-        Phone,
-        Password,
-        RetypePassword,
-        BirthDay,
-        Sex,
-        Address,
-        District,
-        City,
-        role: 'user'
+      .post("http://localhost:5000/api/users", {
+        firstName,
+        lastName,
+        email,
+        phone,
+        password,
+        retypePassword,
+        birthDay,
+        sex,
+        address,
+        district,
+        city,
+        role: "user",
       })
       .then(function (response) {})
       .catch(function (error) {});
@@ -50,115 +50,126 @@ const FormRegister = () => {
   return (
     <form className="form form__register" onSubmit={(e) => e.preventDefault()}>
       <input
+        autoComplete="on"
         type="text"
         placeholder="First Name"
-        {...register("FirstName", { required: true, maxLength: 10 })}
+        {...register("firstName", { required: true, maxLength: 10 })}
       />
-      {errors.FirstName && <span>Please enter valid data !</span>}
+      {errors.firstName && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="Last Name"
-        {...register("LastName", { required: true, maxLength: 10 })}
+        {...register("lastName", { required: true, maxLength: 10 })}
       />
-      {errors.LastName && <span>Please enter valid data !</span>}
+      {errors.lastName && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="Email"
-        {...register("Email", {
+        {...register("email", {
           required: true,
           pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
         })}
       />
-      {errors.Email && <span>Please enter valid data !</span>}
+      {errors.email && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="Phone"
-        {...register("Phone", {
+        {...register("phone", {
           required: true,
           pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
         })}
       />
-      {errors.Phone && <span>Please enter valid data !</span>}
+      {errors.phone && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="password"
         placeholder="Password"
-        {...register("Password", {
+        {...register("password", {
           required: true,
           pattern:
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g,
         })}
       />
-      {errors.Password?.type === "required" && (
+      {errors.password?.type === "required" && (
         <span>Please enter valid data !</span>
       )}
-      {errors.Password?.type === "pattern" && (
+      {errors.password?.type === "pattern" && (
         <span>least 8 characters: letter, number, special characters!</span>
       )}
       <br />
 
       <input
+        autoComplete="on"
         type="password"
-        placeholder="Retype Password"
-        {...register("RetypePassword", {
+        placeholder="Retype password"
+        {...register("retypePassword", {
           required: true,
           validate: (value) =>
             value === password || "The passwords do not match",
         })}
       />
-      {errors.RetypePassword?.type === "required" && (
+      {errors.retypePassword?.type === "required" && (
         <span>Please enter valid data !</span>
       )}
-      {errors.RetypePassword?.type === "validate" && (
+      {errors.retypePassword?.type === "validate" && (
         <span>The passwords do not match! </span>
       )}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="Birth Day"
-        {...register("BirthDay", { required: true })}
+        {...register("birthDay", { required: true })}
       />
-      {errors.BirthDay && <span>Please enter valid data !</span>}
+      {errors.birthDay && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="Sex"
-        {...register("Sex", { required: true })}
+        {...register("sex", { required: true })}
       />
-      {errors.Sex && <span>Please enter valid data !</span>}
+      {errors.sex && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="Address"
-        {...register("Address", { required: true })}
+        {...register("address", { required: true })}
       />
-      {errors.Address && <span>Please enter valid data !</span>}
+      {errors.address && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="District"
-        {...register("District", { required: true })}
+        {...register("district", { required: true })}
       />
-      {errors.District && <span>Please enter valid data !</span>}
+      {errors.district && <span>Please enter valid data !</span>}
       <br />
 
       <input
+        autoComplete="on"
         type="text"
         placeholder="City"
-        {...register("City", { required: true })}
+        {...register("city", { required: true })}
       />
-      {errors.City && <span>Please enter valid data !</span>}
+      {errors.city && <span>Please enter valid data !</span>}
       <br />
 
       <button

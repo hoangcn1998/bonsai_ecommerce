@@ -6,13 +6,19 @@ import { BrowserRouter as Router } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import Store from './redux/Store';
+
 
 ReactDOM.render(
-  <Router>
+  <Provider store={Store}>
+    <Router>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </Router>,
+    </Router>
+  </Provider>,
+  
   document.getElementById('root')
 );
 

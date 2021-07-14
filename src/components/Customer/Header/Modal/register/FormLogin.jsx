@@ -1,26 +1,45 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 
-const FormLogin = (props) => {
+const FormLogin = ({ onCloseModal }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const history = useHistory();
 
+  const checkNavigate = (role) => {
+    if (role === "admin") {
+      history.push("/admin");
+    } else {
+      history.push("/");
+    }
+  };
+
   function onSubmitLogin(data) {
-    axios.post("http://localhost:5000/login", { data })
+    axios
+      .post("http://localhost:5000/api/login", data)
       .then((res) => {
-        if (res.data.status) {
-          localStorage.setItem("token", res.data.accessToken);
+        const {
+          data: { status, accessToken },
+        } = res || {};
+        console.log(res);
+        if (status) {
+          localStorage.setItem("token", accessToken);
           localStorage.setItem("statusLogin", true);
-          history.push("/admin");
+          const userInfo = jwt_decode(accessToken);
+          const { role = "user" } = userInfo;
+          checkNavigate(role);
+          console.log(`userInfo`, userInfo);
+          onCloseModal();
         } else {
           toast.error(res.data.message, {
             position: "top-right",
@@ -33,7 +52,8 @@ const FormLogin = (props) => {
           });
         }
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
+    reset({ example: "", exampleRequired: "" });
   }
 
   return (
@@ -62,7 +82,7 @@ const FormLogin = (props) => {
 
         <button type="submit" className="button__submit">
           Login
-      </button>
+        </button>
         <br />
       </form>
     </React.Fragment>
@@ -70,3 +90,85 @@ const FormLogin = (props) => {
 };
 
 export default FormLogin;
+
+// import React from "react";
+// import axios from "axios";
+// import jwt_decode from "jwt-decode";
+// import { useForm } from "react-hook-form";
+// import {
+//   Link,
+//   Redirect,
+//   Route,
+//   useHistory,
+//   useRouteMatch,
+// } from "react-router-dom";
+
+// const FormLogin = ({ onCloseModal }) => {
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//     reset,
+//   } = useForm();
+//   const history = useHistory();
+
+//   const checkNavigate = (role) => {
+//     if (role === "admin") {
+//       history.push("/admin");
+//     } else {
+//       history.push("/");
+//     }
+//   };
+
+//   const onSubmit = async (data) => {
+//     try {
+//       const {
+//         data: { accessToken },
+//       } = await axios.post("http://localhost:5000/api/login", data);
+//       console.log(data);
+//       const userInfo = jwt_decode(accessToken);
+//       const { sub } = userInfo || {};
+//       const res = await axios.get(`http://localhost:5000/api/users/${sub}`);
+//       const user = res.data;
+//       const { role, email } = user || {};
+//       checkNavigate(role);
+//       localStorage.setItem("statusLogin", "true");
+//       onCloseModal();
+//       reset({ example: "", exampleRequired: "" });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   return (
+//     <form className="form form__login" onSubmit={handleSubmit(onSubmit)}>
+//       <input
+//         autoComplete="on"
+//         type="text"
+//         placeholder="Email"
+//         {...register("email", {
+//           required: true,
+//           pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
+//         })}
+//       />
+//       {errors.email && <span>Please enter valid data !</span>}
+//       <br />
+
+//       <input
+//         autoComplete="on"
+//         type="password"
+//         placeholder="Password"
+//         {...register("password", { required: true })}
+//       />
+//       {errors.password && <span>Please enter valid data !</span>}
+//       <br />
+
+//       <button type="submit" className="button__submit">
+//         Login
+//       </button>
+//       <br />
+//     </form>
+//   );
+// };
+
+// export default FormLogin;
