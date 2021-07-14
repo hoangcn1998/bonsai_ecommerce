@@ -40,7 +40,7 @@ const FormRegister = () => {
         address,
         district,
         city,
-        role: "admin",
+        role: "user",
       })
       .then(function (response) {})
       .catch(function (error) {});

@@ -2,9 +2,10 @@ import { put, takeEvery, call } from "@redux-saga/core/effects";
 import axios from "axios";
 import { GET_PRODUCTS } from "../actions-constants/products-constant";
 import actions from "../actions/index";
+import url from "../../urlApi"
 
 const { productActions } = actions;
-const { getProductsSc } = productActions;
+const { getProductsSc, getProductsEr } = productActions;
 
 function* productSaga() {
     yield  takeEvery(GET_PRODUCTS, fetchProduct);
@@ -16,13 +17,14 @@ function* fetchProduct() {
         if(res.status == '200') {
              yield put(getProductsSc(res.data));
         }
-    }catch(error) {
+    } catch(error) {
         console.error();
+        yield put(getProductsEr(error));
     }
 }
 
 function getAllproduct() {
-    return axios.get("http://localhost:3000/api/products")
+    return axios.get(`${url}products`)
 }
 
 

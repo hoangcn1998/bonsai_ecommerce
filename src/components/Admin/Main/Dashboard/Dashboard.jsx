@@ -145,23 +145,23 @@ function Dashboard(props) {
   const token = localStorage.getItem("token");
   const status = localStorage.getItem("statusLogin");
 
-  // useEffect(() => {
-  //   axios.post("http://localhost:5000/admin", { token })
-  //     .then(res => {
-  //       toast.success(res.data.message, {
-  //         position: "top-right",
-  //         autoClose: 2000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     })
-  // }, [token]);
+  useEffect(() => {
+    axios.post("http://localhost:5000/admin", { token })
+      .then(res => {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }, [token]);
 
   function onHandleLogout() {
     localStorage.clear();

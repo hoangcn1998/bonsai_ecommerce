@@ -6,20 +6,20 @@ import "./style.scss";
 import { Link } from "react-router-dom";
 
 function ItemProducts(props) {
-  const [value, setValue] = React.useState(2);
-  console.log(props);
+  const [value, setValue] = React.useState(4);
 
   const { index, name, price, rating, bigPicture, sale } = props;
-  let salePrice = parseFloat(price) * sale;
+
+  let salePrice = price - price * sale;
+
+  let percentSale = sale * 100;
 
   return (
     <Grid item lg={3} md={4} sm={6} xs={12} className="products__main">
       <div className="products__main--overlay">
         <ul className="products__main--overlay--action">
           <li>
-            <Link to="/Products">
-              <i className="fa fa-eye" />
-            </Link>
+              <i className="fa fa-eye" data-toggle="modal" data-target="#exampleModalCenter" />
           </li>
           <li>
             <i className="fa fa-heart-o" />
@@ -31,7 +31,7 @@ function ItemProducts(props) {
       </div>
       <div className="products__main--main">
         <div className="price-discount">
-          <p>-25%</p>
+          <p>-{percentSale}%</p>
         </div>
         <img src={bigPicture} alt={bigPicture} />
         <p>{name}</p>

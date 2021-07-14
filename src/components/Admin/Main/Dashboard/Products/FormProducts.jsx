@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import url from "../../../../../urlApi";
 
 const FormProducts = () => {
   const {
@@ -15,6 +16,7 @@ const FormProducts = () => {
       CategoriesId,
       ProductsName,
       ProductsPrice,
+      ProductsSale,
       BigPicture,
       ThumbnailUrl1,
       ThumbnailUrl2,
@@ -24,10 +26,11 @@ const FormProducts = () => {
     } = data;
 
     axios
-      .post("http://localhost:3000/api/products", {
+      .post(`${url}products`, {
         categoryId: CategoriesId,
         name: ProductsName,
         price: ProductsPrice,
+        sale: ProductsSale,
         bigPicture: BigPicture,
         thumbnailUrl: [
           ThumbnailUrl1,
@@ -36,7 +39,7 @@ const FormProducts = () => {
           ThumbnailUrl4,
         ],
         description: Description,
-        rating: "",
+        rating: {},
       })
       .then(function (response) {})
       .catch(function (error) {});
@@ -67,6 +70,14 @@ const FormProducts = () => {
         {...register("ProductsPrice", { required: true })}
       />
       {errors.ProductsPrice && <span> * Please enter valid data !</span>}
+      <br />
+
+      <input
+        type="text"
+        placeholder="Products Sale(value to 0 from 1)"
+        {...register("ProductsSale", { required: true })}
+      />
+      {errors.ProductsSale && <span> * Please enter valid data !</span>}
       <br />
 
       <input

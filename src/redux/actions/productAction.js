@@ -13,3 +13,11 @@ export const getProductsSc = (data) => {
     payload: data
   };
 };
+
+export const getProductsEr = (data) => {
+
+  return {
+    type: GET_PRODUCTS_ER,
+    payload: data
+  };
+};
