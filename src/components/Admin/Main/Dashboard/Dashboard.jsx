@@ -42,6 +42,7 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Products from "./Products/Products";
 import Categories from "./Categories/Categories";
+import urlApi from '../../../../urlApi'
 
 const drawerWidth = 240;
 
@@ -146,7 +147,7 @@ function Dashboard(props) {
   const status = localStorage.getItem("statusLogin");
 
   useEffect(() => {
-    axios.post("http://localhost:5000/admin", { token })
+    axios.post(`${urlApi}admin`, { token })
       .then(res => {
         toast.success(res.data.message, {
           position: "top-right",

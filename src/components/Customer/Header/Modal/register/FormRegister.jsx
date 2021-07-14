@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import urlApi from '../../../../../urlApi'
 
 const FormRegister = () => {
   const {
@@ -28,7 +29,7 @@ const FormRegister = () => {
       city,
     } = data;
     axios
-      .post("http://localhost:5000/api/users", {
+      .post(`${urlApi}/users`, {
         firstName,
         lastName,
         email,
@@ -105,7 +106,7 @@ const FormRegister = () => {
         <span>Please enter valid data !</span>
       )}
       {errors.password?.type === "pattern" && (
-        <span>least 8 characters: letter, number, special characters!</span>
+        <span>8 characters: letter, number, special characters!</span>
       )}
       <br />
 
@@ -177,7 +178,7 @@ const FormRegister = () => {
         className="button__submit"
         onClick={handleSubmit(onSubmit)}
       >
-        Login
+        Submit
       </button>
       <br></br>
     </form>

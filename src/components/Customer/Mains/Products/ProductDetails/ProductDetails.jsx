@@ -1,27 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import ProductSlideShow from "./ProductSlideShow/ProductSlideShow";
 import ProductContent from "./ProductContent/ProductContent";
 import ProductContentTabs from "./ProductContentTabs/ProductContentTabs";
+import { connect } from "react-redux";
+import {
+  useParams
+} from "react-router-dom";
 
-const ProductDetails = () => {
+const ProductDetails = ({products}) => {
+
+  const { id } = useParams();
+
+  const product = products.find(x => x.id === id);
+  const {price, sale, thumbnailUrl, description} = product || {};
   return (
     <section className="productDetails__container container">
       <div className="row">
         <div className="col-lg-6">
-          <ProductSlideShow></ProductSlideShow>
+          {product && <ProductSlideShow thumbnailUrl={thumbnailUrl} />}
         </div>
         <div className="col-lg-6">
-          <ProductContent></ProductContent>
+          <ProductContent />
         </div>
       </div>
       <div className="row">
         <div className="col-lg-12">
-          <ProductContentTabs></ProductContentTabs>
+          <ProductContentTabs/>
         </div>
       </div>
     </section>
   );
 };
 
-export default ProductDetails;
+function mapStateToProps(state) {
+  const {
+    products: { data },
+  } = state;
+  return { products: data };
+}
+
+export default connect(mapStateToProps)(ProductDetails);
+

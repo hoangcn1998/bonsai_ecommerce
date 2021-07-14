@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios";
+import urlApi from '../../../../../urlApi'
 
 function ButtonGroup() {
   return (
@@ -34,9 +35,8 @@ function ListCategories() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/categories")
+      .get(`${urlApi}categories`)
       .then(function (response) {
-        console.log(response);
         const { data } = response;
         const formatCategories = formatData(data);
         setStateCategories(formatCategories);

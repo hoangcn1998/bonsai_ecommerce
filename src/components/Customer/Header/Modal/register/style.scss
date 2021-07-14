@@ -119,24 +119,24 @@
         }
     }
 
-    .login__faceBook {
+    // .login__faceBook {
 
-        font-size: 1.2rem;
-        padding-bottom: 2rem;
+    //     font-size: 1.2rem;
+    //     padding-bottom: 2rem;
 
-        a {
-            padding-left: 1rem;
-            color: white;
-            text-decoration: none;
-        }
+    //     a {
+    //         padding-left: 1rem;
+    //         color: white;
+    //         text-decoration: none;
+    //     }
 
-        a:hover, a:active {
-            font-weight: bold;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: rgba(0, 0, 255, 0.692);
-        }
-    }
+    //     a:hover, a:active {
+    //         font-weight: bold;
+    //         transition: all 0.3s;
+    //         text-decoration: none;
+    //         color: rgba(0, 0, 255, 0.692);
+    //     }
+    // }
 }
 
 @media only screen and (max-width: 576px) {
