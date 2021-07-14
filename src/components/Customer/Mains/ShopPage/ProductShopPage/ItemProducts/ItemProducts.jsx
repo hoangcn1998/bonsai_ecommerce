@@ -18,7 +18,7 @@ function ItemProducts({ product, onRedirectDetail }) {
       <div className="products__main--overlay" onClick={() => onRedirectDetail(product)}>
         <ul className="products__main--overlay--action">
           <li>
-              <i className="fa fa-eye" data-toggle="modal" data-target="#exampleModalCenter" />
+            <i className="fa fa-eye" data-toggle="modal" data-target="#exampleModalCenter" />
           </li>
           <li>
             <i className="fa fa-heart-o" />
