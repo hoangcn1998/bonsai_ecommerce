@@ -2,8 +2,12 @@ import React from "react";
 import "../style.scss";
 import ItemCart from "./ItemCart";
 import CartTotal from "./CartTotal";
+import { connect } from "react-redux";
 
-const ContentShoppingCart = () => {
+const ContentShoppingCart = ({ cart }) => {
+
+  const data = cart.map((product, index) => <ItemCart product={product} index={index} key={index} />)
+
   return (
     <div className="container ">
       <div className="row ContentShoppingCart">
@@ -26,9 +30,7 @@ const ContentShoppingCart = () => {
               </tr>
             </thead>
             <tbody>
-              <ItemCart></ItemCart>
-              <ItemCart></ItemCart>
-              <ItemCart></ItemCart>
+              {data}
             </tbody>
           </table>
         </div>
@@ -40,4 +42,14 @@ const ContentShoppingCart = () => {
   );
 };
 
-export default ContentShoppingCart;
+// export default ContentShoppingCart;
+
+function mapStateToProps(state) {
+
+  const {
+    cart: { data },
+  } = state;
+  return { cart: data };
+}
+
+export default connect(mapStateToProps)(ContentShoppingCart);
