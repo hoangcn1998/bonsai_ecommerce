@@ -2,7 +2,13 @@ import { Grid } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import Rating from "@material-ui/lab/Rating";
 import ModalProductDetails from '../../../../Header/Modal/productDetails/ModalProductDetails';
+import { useDispatch } from "react-redux";
+import { addProductToCart } from '../../../../../../redux/actions/cartAction'
+
 function ItemProducts({ product, onRedirectDetail }) {
+
+  const dispatch = useDispatch();
+
   const [value, setValue] = React.useState(4);
   const [selectProduct, setSelectProduct] = useState(null);
 
@@ -20,6 +26,19 @@ function ItemProducts({ product, onRedirectDetail }) {
     setSelectProduct(null)
   }
 
+  const increaseQuantity = (product) => {
+    return {
+      ...product,
+      quantity: 1
+    }
+  }
+
+  const handlerAddToCart = (product) => {
+    const increaseProduct = increaseQuantity(product)
+    dispatch(addProductToCart(increaseProduct))
+  }
+
+
   return (
     <Grid item lg={3} md={4} sm={6} xs={12} className="products__main">
       <div className="products__main--overlay">
@@ -31,7 +50,7 @@ function ItemProducts({ product, onRedirectDetail }) {
             <i className="fa fa-heart-o" />
           </li>
           <li>
-            <i className="fa fa-shopping-basket" />
+            <i className="fa fa-shopping-basket" onClick={() => handlerAddToCart(product)} />
           </li>
         </ul>
       </div>
