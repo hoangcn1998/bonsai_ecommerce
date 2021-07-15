@@ -13,7 +13,8 @@ const ProductDetails = ({products}) => {
   const { id } = useParams();
 
   const product = products.find(x => x.id === id);
-  const {price, sale, thumbnailUrl, description} = product || {};
+  const {thumbnailUrl} = product || {};
+
   return (
     <section className="productDetails__container container">
       <div className="row">
@@ -21,7 +22,7 @@ const ProductDetails = ({products}) => {
           {product && <ProductSlideShow thumbnailUrl={thumbnailUrl} />}
         </div>
         <div className="col-lg-6">
-          <ProductContent />
+         { product && <ProductContent product={product} />}
         </div>
       </div>
       <div className="row">

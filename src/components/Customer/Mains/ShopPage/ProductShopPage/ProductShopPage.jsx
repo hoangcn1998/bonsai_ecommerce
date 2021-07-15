@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import {
-  Link,
-  Redirect,
-  Route,
-  useHistory,
-  useRouteMatch,
-} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import ItemProducts from "./ItemProducts/ItemProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../../../redux/actions/productAction";
@@ -21,7 +15,7 @@ const ProductShopPage = () => {
 
   const errorDataProducts = useSelector((state) => state.products.errorMessage);
 
-
+  const display = useSelector((state) => state.products.display);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -30,7 +24,6 @@ const ProductShopPage = () => {
   const redirectDetail = product => {
     history.push(`/Products/${product.id}`)
   }
-
 
   const data = dataProducts.map((product, index) => {
     return <ItemProducts key={index} index={index} product={product} onRedirectDetail={redirectDetail} />;
@@ -55,10 +48,8 @@ const ProductShopPage = () => {
           {data}
           <p style={style}>{errorDataProducts}</p>
         </Grid>
-        <ModalProductDetails/>
       </div>
-      <div style={{display: 'none'}} className="spinner-border text-success" role="status">
-        <span className="sr-only">Loading...</span>
+      <div style={{display: display}} className="spinner-border text-success" role="status">
       </div>
     </>
   );
