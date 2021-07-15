@@ -1,13 +1,13 @@
-import { GET_PRODUCTS_START, GET_PRODUCTS_SC, GET_PRODUCTS_ER } from '../actions-constants/products-constant';
+import { SET_DISPLAY, GET_PRODUCTS_SC, GET_PRODUCTS_ER } from '../actions-constants/products-constant';
 
-const stateDefault = { data: [], errorMessage: null, isLoading: "block" };
+const stateDefault = { data: [], errorMessage: null, display: "block" };
 
 const ProductsReducer = (state = stateDefault, action) => {
   switch (action.type) {
 
-    case GET_PRODUCTS_START:
+    case SET_DISPLAY:
 
-      return { ...state, isLoading: "block" };
+      return { ...state, display: action.payload };
 
 
     case GET_PRODUCTS_SC:

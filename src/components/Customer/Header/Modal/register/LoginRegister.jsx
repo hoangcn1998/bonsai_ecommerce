@@ -1,10 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import FormLogin from "../register/FormLogin";
 import FormRegister from "../register/FormRegister";
 import "./style.scss";
+import { connect } from "react-redux";
 
 const LoginRegister = (prop) => {
+
+
   const { showSignIn, onToggleSignIn } = prop;
   const [showLogin, setShowLogin] = useState(true);
 
