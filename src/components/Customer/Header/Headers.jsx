@@ -22,13 +22,15 @@ function Header({ auth, cart }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [name, setName] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const { accessToken } = auth || {};
+    const { accessToken = localStorage.getItem("accessToken") } = auth || {};
     if (accessToken) {
       const userInfo = jwt_decode(accessToken);
       const userName = userInfo.name
       setName(userName)
+      setIsLogin(true)
     }
   }, [auth])
 
@@ -55,6 +57,7 @@ function Header({ auth, cart }) {
     localStorage.clear();
     setName('')
     history.push("/");
+    setIsLogin(false)
   }
 
   return (
@@ -95,10 +98,10 @@ function Header({ auth, cart }) {
           <i className="fa fa-bars" aria-hidden="true" />
         </div>
         <div className="header-group__collap">{name}</div>
-        {!auth && <div className="header-group__collap" onClick={onToggleSignIn}>
+        {!isLogin && <div className="header-group__collap" onClick={onToggleSignIn}>
           <i className="fa fa-sign-in" aria-hidden="true"></i>
         </div>}
-        {auth && <div className="header-group__collap">
+        {isLogin && <div className="header-group__collap">
           <button onClick={onHandleLogout}>Logout</button>
         </div>}
       </div>

@@ -22,8 +22,8 @@ function* startLogin(data) {
             yield put(loginSc(res.data));
         }
     } catch (error) {
-        console.log(`error message--->`, error.message);
-        yield put(loginEr(error.message));
+        console.log(`error message--->`, error.response.data.message);
+        yield put(loginEr(error.response.data.message));
     }
 }
 

@@ -6,7 +6,7 @@ const increaseQuantity = (product, cart) => {
   const newCart = [...cart];
   const productIndex = newCart.findIndex(item => item.id === product.id);
   if (productIndex > -1) {
-    newCart[productIndex].quantity += 1;
+    newCart[productIndex].quantity += product.quantity;
   } else {
     newCart.push(product)
   }
@@ -17,7 +17,7 @@ const decreaseQuantity = (product, cart) => {
   const newCart = [...cart];
   const productIndex = newCart.findIndex(item => item.id === product.id);
   if (productIndex > -1) {
-    newCart[productIndex].quantity -= 1;
+    newCart[productIndex].quantity -= product.quantity;
     if (newCart[productIndex].quantity < 0) {
       newCart[productIndex].quantity = 0;
     }

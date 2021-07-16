@@ -18,18 +18,15 @@ const ProductContent = ({ product }) => {
   const [countProductDetails, setCountProductDetails] = useState(initial);
 
   function handlerClickMinus() {
-    const newCountProductDetails = countProductDetails - 1;
+    let newCountProductDetails = countProductDetails - 1;
     if (countProductDetails === 0) {
-      return countProductDetails;
-    } else {
-      setCountProductDetails(newCountProductDetails);
-      localStorage.setItem("countProductDetails", newCountProductDetails);
+      newCountProductDetails = 0;
     }
+    setCountProductDetails(newCountProductDetails);
   }
 
   function handlerClickPlus() {
     const newCountProductDetails = countProductDetails + 1;
-    localStorage.setItem("countProductDetails", newCountProductDetails);
     setCountProductDetails(newCountProductDetails);
   }
 

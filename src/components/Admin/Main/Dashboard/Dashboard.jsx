@@ -150,9 +150,9 @@ function Dashboard(props) {
   }
 
   const isAdmin = () => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken") || {};
     const role = localStorage.getItem("role");
-    if (accessToken && role) {
+    if (accessToken && role === 'admin') {
       return true;
     }
     return false;
