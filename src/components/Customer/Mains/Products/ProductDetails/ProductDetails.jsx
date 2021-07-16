@@ -58,4 +58,3 @@ export default ProductDetails;
 // }
 
 // export default connect(mapStateToProps)(ProductDetails);
-
