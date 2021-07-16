@@ -143,26 +143,6 @@ function Dashboard(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const token = localStorage.getItem("token");
-  const status = localStorage.getItem("statusLogin");
-
-  useEffect(() => {
-    axios.post(`${urlApi}admin`, { token })
-      .then(res => {
-        toast.success(res.data.message, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      })
-  }, [token]);
 
   function onHandleLogout() {
     localStorage.clear();
@@ -170,10 +150,19 @@ function Dashboard(props) {
     history.push("/");
   }
 
+  const isAdmin = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const role = localStorage.getItem("role");
+    if (accessToken && role) {
+      return true;
+    }
+    return false;
+  }
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const element =
-    status === "true" ? (
+    isAdmin() ? (
       <React.Fragment>
         <CssBaseline />
         <ToastContainer />

@@ -1,21 +1,21 @@
 import { put, takeEvery, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { GET_PRODUCTS, GET_PRODUCTS_START } from "../actions-constants/products-constant";
+import { GET_PRODUCTS, SET_DISPLAY } from "../actions-constants/products-constant";
 import actions from "../actions/index";
 import url from "../../urlApi"
 
 
 const { productActions } = actions;
-const { getProductsSc, getProductsEr } = productActions;
+const { getProductsSc, getProductsEr, setDisplay } = productActions;
 
 function* productSaga() {
     yield takeEvery(GET_PRODUCTS, fetchProduct);
-    yield takeEvery(GET_PRODUCTS_START, loading)
 }
 
 function* fetchProduct() {
     try {
         let res = yield call(getAllproduct);
+        yield put(setDisplay("none"));
         if (res.status == '200') {
             yield put(getProductsSc(res.data));
         }
@@ -28,10 +28,5 @@ function* fetchProduct() {
 function getAllproduct() {
     return axios.get(`${url}products`)
 }
-
-function loading() {
-
-}
-
 
 export default productSaga;

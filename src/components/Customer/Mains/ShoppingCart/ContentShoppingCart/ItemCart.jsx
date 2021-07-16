@@ -1,32 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProductToCart, decreaseProductToCart } from '../../../../../redux/actions/cartAction'
 
-const ItemCart = () => {
+const ItemCart = ({ product }) => {
+
+  const dispatch = useDispatch()
+
+  const { name, price, sale, quantity, bigPicture } = product;
+
+  const salePrice = price - (price * sale);
+
+  const totalProduct = quantity * salePrice;
+
+
+  const initial = parseInt(localStorage.getItem("countProductDetails") || 0);
+
+  const increaseQuantity = (product) => {
+    return {
+      ...product,
+      quantity: 1
+    }
+  }
+
+  const handlerAddToCart = (product) => {
+    const increaseProduct = increaseQuantity(product)
+    dispatch(addProductToCart(increaseProduct))
+  }
+
+  const handlerDecreaseProductToCart = (product) => {
+    const increaseProduct = increaseQuantity(product)
+    dispatch(decreaseProductToCart(increaseProduct))
+  }
+
   return (
     <tr className="shoppingcart__item">
       <th scope="row" className="shoppingcart__item--product">
         <button>x</button>
         <img
-          alt="img"
-          src="http://landing.engotheme.com/html/hamadryad/demo/images/products/product-2.jpg"
+          alt={bigPicture}
+          src={bigPicture}
         />
-        <span>Polyscias Fabian</span>
+        <span>{name}</span>
       </th>
-      <td className="shoppingcart__item--price">123$</td>
+      <td className="shoppingcart__item--price">${salePrice}</td>
       <td>
         <div
           className="btn-group mr-2 shoppingcart__item--quantity"
           role="group"
         >
-          <button className="btn btn-light">-</button>
+          <button className="btn btn-light" onClick={() => handlerDecreaseProductToCart(product)} >-</button>
           <button disabled className="btn btn-light">
-            0
+            {quantity}
           </button>
-          <button className="btn btn-light">+</button>
+          <button className="btn btn-light" onClick={() => handlerAddToCart(product)}>+</button>
         </div>
       </td>
-      <td className="shoppingcart__item--total">123$</td>
-    </tr>
+      <td className="shoppingcart__item--total">${totalProduct}</td>
+    </tr >
   );
 };
+
 
 export default ItemCart;

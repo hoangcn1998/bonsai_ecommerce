@@ -2,7 +2,12 @@ import React from "react";
 import { useState } from "react";
 import Rating from "@material-ui/lab/Rating";
 
-const ProductContent = () => {
+const ProductContent = ({product}) => {
+
+  const {price, sale, description, name, categoryId} = product || {};
+  
+  const salePrice = price - (price * sale);
+
   const initial = parseInt(localStorage.getItem("countProductDetails") || 0);
   const [countProductDetails, setCountProductDetails] = useState(initial);
 
@@ -24,11 +29,11 @@ const ProductContent = () => {
 
   return (
     <div className="productDetails__content">
-      <h1 className="productDetails__title">Succulent Plant</h1>
+      <h1 className="productDetails__title">{name}</h1>
       <div className="productDetails__meta">
         <div className="productDetails__price">
-          <div className="productDetails__price--cost">$80.000</div>
-          <div className="productDetails__price--sale">$60.000</div>
+          <div className="productDetails__price--cost">${price}</div>
+          <div className="productDetails__price--sale">${salePrice}</div>
         </div>
         <div className="productDetails__rating">
            <Rating
@@ -38,13 +43,7 @@ const ProductContent = () => {
             />
         </div>
       </div>
-      <p className="productDetails__description">
-        Aenean id ullamcorper libero. Vestibulum imperdiet nibh. Lorem
-        ullamcorper volutpat. Vestibulum lacinia risus. It is a long established
-        fact that a reader will be distracted by the readable content.
-        Pellentesque habitant morbi tristique senectus et netus et malesuada
-        fames ac turpis egestas.
-      </p>
+      <p className="productDetails__description">{description}</p>
       <div className="productDetails__action">
         <div className="productDetails__action--quantity">
           <div
@@ -83,7 +82,7 @@ const ProductContent = () => {
           <span>SKU:</span> PD 031
         </p>
         <p>
-          <span>Categories:</span> Out Door Plant, Plant On Table, Potted.
+          <span>Categories:</span> Category{categoryId}
         </p>
         <p>
           <span>Tags:</span> Cactus, Flower, Indoor.
