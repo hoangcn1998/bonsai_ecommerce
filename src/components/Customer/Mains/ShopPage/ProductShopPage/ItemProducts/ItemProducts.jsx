@@ -1,4 +1,5 @@
-import { Grid } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 import React, { useState, useEffect } from "react";
 import Rating from "@material-ui/lab/Rating";
 import ModalProductDetails from '../../../../Header/Modal/productDetails/ModalProductDetails';
@@ -6,16 +7,11 @@ import { useDispatch } from "react-redux";
 import { addProductToCart } from '../../../../../../redux/actions/cartAction'
 
 function ItemProducts({ product, onRedirectDetail }) {
-
+  const { name, price, bigPicture, sale, rating, id } = product;
+  const [selectProduct, setSelectProduct] = useState(null);
   const dispatch = useDispatch();
 
-  const [value, setValue] = React.useState(4);
-  const [selectProduct, setSelectProduct] = useState(null);
-
-  const { name, price, bigPicture, sale } = product;
-
   let salePrice = price - price * sale;
-
   let percentSale = sale * 100;
 
   const setSelectItem = (product) => {
@@ -41,7 +37,7 @@ function ItemProducts({ product, onRedirectDetail }) {
 
   return (
     <Grid item lg={3} md={4} sm={6} xs={12} className="products__main">
-      <div className="products__main--overlay">
+      <div className="products__main--overlay" >
         <ul className="products__main--overlay--action">
           <li>
             <i onClick={() => setSelectItem(product)} className="fa fa-eye" data-toggle="modal" data-target="#exampleModalCenter" />
@@ -61,16 +57,18 @@ function ItemProducts({ product, onRedirectDetail }) {
         <img src={bigPicture} alt={bigPicture} />
         <p>{name}</p>
         <div className="products__main--main--group">
-          <p>${price}</p>
-          <p>${salePrice}</p>
-          <Rating
-            name="simple-controlled"
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-            id="rating"
-          />
+          <p>{price}$</p>
+          <p>{salePrice}$</p>
+          <Box component="fieldset" mb={3} borderColor="transparent">
+            <Rating
+              style={{ marginLeft: "1rem" }}
+              name="customized-empty"
+              defaultValue={rating}
+              precision={0.5}
+              emptyIcon={<StarBorderIcon fontSize="inherit" />}
+              size="small"
+            />
+          </Box>
         </div>
       </div>
       { selectProduct && <ModalProductDetails product={selectProduct} onResetSelectItem={handleResetItem} />}
