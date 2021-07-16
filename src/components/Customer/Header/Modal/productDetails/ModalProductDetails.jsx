@@ -32,7 +32,7 @@ const ModalProductDetails = ({ product, onResetSelectItem }) => {
                 </div>
             </div>
         </div>
-    );
+    )
 };
 
 export default ModalProductDetails;

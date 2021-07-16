@@ -7,11 +7,11 @@ const ProductSlideShow = ({ thumbnailUrl }) => {
   const renderImage = thumbnailUrl.map((img, index) => (
     <div key={index} className="each-slide">
       <div>
-        <img alt="img" src={img}/>
+        <img alt="img" src={img} />
       </div>
     </div>
   ))
-    
+
   return (
     <div className="slide-container">
       <Slide>
