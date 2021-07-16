@@ -1,18 +1,9 @@
 import { Grid, makeStyles } from "@material-ui/core";
 // import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from "prop-types";
 import React from "react";
 import imageCategory1 from "../../../../../../assests/images/categories-1.jpeg";
 import imageCategory2 from "../../../../../../assests/images/categories-2.jpeg";
 import imageCategory3 from "../../../../../../assests/images/categories-3.jpeg";
-
-Item.propTypes = {
-  categories: PropTypes.array,
-};
-
-Item.defaultProps = {
-  categories: [],
-};
 
 const useStyles = makeStyles((theme) => ({
   center: {

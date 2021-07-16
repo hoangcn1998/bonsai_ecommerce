@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   AppBar,
   Badge,
@@ -26,9 +27,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import PeopleIcon from "@material-ui/icons/People";
 import CategoryIcon from "@material-ui/icons/Category";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import axios from "axios";
 import clsx from "clsx";
-import React, { useEffect } from "react";
 import {
   Link,
   Redirect,
@@ -36,13 +35,13 @@ import {
   useHistory,
   useRouteMatch,
 } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Products from "./Products/Products";
 import Categories from "./Categories/Categories";
-import urlApi from '../../../../urlApi'
+
 
 const drawerWidth = 240;
 
@@ -151,9 +150,9 @@ function Dashboard(props) {
   }
 
   const isAdmin = () => {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken") || {};
     const role = localStorage.getItem("role");
-    if (accessToken && role) {
+    if (accessToken && role === 'admin') {
       return true;
     }
     return false;

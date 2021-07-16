@@ -1,39 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './style.scss';
 import ProductSlideShow from '../../../Mains/Products/ProductDetails/ProductSlideShow/ProductSlideShow'
 import ProductContent from '../../../Mains/Products/ProductDetails/ProductContent/ProductContent';
-import { connect } from "react-redux";
 
 const ModalProductDetails = ({ product, onResetSelectItem }) => {
 
-  const { thumbnailUrl } = product || {};
+    const { thumbnailUrl } = product || {};
 
-  return (
-    <div onClick={() => onResetSelectItem()} className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    return (
+        <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
-      <div className="modal-dialog modal-dialog-centered" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <button onClick={() => onResetSelectItem()} type="button" className="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <section className="productDetails__container container">
-              <div className="row">
-                <div className="col-lg-6">
-                  {product && <ProductSlideShow thumbnailUrl={thumbnailUrl} />}
+            <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <button onClick={() => onResetSelectItem()} style={{ fontSize: '4rem', padding: '0 10px 0 0' }} type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <section className="productDetails__container container">
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    {product && <ProductSlideShow thumbnailUrl={thumbnailUrl} />}
+                                </div>
+                                <div className="col-lg-6">
+                                    {product && <ProductContent product={product} />}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-                <div className="col-lg-6">
-                  {product && <ProductContent product={product} />}
-                </div>
-              </div>
-            </section>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 };
 
 export default ModalProductDetails;

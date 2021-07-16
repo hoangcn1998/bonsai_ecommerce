@@ -1,5 +1,12 @@
 // import React from "react";
-import { LOGIN_START, LOGIN_SC, LOGIN_ER } from "../actions-constants/auth-constant";
+import { LOGIN_START, LOGIN_SC, LOGIN_ER, LOGOUT } from "../actions-constants/auth-constant";
+
+export const logout = () => {
+  return {
+    type: LOGOUT
+  };
+};
+
 
 export const loginStart = (data) => {
   return {

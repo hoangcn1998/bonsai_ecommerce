@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import { Box, Grid } from "@material-ui/core";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import React, { useState, useEffect } from "react";
 import Rating from "@material-ui/lab/Rating";
 import ModalProductDetails from '../../../../Header/Modal/productDetails/ModalProductDetails';
 import { useDispatch } from "react-redux";

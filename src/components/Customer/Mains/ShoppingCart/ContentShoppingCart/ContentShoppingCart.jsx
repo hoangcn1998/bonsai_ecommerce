@@ -6,6 +6,17 @@ import { connect } from "react-redux";
 
 const ContentShoppingCart = ({ cart }) => {
 
+  console.log(cart)
+
+  const calcualteTotalPrice = (cart) => {
+    const total = cart.reduce((sum, currentProduct) => {
+      const { price, sale, quantity } = currentProduct || {};
+      return sum + (price - price * sale) * quantity;
+    }, 0);
+    console.log(`total --->`, total)
+    return total;
+  }
+
   const data = cart.map((product, index) => <ItemCart product={product} index={index} key={index} />)
 
   return (
@@ -35,7 +46,7 @@ const ContentShoppingCart = ({ cart }) => {
           </table>
         </div>
         <div className="col-lg-4 cartTotal">
-          <CartTotal></CartTotal>
+          <CartTotal totalPrice={calcualteTotalPrice(cart)} />
         </div>
       </div>
     </div>
@@ -45,7 +56,6 @@ const ContentShoppingCart = ({ cart }) => {
 // export default ContentShoppingCart;
 
 function mapStateToProps(state) {
-
   const {
     cart: { data },
   } = state;

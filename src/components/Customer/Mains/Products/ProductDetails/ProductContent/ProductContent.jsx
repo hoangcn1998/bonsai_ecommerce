@@ -1,30 +1,47 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Rating from "@material-ui/lab/Rating";
+import { addProductToCart } from '../../../../../../redux/actions/cartAction'
 
-const ProductContent = ({product}) => {
 
-  const {price, sale, description, name, categoryId} = product || {};
-  
+
+const ProductContent = ({ product }) => {
+
+  const dispatch = useDispatch()
+
+  const { price, sale, description, name, categoryId } = product || {};
+
   const salePrice = price - (price * sale);
 
   const initial = parseInt(localStorage.getItem("countProductDetails") || 0);
   const [countProductDetails, setCountProductDetails] = useState(initial);
 
   function handlerClickMinus() {
-    const newCountProductDetails = countProductDetails - 1;
+    let newCountProductDetails = countProductDetails - 1;
     if (countProductDetails === 0) {
-      return countProductDetails;
-    } else {
-      setCountProductDetails(newCountProductDetails);
-      localStorage.setItem("countProductDetails", newCountProductDetails);
+      newCountProductDetails = 0;
     }
+    setCountProductDetails(newCountProductDetails);
   }
 
   function handlerClickPlus() {
     const newCountProductDetails = countProductDetails + 1;
-    localStorage.setItem("countProductDetails", newCountProductDetails);
     setCountProductDetails(newCountProductDetails);
+  }
+
+  const increaseQuantity = (product) => {
+    console.log(countProductDetails)
+    return {
+      ...product,
+      quantity: countProductDetails
+    }
+  }
+
+  const handlerAddToCart = (product) => {
+    const increaseProduct = increaseQuantity(product)
+    console.log(increaseProduct)
+    dispatch(addProductToCart(increaseProduct))
   }
 
   return (
@@ -36,11 +53,11 @@ const ProductContent = ({product}) => {
           <div className="productDetails__price--sale">${salePrice}</div>
         </div>
         <div className="productDetails__rating">
-           <Rating
-              name="simple-controlled"
-              value={5}
-              id="rating"
-            />
+          <Rating
+            name="simple-controlled"
+            value={5}
+            id="rating"
+          />
         </div>
       </div>
       <p className="productDetails__description">{description}</p>
@@ -54,7 +71,7 @@ const ProductContent = ({product}) => {
             <button
               type="button"
               className="btn btn-light"
-              onClick={handlerClickMinus}
+              onClick={() => handlerClickMinus()}
             >
               -
             </button>
@@ -64,14 +81,14 @@ const ProductContent = ({product}) => {
             <button
               type="button"
               className="btn btn-light"
-              onClick={handlerClickPlus}
+              onClick={() => handlerClickPlus()}
             >
               +
             </button>
           </div>
         </div>
         <div className="productDetails__action--addToCart">
-          <button>Add to cart</button>
+          <button onClick={() => handlerAddToCart(product)}>Add to cart</button>
         </div>
         <button className="productDetails__action--love">
           <i className="fa fa-heart-o" aria-hidden="true"></i>

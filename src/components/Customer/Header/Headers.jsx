@@ -1,16 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../../assests/images/logo-header.jpeg";
 import ModalCart from "./Modal/Cart/Cart";
 import LoginRegister from "./Modal/register/LoginRegister";
 import ModalMenu from "./Modal/Menu/Menu";
 import NavMenu from "./NavMenu/NavMenu";
 import "./style.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import { connect, useDispatch } from "react-redux";
+import { loginStart, logout } from "../../../redux/actions/authAction"
 
-function Header(props) {
+function Header({ auth, cart }) {
+
+
+
+  const dispatch = useDispatch();
+  const quantityProductInCart = cart.data.length;
+  const history = useHistory();
+
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
+  const [name, setName] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const { accessToken = localStorage.getItem("accessToken") } = auth || {};
+    if (accessToken) {
+      const userInfo = jwt_decode(accessToken);
+      const userName = userInfo.name
+      setName(userName)
+      setIsLogin(true)
+    }
+  }, [auth])
 
   function onToggleCart() {
     setShowCart(!showCart);
@@ -28,6 +50,14 @@ function Header(props) {
 
   function onHandleToggleMenu() {
     setShowMenu(!showMenu);
+  }
+
+  function onHandleLogout() {
+    dispatch(logout())
+    localStorage.clear();
+    setName('')
+    history.push("/");
+    setIsLogin(false)
   }
 
   return (
@@ -56,9 +86,9 @@ function Header(props) {
         </span>
         <div className="header-group__cart">
           <Link to='/ShoppingCart'>
-          <i className="fa fa-shopping-basket" aria-hidden="true" />
+            <i className="fa fa-shopping-basket" aria-hidden="true" />
           </Link>
-          <div className="header-group__cart--count">2</div>
+          <div className="header-group__cart--count">{quantityProductInCart}</div>
         </div>
         <div className="header-group__cart  header-group__cart-mobile" onClick={onToggleCart}>
           <i className="fa fa-shopping-basket" aria-hidden="true" />
@@ -67,10 +97,13 @@ function Header(props) {
         <div className="header-group__collap header-group__collap-mobile " onClick={onToggleMenu}>
           <i className="fa fa-bars" aria-hidden="true" />
         </div>
-        <div className="header-group__collap">Thong</div>
-        <div className="header-group__collap" onClick={onToggleSignIn}>
+        <div className="header-group__collap">{name}</div>
+        {!isLogin && <div className="header-group__collap" onClick={onToggleSignIn}>
           <i className="fa fa-sign-in" aria-hidden="true"></i>
-        </div>
+        </div>}
+        {isLogin && <div className="header-group__collap">
+          <button onClick={onHandleLogout}>Logout</button>
+        </div>}
       </div>
       <LoginRegister
         showSignIn={showSignIn}
@@ -82,4 +115,12 @@ function Header(props) {
   );
 }
 
-export default Header;
+function mapStateToProps(state) {
+  const {
+    cart,
+    auth: { data },
+  } = state;
+  return { cart, auth: data };
+}
+
+export default connect(mapStateToProps)(Header);

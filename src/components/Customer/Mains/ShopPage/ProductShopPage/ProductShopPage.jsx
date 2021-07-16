@@ -1,14 +1,10 @@
 import { Grid } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import ItemProducts from "./ItemProducts/ItemProducts";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useHistory
-} from "react-router-dom";
 import { getProducts } from "../../../../../redux/actions/productAction";
-import ModalProductDetails from '../../../Header/Modal/productDetails/ModalProductDetails';
-import ItemProducts from "./ItemProducts/ItemProducts";
-import Pagination from "../Pagination/Pagination";
-import axios from "axios";
+import Pagination from '../../ShopPage/Pagination/Pagination'
 
 const ProductShopPage = (props) => {
   const { findCategory, sortPrice } = props;
@@ -16,6 +12,7 @@ const ProductShopPage = (props) => {
   const history = useHistory();
   const dataProducts = useSelector((state) => state.products.data);
   const errorDataProducts = useSelector((state) => state.products.errorMessage);
+  const display = useSelector((state) => state.products.display);
 
   //current page
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,10 +90,9 @@ const ProductShopPage = (props) => {
           {data}
           <p style={style}>{errorDataProducts}</p>
         </Grid>
-        <ModalProductDetails />
       </div>
-      <div style={{ display: 'none' }} className="spinner-border text-success" role="status">
-        <span className="sr-only">Loading...</span>
+
+      <div style={{ display: display }} className="spinner-border text-success" role="status">
       </div>
       <Pagination
         productsPerPage={productsPerPage}
