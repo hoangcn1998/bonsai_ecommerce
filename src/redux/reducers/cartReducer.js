@@ -4,7 +4,6 @@ const stateDefault = { data: [] };
 
 const increaseQuantity = (product, cart) => {
   const newCart = [...cart];
-  console.log(`newCart`, newCart)
   const productIndex = newCart.findIndex(item => item.id === product.id);
   if (productIndex > -1) {
     newCart[productIndex].quantity += 1;
@@ -19,7 +18,7 @@ const decreaseQuantity = (product, cart) => {
   const productIndex = newCart.findIndex(item => item.id === product.id);
   if (productIndex > -1) {
     newCart[productIndex].quantity -= 1;
-    if (newCart[productIndex].quantity = 0) {
+    if (newCart[productIndex].quantity < 0) {
       newCart[productIndex].quantity = 0;
     }
   }

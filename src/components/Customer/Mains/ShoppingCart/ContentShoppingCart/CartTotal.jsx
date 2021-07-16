@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CartTotal = () => {
+const CartTotal = ({ totalPrice }) => {
+
   return (
     <>
       <div className="total__price">
         <h1>Total Price</h1>
-        <h1>123$</h1>
+        <h1>${totalPrice}</h1>
       </div>
       <div className="promocode">
         <input

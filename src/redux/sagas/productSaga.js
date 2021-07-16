@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { GET_PRODUCTS, SET_DISPLAY } from "../actions-constants/products-constant";
+import { GET_PRODUCTS } from "../actions-constants/products-constant";
 import actions from "../actions/index";
 import url from "../../urlApi"
 
@@ -16,7 +16,7 @@ function* fetchProduct() {
     try {
         let res = yield call(getAllproduct);
         yield put(setDisplay("none"));
-        if (res.status == '200') {
+        if (parseInt(res.status) === 200) {
             yield put(getProductsSc(res.data));
         }
     } catch (error) {

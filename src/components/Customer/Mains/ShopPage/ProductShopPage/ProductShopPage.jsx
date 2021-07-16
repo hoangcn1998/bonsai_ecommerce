@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ItemProducts from "./ItemProducts/ItemProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../../../redux/actions/productAction";
-import ModalProductDetails from '../../../Header/Modal/productDetails/ModalProductDetails'
 
 const ProductShopPage = () => {
   const dispatch = useDispatch();
 
-   const history = useHistory();
+  const history = useHistory();
 
   const dataProducts = useSelector((state) => state.products.data);
 
@@ -49,7 +48,7 @@ const ProductShopPage = () => {
           <p style={style}>{errorDataProducts}</p>
         </Grid>
       </div>
-      <div style={{display: display}} className="spinner-border text-success" role="status">
+      <div style={{ display: display }} className="spinner-border text-success" role="status">
       </div>
     </>
   );

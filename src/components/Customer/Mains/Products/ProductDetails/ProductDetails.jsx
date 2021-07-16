@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./style.scss";
 import ProductSlideShow from "./ProductSlideShow/ProductSlideShow";
 import ProductContent from "./ProductContent/ProductContent";
@@ -8,12 +8,12 @@ import {
   useParams
 } from "react-router-dom";
 
-const ProductDetails = ({products}) => {
+const ProductDetails = ({ products }) => {
 
   const { id } = useParams();
 
   const product = products.find(x => x.id === id);
-  const {thumbnailUrl} = product || {};
+  const { thumbnailUrl } = product || {};
 
   return (
     <section className="productDetails__container container">
@@ -22,12 +22,12 @@ const ProductDetails = ({products}) => {
           {product && <ProductSlideShow thumbnailUrl={thumbnailUrl} />}
         </div>
         <div className="col-lg-6">
-         { product && <ProductContent product={product} />}
+          {product && <ProductContent product={product} />}
         </div>
       </div>
       <div className="row">
         <div className="col-lg-12">
-          <ProductContentTabs/>
+          <ProductContentTabs />
         </div>
       </div>
     </section>

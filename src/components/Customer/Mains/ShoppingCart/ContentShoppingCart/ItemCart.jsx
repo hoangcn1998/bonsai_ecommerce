@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { addProductToCart, decreaseProductToCart } from '../../../../../redux/actions/cartAction'
 
@@ -11,9 +11,6 @@ const ItemCart = ({ product }) => {
   const salePrice = price - (price * sale);
 
   const totalProduct = quantity * salePrice;
-
-
-  const initial = parseInt(localStorage.getItem("countProductDetails") || 0);
 
   const increaseQuantity = (product) => {
     return {

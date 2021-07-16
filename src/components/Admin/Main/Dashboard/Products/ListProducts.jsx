@@ -9,7 +9,7 @@ function Image(image) {
     height: "70px",
   };
 
-  return <img style={style} src={image.src}></img>;
+  return <img style={style} alt={image.src} src={image.src}></img>;
 }
 
 function ButtonGroup() {

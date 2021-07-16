@@ -1,11 +1,9 @@
-import axios from "axios";
 import jwt_decode from "jwt-decode";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import urlApi from '../../../../../urlApi'
 import { loginStart } from '../../../../../redux/actions/authAction'
 import { connect } from "react-redux";
 
@@ -63,32 +61,6 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
 
   function onSubmitLogin(data) {
     dispatch(loginStart(data))
-    // axios
-    //   .post(`${urlApi}login`, data)
-    //   .then((res) => {
-    //     const {
-    //       data: { status, accessToken },
-    //     } = res || {};
-    //     if (status) {
-    //       localStorage.setItem("token", accessToken);
-    //       localStorage.setItem("statusLogin", true);
-    //       const userInfo = jwt_decode(accessToken);
-    //       const { role = "user" } = userInfo;
-    //       checkNavigate(role);
-    //       onCloseModal();
-    //     } else {
-    //       toast.error(res.data.message, {
-    //         position: "top-right",
-    //         autoClose: 2000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => console.log(error));
     reset({ example: "", exampleRequired: "" });
   }
 
@@ -124,7 +96,6 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
   );
 };
 
-// export default FormLogin;
 function mapStateToProps(state) {
   const {
     auth: { data, error },

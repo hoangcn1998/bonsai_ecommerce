@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Rating from "@material-ui/lab/Rating";
 import ModalProductDetails from '../../../../Header/Modal/productDetails/ModalProductDetails';
 import { useDispatch } from "react-redux";

@@ -6,7 +6,7 @@ import url from "../../urlApi"
 
 
 const { authActions } = actions;
-const { loginStart, loginSc, loginEr } = authActions;
+const { loginSc, loginEr } = authActions;
 
 function* authSaga() {
     yield takeEvery(LOGIN_START, startLogin);
@@ -18,7 +18,7 @@ function* startLogin(data) {
         // yield put(loginStart(res.data));
         let res = yield call(login, { email, password });
         console.log('res', res)
-        if (res.status == '200') {
+        if (parseInt(res.status) === 200) {
             yield put(loginSc(res.data));
         }
     } catch (error) {
