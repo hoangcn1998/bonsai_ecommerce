@@ -13,12 +13,10 @@ import Store from './redux/Store';
 ReactDOM.render(
   <Provider store={Store}>
     <Router>
-    <React.StrictMode>
       <App />
-    </React.StrictMode>
     </Router>
   </Provider>,
-  
+
   document.getElementById('root')
 );
 
