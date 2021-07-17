@@ -1,5 +1,5 @@
 // import React from "react";
-import { GET_PRODUCTS, SET_DISPLAY, GET_PRODUCTS_SC, GET_PRODUCTS_ER } from "../actions-constants/products-constant";
+import { GET_PRODUCTS, SET_DISPLAY, GET_PRODUCTS_SC, GET_PRODUCTS_ER, DELETE_PRODUCTS, DELETE_PRODUCTS_SC } from "../actions-constants/products-constant";
 
 export const getProducts = () => {
   return {
@@ -28,3 +28,12 @@ export const getProductsEr = (data) => {
     payload: data
   };
 };
+
+export const deleteProducts = (data) => {
+  console.log(data)
+  return {
+    type: DELETE_PRODUCTS,
+    payload: data
+  };
+};
+
