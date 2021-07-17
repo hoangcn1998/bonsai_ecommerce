@@ -1,15 +1,16 @@
 import { put, takeEvery, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { GET_PRODUCTS } from "../actions-constants/products-constant";
+import { GET_PRODUCTS, DELETE_PRODUCTS } from "../actions-constants/products-constant";
 import actions from "../actions/index";
 import url from "../../urlApi"
 
 
 const { productActions } = actions;
-const { getProductsSc, getProductsEr, setDisplay } = productActions;
+const { getProductsSc, getProductsEr, setDisplay, deleteProductsSc } = productActions;
 
 function* productSaga() {
     yield takeEvery(GET_PRODUCTS, fetchProduct);
+    yield takeEvery(DELETE_PRODUCTS, deleteItemProducts)
 }
 
 function* fetchProduct() {
@@ -27,6 +28,21 @@ function* fetchProduct() {
 
 function getAllproduct() {
     return axios.get(`${url}products`)
+}
+
+function* deleteItemProducts(data) {
+    console.log(data)
+    try{
+        let res = yield call(deleteProducts, {data})
+        console.log(res)
+    }catch (error) {
+        console.error()
+    }
+}
+
+function deleteProducts(data) {
+    console.log(data.data.payload)
+      return axios.delete(`${url}products/${data.data.payload}` )
 }
 
 export default productSaga;

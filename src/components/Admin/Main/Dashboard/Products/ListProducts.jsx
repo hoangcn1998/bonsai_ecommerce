@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../../../../redux/actions/productAction";
+import { getProducts, deleteProducts } from "../../../../../redux/actions/productAction";
 
 function Image(image) {
   let style = {
@@ -12,20 +12,21 @@ function Image(image) {
   return <img style={style} alt={image.src} src={image.src}></img>;
 }
 
-function ButtonGroup() {
+function ButtonGroup({ params, deleteProduct }) {
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
       <button type="button" className="btn btn-primary">
         Edit
       </button>
-      <button type="button" className="btn btn-danger">
+      <button type="button" className="btn btn-danger" onClick={() => deleteProduct(params)}>
         Delete
       </button>
     </div>
   );
 }
 
-function ListProducts({ products }) {
+function ListProducts() {
+
   const columns = [
     { field: "categoryId", headerName: "CategoryName", width: 180 },
     {
@@ -45,7 +46,7 @@ function ListProducts({ products }) {
       disableClickEventBubbling: true,
       width: 150,
       renderCell: (params) => {
-        return <ButtonGroup></ButtonGroup>;
+        return <ButtonGroup deleteProduct={deleteProduct} params={params}  ></ButtonGroup>;
       },
     },
   ];
@@ -58,6 +59,10 @@ function ListProducts({ products }) {
     dispatch(getProducts());
   }, []);
 
+  const deleteProduct = (params) => {
+    console.log(params.id)
+    dispatch(deleteProducts(params.id))
+  }
 
   const formatData = dataProducts.map((item) => {
     const { categoryId, name, bigPicture, price, id } = item;
@@ -84,11 +89,3 @@ function ListProducts({ products }) {
 
 export default ListProducts;
 
-// function mapStateToProps(state) {
-//   const {
-//     products: { data },
-//   } = state;
-//   return { products: data };
-// }
-
-// export default connect(mapStateToProps)(ListProducts);

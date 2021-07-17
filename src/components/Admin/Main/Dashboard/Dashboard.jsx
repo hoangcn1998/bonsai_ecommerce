@@ -149,14 +149,12 @@ function Dashboard(props) {
 
   function onHandleLogout() {
     dispatch(logout())
-    console.log(12342142)
     localStorage.clear();
     history.push("/");
   }
 
   const isAdmin = () => {
     const accessToken = localStorage.getItem("accessToken") || {};
-    console.log(accessToken)
     const role = localStorage.getItem("role");
     if (accessToken && role === 'admin') {
       return true;

@@ -3,13 +3,13 @@ import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios";
 import urlApi from '../../../../../urlApi'
 
-function ButtonGroup() {
+function ButtonGroup({ params, deleteCategory }) {
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
       <button type="button" className="btn btn-primary">
         Edit
       </button>
-      <button type="button" className="btn btn-danger">
+      <button type="button" className="btn btn-danger" onClick={() => deleteCategory(params)}>
         Delete
       </button>
     </div>
@@ -28,11 +28,11 @@ function ListCategories() {
       disableClickEventBubbling: true,
       width: 200,
       renderCell: (params) => {
-        return <ButtonGroup></ButtonGroup>;
+        return <ButtonGroup deleteCategory={deleteCategory} params={params}></ButtonGroup>;
       },
     },
   ];
-
+  // ----------------------get category----------------------
   useEffect(() => {
     axios
       .get(`${urlApi}categories`)
@@ -60,6 +60,18 @@ function ListCategories() {
       };
     });
   };
+  // ----------------------delete category----------------------
+
+  const deleteCategory = (params) => {
+    axios.delete(`${urlApi}categories/${params.id}`)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
 
   return (
     <div style={{ height: 400, width: "100%" }}>

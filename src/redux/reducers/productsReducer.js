@@ -8,8 +8,7 @@ const ProductsReducer = (state = stateDefault, action) => {
     case SET_DISPLAY:
 
       return { ...state, display: action.payload };
-
-
+      
     case GET_PRODUCTS_SC:
 
       return { ...state, data: action.payload, errorMessage: null }
