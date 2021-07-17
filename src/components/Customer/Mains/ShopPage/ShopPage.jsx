@@ -3,6 +3,8 @@ import BannerProducts from "../Products/BannerProducts/BannerProducts";
 import Instagram from "../Products/Instagram/Instagram";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
 import ProductShopPage from "./ProductShopPage/ProductShopPage";
+import Headers from '../../Header/Headers';
+import Footer from '../../Footer/Footer'
 import "./style.scss";
 import axios from "axios";
 
@@ -33,6 +35,7 @@ const ShopPage = () => {
 
   return (
     <div>
+      <Headers></Headers>
       <BannerProducts></BannerProducts>
       <DropdownMenu
         categories={categories}
@@ -43,6 +46,7 @@ const ShopPage = () => {
         findCategory={findCategory}
         sortPrice={sortPrice} />
       <Instagram></Instagram>
+      <Footer></Footer>
     </div>
   );
 };

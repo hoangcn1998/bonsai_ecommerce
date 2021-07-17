@@ -41,6 +41,8 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Products from "./Products/Products";
 import Categories from "./Categories/Categories";
+import { logout } from "../../../../redux/actions/authAction"
+import { useDispatch } from 'react-redux';
 
 
 const drawerWidth = 240;
@@ -143,14 +145,18 @@ function Dashboard(props) {
     setOpen(false);
   };
 
-  function onHandleLogout() {
-    localStorage.clear();
+  const dispatch = useDispatch();
 
+  function onHandleLogout() {
+    dispatch(logout())
+    console.log(12342142)
+    localStorage.clear();
     history.push("/");
   }
 
   const isAdmin = () => {
     const accessToken = localStorage.getItem("accessToken") || {};
+    console.log(accessToken)
     const role = localStorage.getItem("role");
     if (accessToken && role === 'admin') {
       return true;

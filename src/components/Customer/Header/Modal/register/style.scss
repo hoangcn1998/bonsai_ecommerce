@@ -102,41 +102,27 @@
             border-radius: 8px;
         }
 
+        .button__submit:hover, .button__submit:active{
+            box-shadow: 0 0 5px white;
+        }
+
         input {
             color: #758A53 ;
         
             input::placeholder {
                 color: #758A53;
             }
+        }
 
-            input:focus {
-                outline: none;
-            }
+        input:focus {
+            outline: none;
+            border: 2px solid white
         }
 
         span {
             padding-left: 1rem;
         }
     }
-
-    // .login__faceBook {
-
-    //     font-size: 1.2rem;
-    //     padding-bottom: 2rem;
-
-    //     a {
-    //         padding-left: 1rem;
-    //         color: white;
-    //         text-decoration: none;
-    //     }
-
-    //     a:hover, a:active {
-    //         font-weight: bold;
-    //         transition: all 0.3s;
-    //         text-decoration: none;
-    //         color: rgba(0, 0, 255, 0.692);
-    //     }
-    // }
 }
 
 @media only screen and (max-width: 576px) {
