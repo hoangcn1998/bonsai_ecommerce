@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_TO_CART, DECREASE_PRODUCT_TO_CART } from '../actions-constants/cart-constant';
+import { ADD_PRODUCT_TO_CART, DECREASE_PRODUCT_TO_CART, DELETE_PRODUCT_IN_CART } from '../actions-constants/cart-constant';
 
 const stateDefault = { data: [] };
 
@@ -25,6 +25,13 @@ const decreaseQuantity = (product, cart) => {
   return newCart;
 }
 
+const deleteItemCart = (product, cart) => {
+  const newCart = [...cart];
+  const itemIndex = newCart.findIndex(item => item.id === product.id)
+  newCart.splice(itemIndex, 1);
+  return newCart;
+}
+
 const CartReducer = (state = stateDefault, action) => {
   switch (action.type) {
 
@@ -37,6 +44,12 @@ const CartReducer = (state = stateDefault, action) => {
       const decreaseCart = decreaseQuantity(action.payload, state.data);
       console.log({ ...state, data: decreaseCart })
       return { ...state, data: decreaseCart };
+
+    case DELETE_PRODUCT_IN_CART:
+      const deleteCart = deleteItemCart(action.payload, state.data);
+      console.log({ ...state, data: deleteCart })
+      return { ...state, data: deleteCart };
+
     default:
       return state;
   }

@@ -7,6 +7,7 @@ import Headers from '../../Header/Headers';
 import Footer from '../../Footer/Footer'
 import "./style.scss";
 import axios from "axios";
+import urlApi from '../../../../urlApi'
 
 const ShopPage = () => {
   const [categories, setCategories] = useState([]);
@@ -15,7 +16,7 @@ const ShopPage = () => {
 
   useEffect(() => {
     try {
-      axios.get("http://localhost:5000/api/categories")
+      axios.get(`${urlApi}categories`)
         .then(res => {
           setCategories(res.data);
         })

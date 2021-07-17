@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addProductToCart, decreaseProductToCart } from '../../../../../redux/actions/cartAction'
+import { addProductToCart, decreaseProductToCart, deleteProductInCart } from '../../../../../redux/actions/cartAction'
 
 const ItemCart = ({ product }) => {
 
@@ -29,10 +29,14 @@ const ItemCart = ({ product }) => {
     dispatch(decreaseProductToCart(increaseProduct))
   }
 
+  const handlerDeleteProductInCart = (product) => {
+    dispatch(deleteProductInCart(product))
+  }
+
   return (
     <tr className="shoppingcart__item">
       <th scope="row" className="shoppingcart__item--product">
-        <button>x</button>
+        <button onClick={() => handlerDeleteProductInCart(product)}>x</button>
         <img
           alt={bigPicture}
           src={bigPicture}
