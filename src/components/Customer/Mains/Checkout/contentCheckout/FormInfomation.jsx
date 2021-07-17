@@ -1,10 +1,15 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
+import Button from '@material-ui/core/Button';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
+import Stepper from '@material-ui/core/Stepper';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import React, { useState } from 'react';
+import BasicInfor from './Infor/BasicInfor';
+import ContactInfor from './Infor/ContactInfor';
+import OrderDetails from './Infor/OrderDetails';
+import Payment from './Infor/Payment';
+import PersonalInfor from './Infor/PersonalInfor';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,29 +24,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
-  return ["Basic Information", "Contact Information", "Personal Information", "Payment"];
-}
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return 'Select campaign settings...';
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown step';
-  }
-}
-
 function FormInformation() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
+  const [activeStep, setActiveStep] = useState(0);
+  const [refresh, setRefresh] = useState(0)
+
+  function getSteps() {
+    return ["Basic Information", "Contact Information", "Personal Information", "Payment"];
+  }
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <React.Fragment> <BasicInfor onClick={handleNext} /> </React.Fragment>
+      case 1:
+        return <React.Fragment> <ContactInfor onClick={handleNext} /> </React.Fragment>
+      case 2:
+        return <React.Fragment> <PersonalInfor onClick={handleNext} /> </React.Fragment>
+      default:
+        return <React.Fragment> <Payment onClick={handleNext} /> </React.Fragment>;
+    }
+  }
+
   const handleNext = () => {
+    setRefresh(prev => prev + 1)
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -69,12 +77,13 @@ function FormInformation() {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>
+            {/* <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
-            </Button>
+            </Button> */}
+            <OrderDetails />
           </div>
         ) : (
             <div>
@@ -83,14 +92,41 @@ function FormInformation() {
                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                   Back
               </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
+                {activeStep === 0 ?
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    form="my-form"
+                    type="submit"
+                    className={classes.button}>
+                    Next
+                  </Button> :
+                  activeStep === 1 ?
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      form="form-contact"
+                      type="submit"
+                      className={classes.button}>
+                      Next
+                  </Button> :
+                    activeStep === 2 ?
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        form="form-personal"
+                        type="submit"
+                        className={classes.button}>
+                        Next
+                  </Button> :
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        form="form-payment"
+                        className={classes.button}>
+                        Finish
+                </Button>}
               </div>
             </div>
           )}
