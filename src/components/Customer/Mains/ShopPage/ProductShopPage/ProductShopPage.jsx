@@ -91,7 +91,6 @@ const ProductShopPage = (props) => {
           <p style={style}>{errorDataProducts}</p>
         </Grid>
       </div>
-
       <div style={{ display: display }} className="spinner-border text-success" role="status">
       </div>
       <Pagination
