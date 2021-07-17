@@ -55,7 +55,7 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
     if (role === "admin") {
       history.push("/admin");
     } else {
-      history.push("/");
+      history.push("/HomePage");
     }
   };
 

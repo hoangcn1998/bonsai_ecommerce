@@ -4,7 +4,7 @@ import "./style.scss";
 import ProductSlideShow from "./ProductSlideShow/ProductSlideShow";
 import ProductContent from "./ProductContent/ProductContent";
 import ProductContentTabs from "./ProductContentTabs/ProductContentTabs";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import {
   useParams
 } from "react-router-dom";
