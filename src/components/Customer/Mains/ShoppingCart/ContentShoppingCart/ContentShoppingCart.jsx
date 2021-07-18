@@ -7,12 +7,9 @@ import { connect } from "react-redux";
 const ContentShoppingCart = ({ cart }) => {
 
 
-  const dataStorage = JSON.parse(localStorage.getItem('ProductsInCart'));
 
-  const dataProducts = dataStorage || cart || {};
-
-  const calcualteTotalPrice = (dataProducts) => {
-    const total = dataProducts.reduce((sum, currentProduct) => {
+  const calcualteTotalPrice = (cart) => {
+    const total = cart.reduce((sum, currentProduct) => {
       const { price, sale, quantity } = currentProduct || {};
       return sum + (price - price * sale) * quantity;
     }, 0);
@@ -20,7 +17,7 @@ const ContentShoppingCart = ({ cart }) => {
     return total;
   }
 
-  const data = dataProducts.map((product, index) => <ItemCart product={product} index={index} key={index} />)
+  const data = cart.map((product, index) => <ItemCart product={product} index={index} key={index} />)
 
   return (
     <div className="container ">
@@ -49,7 +46,7 @@ const ContentShoppingCart = ({ cart }) => {
           </table>
         </div>
         <div className="col-lg-4 cartTotal">
-          <CartTotal totalPrice={calcualteTotalPrice(dataProducts)} />
+          <CartTotal totalPrice={calcualteTotalPrice(cart)} />
         </div>
       </div>
     </div>

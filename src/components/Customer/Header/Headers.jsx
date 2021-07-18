@@ -12,17 +12,8 @@ import { logout } from "../../../redux/actions/authAction"
 
 function Header({ auth, cart }) {
 
-  const ProductStorage = () => {
-    const dataProductStorage = JSON.parse(localStorage.getItem('ProductsInCart'));
-    if (dataProductStorage === null) {
-      return dataProductStorage;
-    } else {
-      return dataProductStorage.length;
-    }
-  }
-
   const dispatch = useDispatch();
-  const quantityProductInCart = ProductStorage() || cart.data.length;
+  const quantityProductInCart = cart.data.length;
   const history = useHistory();
 
   const [showCart, setShowCart] = useState(false);
@@ -35,7 +26,7 @@ function Header({ auth, cart }) {
     const { accessToken = localStorage.getItem("accessToken") } = auth || {};
     if (accessToken) {
       const userInfo = jwt_decode(accessToken);
-      const userName = userInfo.name
+      const userName = userInfo.lastName;
       setName(userName)
       setIsLogin(true)
       setShowSignIn(false)

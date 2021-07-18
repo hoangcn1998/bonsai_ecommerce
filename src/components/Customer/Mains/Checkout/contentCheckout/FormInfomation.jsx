@@ -1,27 +1,66 @@
 
 import React from "react";
+import { useForm } from "react-hook-form";
 
-const FormInformation = () => {
+const FormInformation = ({ getDataUser }) => {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+  } = useForm();
+
+
+  function onSubmit(data) {
+    const { fullname, phoneNumber, orderNotes, deleveryAddress } = data;
+    const dataUser = { fullname, phoneNumber, orderNotes, deleveryAddress }
+    getDataUser(dataUser)
+    reset({ example: "", exampleRequired: "" });
+  }
+
+
   return (
-    <form className="userform">
+    <form className="userform" onSubmit={(e) => e.preventDefault()}>
       <h1>Billing Information</h1>
-      <input type="text" className="form-control" placeholder="Full Name"></input>
       <input
+        autoComplete="on"
+        type="text"
+        className="form-control"
+        placeholder="Full Name"
+        defaultValue={''}
+        {...register("fullname", { required: true, maxLength: 25 })} />
+      {errors.fullname && <span>* Please enter Full Name !</span>}
+
+
+      <input
+        defaultValue={''}
+        autoComplete="on"
         type="text"
         className="form-control"
         placeholder="Phone number"
-      ></input>
+        {...register("phoneNumber", { required: true, pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g, })} />
+      {errors.phoneNumber && <span>* Please enter Phone number !</span>}
+
+
       <input
+        defaultValue={''}
+        autoComplete="on"
         type="text"
         className="form-control"
         placeholder="Delivery address"
-      ></input>
+        {...register("deleveryAddress", { required: true, maxLength: 50 })} />
+      {errors.deleveryAddress && <span>* Please enter Delivery address !</span>}
+
       <textarea
         className="form-control"
         rows="5"
         placeholder="Order notes"
-      ></textarea>
-      <button type="button" className="btn btn-light">
+        {...register("orderNotes")} />
+
+
+      <button type="button" className="btn btn-light" onClick={handleSubmit(onSubmit)}>
         Order
       </button>
     </form>
@@ -29,8 +68,6 @@ const FormInformation = () => {
 };
 
 export default FormInformation;
-
-
 
 
 
@@ -126,50 +163,50 @@ export default FormInformation;
 //             <OrderDetails />
 //           </div>
 //         ) : (
+//           <div>
+//             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
 //             <div>
-//               <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-//               <div>
-//                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-//                   Back
+//               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+//                 Back
 //               </Button>
-//                 {activeStep === 0 ?
+//               {activeStep === 0 ?
+//                 <Button
+//                   variant="contained"
+//                   color="primary"
+//                   form="my-form"
+//                   type="submit"
+//                   className={classes.button}>
+//                   Next
+//                 </Button> :
+//                 activeStep === 1 ?
 //                   <Button
 //                     variant="contained"
 //                     color="primary"
-//                     form="my-form"
+//                     form="form-contact"
 //                     type="submit"
 //                     className={classes.button}>
 //                     Next
 //                   </Button> :
-//                   activeStep === 1 ?
+//                   activeStep === 2 ?
 //                     <Button
 //                       variant="contained"
 //                       color="primary"
-//                       form="form-contact"
+//                       form="form-personal"
 //                       type="submit"
 //                       className={classes.button}>
 //                       Next
-//                   </Button> :
-//                     activeStep === 2 ?
-//                       <Button
-//                         variant="contained"
-//                         color="primary"
-//                         form="form-personal"
-//                         type="submit"
-//                         className={classes.button}>
-//                         Next
-//                   </Button> :
-//                       <Button
-//                         variant="contained"
-//                         color="primary"
-//                         type="submit"
-//                         form="form-payment"
-//                         className={classes.button}>
-//                         Finish
-//                 </Button>}
-//               </div>
+//                     </Button> :
+//                     <Button
+//                       variant="contained"
+//                       color="primary"
+//                       type="submit"
+//                       form="form-payment"
+//                       className={classes.button}>
+//                       Finish
+//                     </Button>}
 //             </div>
-//           )}
+//           </div>
+//         )}
 //       </div>
 //     </div>
 //   );

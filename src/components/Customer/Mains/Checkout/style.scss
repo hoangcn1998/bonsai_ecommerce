@@ -29,13 +29,24 @@
             color: white;
         }
 
-        .totalprice > p {
-            font-weight: bold;
+        span {
+            color: red;
+            font-size: 1rem;
+            margin: 0 0;
+        }
+
+        textarea {
+            margin-top: 1rem;
         }
     }
 
-    .OrderDetails {
+    .Order {
         padding-left: 1rem;
+
+        .totalprice > p {
+            font-weight: bold;
+            font-size: 1.6rem;
+        }
 
         h1 {
             padding-bottom: 1rem;

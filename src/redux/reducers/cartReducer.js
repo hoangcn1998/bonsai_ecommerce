@@ -39,19 +39,16 @@ const CartReducer = (state = stateDefault, action) => {
       console.log(action.payload)
       console.log(state.data)
       const increaseCart = increaseQuantity(action.payload, state.data);
-      localStorage.setItem('ProductsInCart', JSON.stringify(increaseCart))
       console.log({ ...state, data: increaseCart })
       return { ...state, data: increaseCart };
 
     case DECREASE_PRODUCT_TO_CART:
       const decreaseCart = decreaseQuantity(action.payload, state.data);
-      localStorage.setItem('ProductsInCart', JSON.stringify(decreaseCart))
       console.log({ ...state, data: decreaseCart })
       return { ...state, data: decreaseCart };
 
     case DELETE_PRODUCT_IN_CART:
       const deleteCart = deleteItemCart(action.payload, state.data);
-      localStorage.setItem('ProductsInCart', JSON.stringify(deleteCart))
       console.log({ ...state, data: deleteCart })
       return { ...state, data: deleteCart };
 
