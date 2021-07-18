@@ -8,14 +8,21 @@ import "./style.scss";
 import { Link, useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { connect, useDispatch } from "react-redux";
-import { loginStart, logout } from "../../../redux/actions/authAction"
+import { logout } from "../../../redux/actions/authAction"
 
 function Header({ auth, cart }) {
 
-
+  const ProductStorage = () => {
+    const dataProductStorage = JSON.parse(localStorage.getItem('ProductsInCart'));
+    if (dataProductStorage === null) {
+      return dataProductStorage;
+    } else {
+      return dataProductStorage.length;
+    }
+  }
 
   const dispatch = useDispatch();
-  const quantityProductInCart = cart.data.length;
+  const quantityProductInCart = ProductStorage() || cart.data.length;
   const history = useHistory();
 
   const [showCart, setShowCart] = useState(false);
@@ -31,6 +38,7 @@ function Header({ auth, cart }) {
       const userName = userInfo.name
       setName(userName)
       setIsLogin(true)
+      setShowSignIn(false)
     }
   }, [auth])
 

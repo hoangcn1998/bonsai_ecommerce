@@ -4,7 +4,7 @@ import ContentPageCustomer from "../../Router/ContentPage";
 const Mains = () => {
   return (
     <div className="mains">
-      <ContentPageCustomer></ContentPageCustomer>
+      {/* <ContentPageCustomer></ContentPageCustomer> */}
     </div>
   );
 };

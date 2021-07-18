@@ -15,16 +15,16 @@ import Checkout from './components/Customer/Mains/Checkout/Checkout';
 function App() {
   let routes = (
     <Switch>
-      <Route exact path="/">
-        <Redirect to="/HomePage" />
-      </Route>
-      <Route exact path="/HomePage" component={HomePage}></Route>
       <Route path="/ShopPage" component={ShopPage}></Route>
       <Route path="/Products/:id" component={Products}></Route>
       <Route path="/Products" exact component={Products}></Route>
       <Route path="/ShoppingCart" component={ShoppingCart}></Route>
       <Route path="/Checkout" component={Checkout}></Route>
       <Route path="/admin" component={Dashboard}></Route>
+      <Route exact path="/">
+        <Redirect to="/HomePage" />
+      </Route>
+      <Route exact path="/HomePage" component={HomePage}></Route>
     </Switch>
   );
   return (

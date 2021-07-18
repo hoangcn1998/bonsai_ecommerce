@@ -6,10 +6,10 @@ const ContentCheckout = () => {
   return (
     <div className="container-fluid">
       <div className="row checkout">
-        <div className="col-lg-8">
+        <div className="col-lg-7">
           <FormInformation></FormInformation>
         </div>
-        <div className="col-lg-4">
+        <div className="col-lg-5  ">
           <Order></Order>
         </div>
       </div>
