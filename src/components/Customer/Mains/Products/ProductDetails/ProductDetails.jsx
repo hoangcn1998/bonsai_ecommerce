@@ -1,32 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios'
-import "./style.scss";
-import ProductSlideShow from "./ProductSlideShow/ProductSlideShow";
+import React from "react";
+import { useSelector } from "react-redux";
 import ProductContent from "./ProductContent/ProductContent";
 import ProductContentTabs from "./ProductContentTabs/ProductContentTabs";
-// import { connect } from "react-redux";
-import {
-  useParams
-} from "react-router-dom";
-import urlApi from '../../../../../urlApi'
+import ProductSlideShow from "./ProductSlideShow/ProductSlideShow";
+import "./style.scss";
 
 const ProductDetails = () => {
 
-  const { id } = useParams();
-
-  const [product, setProduct] = useState(null)
-
-
-  useEffect(() => {
-    axios.get(`${urlApi}Products/${id}`)
-      .then(function (response) {
-        setProduct(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-  }, [])
-
+  const product = useSelector(state => state.relatedProduts.relatedProducts)
   const { thumbnailUrl } = product || {};
 
   return (

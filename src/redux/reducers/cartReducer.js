@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { ADD_PRODUCT_TO_CART, DECREASE_PRODUCT_TO_CART, DELETE_PRODUCT_IN_CART } from '../actions-constants/cart-constant';
 
 const stateDefault = { data: [] };
@@ -36,20 +37,26 @@ const CartReducer = (state = stateDefault, action) => {
   switch (action.type) {
 
     case ADD_PRODUCT_TO_CART:
-      console.log(action.payload)
-      console.log(state.data)
+      console.log(action.payload.name)
+      toast.success(`Add bonsai ${action.payload.name} successfully!`, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
       const increaseCart = increaseQuantity(action.payload, state.data);
-      console.log({ ...state, data: increaseCart })
       return { ...state, data: increaseCart };
 
     case DECREASE_PRODUCT_TO_CART:
       const decreaseCart = decreaseQuantity(action.payload, state.data);
-      console.log({ ...state, data: decreaseCart })
       return { ...state, data: decreaseCart };
 
     case DELETE_PRODUCT_IN_CART:
       const deleteCart = deleteItemCart(action.payload, state.data);
-      console.log({ ...state, data: deleteCart })
       return { ...state, data: deleteCart };
 
     default:

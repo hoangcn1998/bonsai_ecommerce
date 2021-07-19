@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
 import Rating from "@material-ui/lab/Rating";
-import { addProductToCart } from '../../../../../../redux/actions/cartAction'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from '../../../../../../redux/actions/cartAction';
 
 
 
@@ -15,6 +14,8 @@ const ProductContent = ({ product }) => {
   const salePrice = price - (price * sale);
 
   const [countProductDetails, setCountProductDetails] = useState(0);
+
+  //get value related product
 
   function handlerClickMinus() {
     let newCountProductDetails = countProductDetails - 1;
