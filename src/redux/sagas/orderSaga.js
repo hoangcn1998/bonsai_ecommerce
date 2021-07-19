@@ -14,9 +14,9 @@ function* orderSaga() {
 
 function* orderStart(data) {
     console.log(data.payload)
-    const { fullname, deleveryAddress, orderNotes, phoneNumber, cart } = data.payload
+    const {userId, fullname, deleveryAddress, orderNotes, phoneNumber, cart } = data.payload
     try {
-        let res = yield call(order, { fullname, deleveryAddress, orderNotes, phoneNumber, cart });
+        let res = yield call(order, {userId, fullname, deleveryAddress, orderNotes, phoneNumber, cart });
         console.log('res', res)
         if (parseInt(res.status) === 201) {
             yield put(addOrderSc(res.data));

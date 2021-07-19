@@ -1,23 +1,49 @@
 
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router";
 
-const FormInformation = ({ getDataUser }) => {
+const FormInformation = ({ dataUser ,getDataUser }) => {
+
+  const {firstName = '', lastName = '', phone = '', address = '', id = "" } = dataUser || {};
+
+  const [stateFullName, setStateFullName] = useState(`${firstName} ${lastName}`);
+  const [statePhone, setStatePhone] = useState(phone);
+  const [stateAddress, setStateAddress] = useState(address);
+  const [stateId, setStateId] = useState(id);
+
+  useEffect(() => {
+    setStateFullName(`${firstName} ${lastName}`)
+  }, [firstName, lastName])
+
+  useEffect(() => {
+    setStatePhone(phone)
+  }, [phone])
+
+  useEffect(() => {
+    setStateAddress(address)
+  }, [address])
+
+  useEffect(() => {
+    setStateId(id)
+  }, [id])
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-    watch,
+    reset
   } = useForm();
 
+  const history = useHistory();
 
   function onSubmit(data) {
     const { fullname, phoneNumber, orderNotes, deleveryAddress } = data;
-    const dataUser = { fullname, phoneNumber, orderNotes, deleveryAddress }
+    const dataUser = { fullname, phoneNumber, orderNotes, deleveryAddress, userId: stateId }
     getDataUser(dataUser)
     reset({ example: "", exampleRequired: "" });
+    history.push('/OrderDetails')
   }
 
 
@@ -29,27 +55,27 @@ const FormInformation = ({ getDataUser }) => {
         type="text"
         className="form-control"
         placeholder="Full Name"
-        defaultValue={''}
+        defaultValue={stateFullName}
         {...register("fullname", { required: true, maxLength: 25 })} />
       {errors.fullname && <span>* Please enter Full Name !</span>}
 
 
       <input
-        defaultValue={''}
         autoComplete="on"
         type="text"
         className="form-control"
         placeholder="Phone number"
+        defaultValue={statePhone}
         {...register("phoneNumber", { required: true, pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g, })} />
       {errors.phoneNumber && <span>* Please enter Phone number !</span>}
 
 
       <input
-        defaultValue={''}
         autoComplete="on"
         type="text"
         className="form-control"
         placeholder="Delivery address"
+        defaultValue={stateAddress}
         {...register("deleveryAddress", { required: true, maxLength: 50 })} />
       {errors.deleveryAddress && <span>* Please enter Delivery address !</span>}
 

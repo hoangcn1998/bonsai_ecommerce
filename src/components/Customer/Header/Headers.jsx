@@ -10,7 +10,7 @@ import jwt_decode from "jwt-decode";
 import { connect, useDispatch } from "react-redux";
 import { logout } from "../../../redux/actions/authAction"
 
-function Header({ auth, cart }) {
+function Header({ auth, cart, shouldOpenLoginModal }) {
 
   const dispatch = useDispatch();
   const quantityProductInCart = cart.data.length;
@@ -23,7 +23,7 @@ function Header({ auth, cart }) {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const { accessToken = localStorage.getItem("accessToken") } = auth || {};
+    const { accessToken } = auth || {};
     if (accessToken) {
       const userInfo = jwt_decode(accessToken);
       const userName = userInfo.lastName;
@@ -32,6 +32,13 @@ function Header({ auth, cart }) {
       setShowSignIn(false)
     }
   }, [auth])
+
+  useEffect(() => {
+    if (shouldOpenLoginModal) {
+      history.push('/ShoppingCart');
+      onToggleSignIn();
+    }
+  }, [shouldOpenLoginModal])
 
   function onToggleCart() {
     setShowCart(!showCart);
@@ -53,7 +60,6 @@ function Header({ auth, cart }) {
 
   function onHandleLogout() {
     dispatch(logout())
-    localStorage.clear();
     setName('')
     history.push("/");
     setIsLogin(false)

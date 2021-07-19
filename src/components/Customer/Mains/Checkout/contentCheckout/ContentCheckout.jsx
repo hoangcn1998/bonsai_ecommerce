@@ -1,14 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import FormInformation from "./FormInfomation";
 import { connect, useDispatch } from "react-redux";
 import { addOrder } from "../../../../../redux/actions/orderAction";
+import jwt_decode from "jwt-decode";
 
 
-const ContentCheckout = ({ cart }) => {
+const ContentCheckout = ({ auth, cart }) => {
+
+  const [userState, setUserState] = useState(null);
+
+  useEffect(() => {
+    const { accessToken } = auth || {};
+    if (accessToken) {
+      const userInfo = jwt_decode(accessToken);
+      setUserState(userInfo)
+    }
+  }, [auth])
+
 
   const dispatch = useDispatch()
 
-  const formatDataProducts = cart.map((item) => {
+  const formatDataProducts = cart && cart.length && cart.map((item) => {
     const { name, sale, price, quantity } = item;
     return {
       name,
@@ -17,6 +29,7 @@ const ContentCheckout = ({ cart }) => {
       unitPrice: (price - price * sale) * quantity,
     }
   })
+
 
   const order = cart.map((product, index) => {
 
@@ -38,13 +51,13 @@ const ContentCheckout = ({ cart }) => {
       const { price, sale, quantity } = currentProduct || {};
       return sum + (price - price * sale) * quantity;
     }, 0);
-    console.log(`total --->`, total)
     return total;
   }
 
   const getDataUser = (dataUser) => {
-    const { fullname, phoneNumber, orderNotes, deleveryAddress } = dataUser;
+    const { fullname, phoneNumber, orderNotes, deleveryAddress, userId } = dataUser;
     const dataOrder = {
+      userId,
       fullname,
       phoneNumber,
       orderNotes,
@@ -52,20 +65,18 @@ const ContentCheckout = ({ cart }) => {
       cart: {
         product: formatDataProducts,
         totalPrice: calcualteTotalPrice(cart)
-      },
-
+      }
     };
     dispatch(addOrder(dataOrder))
-
   }
 
   return (
     <div className="container-fluid">
       <div className="row checkout">
-        <div className="col-lg-7">
-          <FormInformation getDataUser={getDataUser}></FormInformation>
+        <div style={{padding: '0px'}} className="col-lg-5">
+          <FormInformation dataUser={userState} getDataUser={getDataUser}></FormInformation>
         </div>
-        <div className="col-lg-5">
+        <div style={{padding: '0px'}} className="col-lg-7">
           <div className="Order">
             <h1>Your Order</h1>
             <div className="Order__title">
@@ -88,13 +99,13 @@ const ContentCheckout = ({ cart }) => {
   );
 };
 
-// export default ContentCheckout;
 
 function mapStateToProps(state) {
   const {
-    cart: { data },
+    auth: { data: authData },
+    cart: { data: cartdata }
   } = state;
-  return { cart: data };
+  return { auth: authData, cart: cartdata };
 }
 
 export default connect(mapStateToProps)(ContentCheckout);

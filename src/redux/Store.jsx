@@ -8,6 +8,7 @@ import rootSaga from "./sagas/index";
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ['products', 'order'] 
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

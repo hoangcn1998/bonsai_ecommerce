@@ -10,6 +10,7 @@ import ShopPage from './components/Customer/Mains/ShopPage/ShopPage';
 import Products from './components/Customer/Mains/Products/Products';
 import Checkout from './components/Customer/Mains/Checkout/Checkout';
 import orderDetails from "./components/Customer/Mains/orderDetails/orderDetails";
+import MyOrders from "./components/Customer/Mains/MyOrder/MyOrder";
 
 function App() {
   let routes = (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/ShoppingCart" component={ShoppingCart}></Route>
       <Route path="/Checkout" component={Checkout}></Route>
       <Route path="/OrderDetails" component={orderDetails}></Route>
+      <Route path="/MyOrders" component={MyOrders}></Route>
       <Route path="/admin" component={Dashboard}></Route>
       <Route exact path="/">
         <Redirect to="/HomePage" />
