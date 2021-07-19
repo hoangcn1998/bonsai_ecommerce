@@ -1,7 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-const CartTotal = ({ totalPrice }) => {
+const CartTotal = ({ totalPrice, auth }) => {
+  const history = useHistory();
+  const [error, setError] = useState('');
+
+  const handleCheckout = e => {
+    const { accessToken } = auth || {};
+    if (!accessToken) {
+      setError("Please login to checkout!")
+    } else {
+      history.push('/Checkout')
+    }
+  }
 
   return (
     <>
@@ -19,13 +31,22 @@ const CartTotal = ({ totalPrice }) => {
           Apply
         </button>
       </div>
-      <Link to="/Checkout">
+      <Link onClick={handleCheckout}>
         <button type="button" className="btn btn-success">
           Checkout
         </button>
       </Link>
+      {error}
     </>
   );
 };
 
-export default CartTotal;
+function mapStateToProps(state) {
+  const {
+    auth: { data },
+  } = state;
+  return { auth: data };
+}
+
+
+export default connect(mapStateToProps)(CartTotal);

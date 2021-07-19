@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 const ContentShoppingCart = ({ cart }) => {
 
-  console.log(cart)
+
 
   const calcualteTotalPrice = (cart) => {
     const total = cart.reduce((sum, currentProduct) => {

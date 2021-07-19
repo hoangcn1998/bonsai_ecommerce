@@ -7,13 +7,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import Store from './redux/Store';
+import { PersistGate } from 'redux-persist/integration/react'
+import persistStore from './redux/Store';
 
+const { store, persistor } = persistStore || {};
 
 ReactDOM.render(
-  <Provider store={Store}>
+  <Provider store={store}>
     <Router>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Router>
   </Provider>,
 

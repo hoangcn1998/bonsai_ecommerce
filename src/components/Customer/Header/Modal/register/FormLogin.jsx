@@ -33,13 +33,17 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
     });
   }
 
+  const checkNavigate = (role) => {
+    if (role === "admin") {
+      history.push("/admin");
+    }
+  };
+
   useEffect(() => {
     const { accessToken } = auth || {};
     if (accessToken) {
       const userInfo = jwt_decode(accessToken);
       const { role = "user" } = userInfo;
-      localStorage.setItem("accessToken", accessToken)
-      localStorage.setItem("role", role)
       checkNavigate(role);
       onCloseModal();
     }
@@ -51,13 +55,7 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
     }
   }, [error])
 
-  const checkNavigate = (role) => {
-    if (role === "admin") {
-      history.push("/admin");
-    } else {
-      history.push("/HomePage");
-    }
-  };
+ 
 
   function onSubmitLogin(data) {
     dispatch(loginStart(data))
