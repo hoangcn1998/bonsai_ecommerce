@@ -28,6 +28,7 @@ function ListCategories() {
       disableClickEventBubbling: true,
       width: 200,
       renderCell: (params) => {
+        console.log(params)
         return <ButtonGroup deleteCategory={deleteCategory} params={params}></ButtonGroup>;
       },
     },
@@ -62,10 +63,15 @@ function ListCategories() {
   };
   // ----------------------delete category----------------------
 
+  const removeCategory = (category) => {
+    return stateCategories.filter(cate => cate.id !== category.id);
+  }
+
   const deleteCategory = (params) => {
     axios.delete(`${urlApi}categories/${params.id}`)
       .then(function (response) {
-        console.log(response);
+        const newCategories = removeCategory(params);
+        setStateCategories(newCategories)
       })
       .catch(function (error) {
         console.log(error);

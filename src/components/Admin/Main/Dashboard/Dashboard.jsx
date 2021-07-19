@@ -43,7 +43,8 @@ import Products from "./Products/Products";
 import Categories from "./Categories/Categories";
 import { logout } from "../../../../redux/actions/authAction"
 import { useDispatch } from 'react-redux';
-
+import { connect } from "react-redux";
+import jwt_decode from "jwt-decode";
 
 const drawerWidth = 240;
 
@@ -131,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Dashboard(props) {
+function Dashboard({ auth }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   let { url } = useRouteMatch();
@@ -149,13 +150,13 @@ function Dashboard(props) {
 
   function onHandleLogout() {
     dispatch(logout())
-    localStorage.clear();
     history.push("/");
   }
 
   const isAdmin = () => {
-    const accessToken = localStorage.getItem("accessToken") || {};
-    const role = localStorage.getItem("role");
+    const { accessToken } = auth || {};
+    const userInfo = jwt_decode(accessToken);
+    const { role = "user" } = userInfo;
     if (accessToken && role === 'admin') {
       return true;
     }
@@ -338,4 +339,11 @@ function Dashboard(props) {
   return <div className={classes.root}>{element}</div>;
 }
 
-export default Dashboard;
+function mapStateToProps(state) {
+  const {
+    auth: { data },
+  } = state;
+  return { auth: data };
+}
+
+export default connect(mapStateToProps)(Dashboard);

@@ -14,8 +14,7 @@ const ProductContent = ({ product }) => {
 
   const salePrice = price - (price * sale);
 
-  const initial = parseInt(localStorage.getItem("countProductDetails") || 0);
-  const [countProductDetails, setCountProductDetails] = useState(initial);
+  const [countProductDetails, setCountProductDetails] = useState(0);
 
   function handlerClickMinus() {
     let newCountProductDetails = countProductDetails - 1;

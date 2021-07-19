@@ -1,7 +1,9 @@
+
+
 .checkout {
     margin: 3rem 0;
     font-size: 1.5rem;
-    color: #758A53;
+    color: #758a53;
 
     .userform {
         padding: 0 3rem;
@@ -22,22 +24,41 @@
             background-color: rgba(128, 128, 128, 0.199);
         }
 
-         button:hover, button:active {
-            transition: all .3s;
-            background-color: #758A53 ;
+        button:hover,
+        button:active {
+            transition: all 0.3s;
+            background-color: #758a53;
             color: white;
-         }
+        }
+
+        span {
+            color: red;
+            font-size: 1rem;
+            margin: 0 0;
+        }
+
+        textarea {
+            margin-top: 1rem;
+        }
     }
 
-    .OrderDetails {
-        padding-left: 1rem;
+    .Order {
+        padding: 0 3rem;
+
+        .totalprice > p {
+            font-weight: bold;
+            font-size: 1.6rem;
+        }
 
         h1 {
             padding-bottom: 1rem;
             border-bottom: 2px solid rgba(0, 0, 0, 0.1);
         }
 
-        &__title, &__item, .deliverycharges, .totalprice {
+        &__title,
+        &__item,
+        .deliverycharges,
+        .totalprice {
             display: flex;
             justify-content: space-between;
 
@@ -45,11 +66,9 @@
             margin: 1.5rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-            strong{
+            strong {
                 font-weight: bold;
             }
         }
-
-        
     }
 }

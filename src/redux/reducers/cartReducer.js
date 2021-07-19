@@ -36,6 +36,8 @@ const CartReducer = (state = stateDefault, action) => {
   switch (action.type) {
 
     case ADD_PRODUCT_TO_CART:
+      console.log(action.payload)
+      console.log(state.data)
       const increaseCart = increaseQuantity(action.payload, state.data);
       console.log({ ...state, data: increaseCart })
       return { ...state, data: increaseCart };
