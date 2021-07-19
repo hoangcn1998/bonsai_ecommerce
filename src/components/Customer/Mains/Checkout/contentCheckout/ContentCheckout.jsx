@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import FormInformation from "./FormInfomation";
 import { connect, useDispatch } from "react-redux";
-import { addOrder } from "../../../../../redux/actions/orderAction";
+import { addOrder, getOrder } from "../../../../../redux/actions/orderAction";
 import jwt_decode from "jwt-decode";
 
 
@@ -13,6 +13,7 @@ const ContentCheckout = ({ auth, cart }) => {
     const { accessToken } = auth || {};
     if (accessToken) {
       const userInfo = jwt_decode(accessToken);
+      console.log(userInfo)
       setUserState(userInfo)
     }
   }, [auth])
@@ -54,7 +55,7 @@ const ContentCheckout = ({ auth, cart }) => {
     return total;
   }
 
-  const getDataUser = (dataUser) => {
+  const submitDataUser = (dataUser) => {
     const { fullname, phoneNumber, orderNotes, deleveryAddress, userId } = dataUser;
     const dataOrder = {
       userId,
@@ -74,7 +75,7 @@ const ContentCheckout = ({ auth, cart }) => {
     <div className="container-fluid">
       <div className="row checkout">
         <div style={{padding: '0px'}} className="col-lg-5">
-          <FormInformation dataUser={userState} getDataUser={getDataUser}></FormInformation>
+          <FormInformation dataUser={userState} submitDataUser={submitDataUser}></FormInformation>
         </div>
         <div style={{padding: '0px'}} className="col-lg-7">
           <div className="Order">

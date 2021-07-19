@@ -6,14 +6,11 @@ import { connect } from "react-redux";
 
 const ContentShoppingCart = ({ cart }) => {
 
-
-
   const calcualteTotalPrice = (cart) => {
     const total = cart.reduce((sum, currentProduct) => {
       const { price, sale, quantity } = currentProduct || {};
       return sum + (price - price * sale) * quantity;
     }, 0);
-    console.log(`total --->`, total)
     return total;
   }
 

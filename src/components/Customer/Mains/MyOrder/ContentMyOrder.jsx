@@ -6,11 +6,8 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode";
 
-
-const ContentMyOrder = ({auth}) => {
-
+const ContentMyOrder = ({auth, orders}) => {
 const [userId, setUserId] = useState('');
-const [orders, setOrders] = useState([])
 
 useEffect(() => {
     const { accessToken } = auth || {};
@@ -21,38 +18,17 @@ useEffect(() => {
     }
     }, [auth])
 
-useEffect(() => {
-    axios.get(`${urlApi}orders`)
-    .then(function (response) {
-        const order = response.data;
-        setOrders(order)
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-}, [])
+const dataOrder = (orders && orders.length && orders.filter(order => order.userId === userId)) || [];
 
-console.log(userId)
-console.log(orders)
-const myOrder = () => {
-    if(orders.length > 0) {
-        const dataOrder = orders.filter(order => order.userId === userId)
-        return dataOrder;
-    }
-}
-console.log(myOrder())
-const dataOrder = myOrder();
-
-const orderItem =  dataOrder.map((item, index) =>  { return <MyOrderItem data={item} key={index}/>})
+const orderItem = dataOrder.map((item, index) =>  { return <MyOrderItem key={index} index={index} data={item}/>})
 
   return (
     <div>
         <div className="container">
             <div className="row orderDetails ">
                 <div className="col-lg-12 center" >
-                    <h1 className="orderDetails__title">Order Success!</h1>
-                    {/* {orderItem} */}
+                    <h1 className="orderDetails__title"> Bill List !</h1>
+                    {orderItem}
                 </div>
             </div>
         </div>
@@ -60,10 +36,8 @@ const orderItem =  dataOrder.map((item, index) =>  { return <MyOrderItem data={i
   );
 }
 
-
-// export default ContentMyOrder;
-
 function mapStateToProps(state) {
+
     const {
         auth: { data }
     } = state;

@@ -31,12 +31,10 @@ const CartTotal = ({ totalPrice, auth }) => {
           Apply
         </button>
       </div>
-      <Link onClick={handleCheckout}>
-        <button type="button" className="btn btn-success">
+        <button type="button" className="btn btn-success" onClick={handleCheckout}>
           Checkout
         </button>
-      </Link>
-      {error}
+      <p className="errorLogin"> {error}</p>
     </>
   );
 };

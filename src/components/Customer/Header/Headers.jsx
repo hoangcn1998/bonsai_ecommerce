@@ -4,11 +4,12 @@ import ModalCart from "./Modal/Cart/Cart";
 import LoginRegister from "./Modal/register/LoginRegister";
 import ModalMenu from "./Modal/Menu/Menu";
 import NavMenu from "./NavMenu/NavMenu";
+import ProfileMenu from "./ProfileMenu/ProfileMenu";
 import "./style.scss";
 import { Link, useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { connect, useDispatch } from "react-redux";
-import { logout } from "../../../redux/actions/authAction"
+import { logout } from "../../../redux/actions/authAction";
 
 function Header({ auth, cart, shouldOpenLoginModal }) {
 
@@ -65,6 +66,10 @@ function Header({ auth, cart, shouldOpenLoginModal }) {
     setIsLogin(false)
   }
 
+  const HandlerListOrder = () => {
+    history.push("/MyOrders")
+  }
+
   return (
     <div className="header ">
       <div
@@ -102,12 +107,9 @@ function Header({ auth, cart, shouldOpenLoginModal }) {
         <div className="header-group__collap header-group__collap-mobile " onClick={onToggleMenu}>
           <i className="fa fa-bars" aria-hidden="true" />
         </div>
-        <div className="header-group__collap">{name}</div>
+        { isLogin && <ProfileMenu name={name} handleLogout={onHandleLogout} />}
         {!isLogin && <div className="header-group__collap" onClick={onToggleSignIn}>
           <i className="fa fa-sign-in" aria-hidden="true"></i>
-        </div>}
-        {isLogin && <div className="header-group__collap">
-          <button onClick={onHandleLogout}>Logout</button>
         </div>}
       </div>
       <LoginRegister

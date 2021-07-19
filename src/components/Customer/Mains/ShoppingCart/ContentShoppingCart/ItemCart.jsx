@@ -4,7 +4,6 @@ import { addProductToCart, decreaseProductToCart, deleteProductInCart } from '..
 
 const ItemCart = ({ product }) => {
 
-  console.log(product)
   const dispatch = useDispatch()
 
   const { name, price, sale, quantity, bigPicture } = product;
