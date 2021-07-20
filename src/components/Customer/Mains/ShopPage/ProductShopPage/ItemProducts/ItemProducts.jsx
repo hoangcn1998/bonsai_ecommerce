@@ -1,10 +1,11 @@
-import React, { useState } from "react";
 import { Box, Grid } from "@material-ui/core";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import Rating from "@material-ui/lab/Rating";
-import ModalProductDetails from '../../../../Header/Modal/productDetails/ModalProductDetails';
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProductToCart } from '../../../../../../redux/actions/cartAction'
+import { ToastContainer } from 'react-toastify';
+import { addProductToCart } from '../../../../../../redux/actions/cartAction';
+import ModalProductDetails from '../../../../Header/Modal/productDetails/ModalProductDetails';
 
 function ItemProducts({ product, onRedirectDetail }) {
   const { name, price, bigPicture, sale, rating } = product;
@@ -38,6 +39,7 @@ function ItemProducts({ product, onRedirectDetail }) {
 
   return (
     <Grid item lg={3} md={4} sm={6} xs={12} className="products__main">
+      <ToastContainer />
       <div className="products__main--overlay" >
         <ul className="products__main--overlay--action">
           <li>
