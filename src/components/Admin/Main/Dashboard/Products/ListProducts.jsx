@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState  } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, deleteProducts } from "../../../../../redux/actions/productAction";
+import axios from "axios";
+import urlApi from '../../../../../urlApi'
 
 function Image(image) {
   let style = {
@@ -40,6 +42,7 @@ function ListProducts() {
     { field: "name", headerName: "Name", width: 200 },
     { field: "id", headerName: "Id", width: 150 },
     { field: "price", headerName: "Price", width: 120 },
+    { field: "createdAt", headerName: "CreatedAt", width: 150 },
     {
       field: "action",
       headerName: "Action",
@@ -51,36 +54,100 @@ function ListProducts() {
     },
   ];
 
-  const dispatch = useDispatch();
+  // ----------get product and delete product ------------------
 
-  const dataProducts = useSelector((state) => state.products.data);
-
+  // case 1:-----------------------------
+  // ---------------get product----------------------
   useEffect(() => {
-    dispatch(getProducts());
+    axios
+      .get(`${urlApi}products`)
+      .then(function (response) {
+        console.log(response)
+        const { data } = response;
+        const formatproducts = formatData(data);
+        console.log(formatproducts)
+        setStateProducts(formatproducts);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   }, []);
+
+  const [stateProduct, setStateProducts] = useState([]);
+
+  const formatData =(products) => {
+    console.log(products)
+     return products.map((item) => {
+      const { categoryId, name, bigPicture, price, id, createdAt } = item;
+      return {
+        id,
+        categoryId: `category${categoryId}`,
+        bigPicture,
+        name,
+        price,
+        createdAt: new Date(createdAt).toDateString(),
+      };
+    });
+  } 
+
+  //  // ---------------delete product----------------------
+
+   const removeProduct = (Product) => {
+    console.log(Product)
+    return stateProduct.filter(product => product.id !== Product.id);
+  }
 
   const deleteProduct = (params) => {
     console.log(params.id)
-    dispatch(deleteProducts(params.id))
+    axios.delete(`${urlApi}products/${params.id}`)
+      .then(function (response) {
+        const newProduct = removeProduct(params);
+        setStateProducts(newProduct)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-  const formatData = dataProducts.map((item) => {
-    const { categoryId, name, bigPicture, price, id } = item;
-    return {
-      id,
-      categoryId: `category${categoryId}`,
-      bigPicture,
-      name,
-      price,
-    };
-  });
+  // case 2:---------------------------------
+  // ---------------get product---------------------
 
+  // const dispatch = useDispatch();
+  // const dataProducts = useSelector((state) => state.products.data);
+  
+  // useEffect(() => {
+  //   dispatch(getProducts());
+  // }, []);
+
+  // const formatData = dataProducts.map((item) => {
+  //     const { categoryId, name, bigPicture, price, id, createdAt } = item;
+  //     return {
+  //       id,
+  //       categoryId: `category${categoryId}`,
+  //       bigPicture,
+  //       name,
+  //       price,
+  //       createdAt: new Date(createdAt).toDateString(),
+  //     };
+  //   });
+  
+  // ----------------- delete Products-------------------
+
+  // const deleteProduct = (params) => {
+  //   console.log(params.id)
+  //   // dispatch(deleteProducts(params.id))
+  // }
+
+
+
+  // --------change rows = formatData(case2) or stateProduct(case1) to test------
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={formatData}
+        rows={stateProduct}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         checkboxSelection
       />
     </div>

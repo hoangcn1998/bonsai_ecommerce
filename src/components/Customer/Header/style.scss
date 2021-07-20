@@ -198,30 +198,6 @@ $primary-color: #758A53;
 }
 
 
-// .makeStyles-root-2 {
-//   width: 150px;
-
-
-//   .MuiButtonBase-root {
-  
-
-//     .MuiButton-label {
-//       width: 150px;
-//       justify-content: space-between;
-     
-//       i {
-//         font-size: 1.7rem;
-//       }
-//     }
-//   }
-
-//   ul {
-//     width: 150px;
-//   }
-// }
-
-
-
 @media only screen and (max-width: 600px) {
 
   .header-group__cart {
@@ -254,6 +230,10 @@ $primary-color: #758A53;
 
       span {
         display: none;
+      }
+
+      span.MuiButton-label {
+        display: block;
       }
       // & input {
       //   display: none;
