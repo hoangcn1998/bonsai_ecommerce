@@ -18,13 +18,14 @@ $primary-color: #758A53;
   margin-top: 1rem;
   margin-bottom: 1rem;
   height: 5rem;
-
+  position: relative;
+  z-index: 2;
 
   & > .signin__overlay {
     width: 100%;
     height: 100%;
     top: 0;
-    position: absolute;
+    position: fixed;
     background-color: #1d1d1f99;
     z-index: 1;
     transition: background-color linear 0.3s;
@@ -106,6 +107,7 @@ $primary-color: #758A53;
   &-group {
     @include center;
     margin: 0 1rem;
+    height: 80px;
 
     &__collap > button {
       color: rgb(199, 9, 9);
@@ -141,6 +143,11 @@ $primary-color: #758A53;
     & i {
       cursor: pointer;
       font-size: 1.2rem;
+    }
+
+    & i.profile-icon {
+      font-size: 1.7rem;
+      padding-left: 20px;
     }
 
     & > div {
@@ -186,6 +193,11 @@ $primary-color: #758A53;
   display: none;
 }
 
+.profile-icon {
+  font-size: 1.5rem;
+}
+
+
 @media only screen and (max-width: 600px) {
 
   .header-group__cart {
@@ -218,6 +230,10 @@ $primary-color: #758A53;
 
       span {
         display: none;
+      }
+
+      span.MuiButton-label {
+        display: block;
       }
       // & input {
       //   display: none;
@@ -342,3 +358,7 @@ $primary-color: #758A53;
     }
   }
 }
+
+
+
+

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { addProductToCart } from '../../../../../../redux/actions/cartAction'
 
 function ItemProducts({ product, onRedirectDetail }) {
-  const { name, price, bigPicture, sale, rating, id } = product;
+  const { name, price, bigPicture, sale, rating } = product;
   const [selectProduct, setSelectProduct] = useState(null);
   const dispatch = useDispatch();
 
@@ -29,7 +29,8 @@ function ItemProducts({ product, onRedirectDetail }) {
     }
   }
 
-  const handlerAddToCart = (product) => {
+  const handlerAddToCart = event => {
+    event.stopPropagation();
     const increaseProduct = increaseQuantity(product)
     dispatch(addProductToCart(increaseProduct))
   }
@@ -46,7 +47,7 @@ function ItemProducts({ product, onRedirectDetail }) {
             <i className="fa fa-heart-o" />
           </li>
           <li>
-            <i className="fa fa-shopping-basket" onClick={() => handlerAddToCart(product)} />
+            <i className="fa fa-shopping-basket" onClick={handlerAddToCart} />
           </li>
         </ul>
       </div>
@@ -54,7 +55,7 @@ function ItemProducts({ product, onRedirectDetail }) {
         <div className="price-discount">
           <p>-{percentSale}%</p>
         </div>
-        <img src={bigPicture} alt={bigPicture} />
+        <img src={bigPicture} alt={bigPicture}/>
         <p>{name}</p>
         <div className="products__main--main--group">
           <p>{price}$</p>

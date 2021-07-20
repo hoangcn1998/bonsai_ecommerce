@@ -4,11 +4,11 @@ import ProductSlideShow from '../../../Mains/Products/ProductDetails/ProductSlid
 import ProductContent from '../../../Mains/Products/ProductDetails/ProductContent/ProductContent';
 
 const ModalProductDetails = ({ product, onResetSelectItem }) => {
-
+  console.log(product)
   const { thumbnailUrl } = product || {};
 
   return (
-    <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div className="modal fade show" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
