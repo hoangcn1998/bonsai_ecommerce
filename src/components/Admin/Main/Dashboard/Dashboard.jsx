@@ -201,7 +201,7 @@ function Dashboard({ auth }) {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <button onClick={onHandleLogout}>Logout</button>
+            <button className='admin__button--logout' onClick={onHandleLogout}>Logout</button>
           </Toolbar>
         </AppBar>
         <Drawer
