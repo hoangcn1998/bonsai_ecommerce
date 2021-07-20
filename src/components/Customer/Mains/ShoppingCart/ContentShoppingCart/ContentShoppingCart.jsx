@@ -50,8 +50,6 @@ const ContentShoppingCart = ({ cart }) => {
   );
 };
 
-// export default ContentShoppingCart;
-
 function mapStateToProps(state) {
   const {
     cart: { data },
