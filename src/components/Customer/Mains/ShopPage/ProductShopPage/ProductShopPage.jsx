@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../../../redux/actions/productAction";
 import Pagination from '../../ShopPage/Pagination/Pagination'
+import { getRelatedProducts } from "../../../../../redux/actions/relatedProduct";
 
 const ProductShopPage = (props) => {
   const { findCategory, sortPrice } = props;
@@ -54,8 +55,12 @@ const ProductShopPage = (props) => {
     dispatch(getProducts());
   }, []);
 
+  const relatedProduct = useSelector(state => state.relatedProduts.relatedProducts);
+
   const redirectDetail = product => {
-    history.push(`/Products/${product.id}`)
+    const action = getRelatedProducts(product);
+    dispatch(action);
+    history.push(`/Products/${relatedProduct.id}`);
   }
   // count duplicate rating products id
 

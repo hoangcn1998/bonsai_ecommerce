@@ -5,15 +5,21 @@ import { connect } from "react-redux";
 const CartTotal = ({ totalPrice, auth }) => {
   const history = useHistory();
   const [error, setError] = useState('');
-
+  console.log(totalPrice)
   const handleCheckout = e => {
+
     const { accessToken } = auth || {};
-    if (!accessToken) {
-      setError("Please login to checkout!")
+
+    if(totalPrice <= 0){
+      setError("You have not selected a product!")
+      if (!accessToken) {
+        setError("Please login to checkout!")
+      }
     } else {
       history.push('/Checkout')
     }
-  }
+  } 
+  
 
   return (
     <>
@@ -41,7 +47,7 @@ const CartTotal = ({ totalPrice, auth }) => {
 
 function mapStateToProps(state) {
   const {
-    auth: { data },
+    auth: { data }
   } = state;
   return { auth: data };
 }
