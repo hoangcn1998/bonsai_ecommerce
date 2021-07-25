@@ -3,7 +3,6 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import Rating from "@material-ui/lab/Rating";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { ToastContainer } from 'react-toastify';
 import { addProductToCart } from '../../../../../../redux/actions/cartAction';
 import ModalProductDetails from '../../../../Header/Modal/productDetails/ModalProductDetails';
 
@@ -39,7 +38,6 @@ function ItemProducts({ product, onRedirectDetail }) {
 
   return (
     <Grid item lg={3} md={4} sm={6} xs={12} className="products__main">
-      <ToastContainer />
       <div className="products__main--overlay" >
         <ul className="products__main--overlay--action">
           <li>
@@ -57,7 +55,7 @@ function ItemProducts({ product, onRedirectDetail }) {
         <div className="price-discount">
           <p>-{percentSale}%</p>
         </div>
-        <img src={bigPicture} alt={bigPicture}/>
+        <img src={bigPicture} alt={bigPicture} />
         <p>{name}</p>
         <div className="products__main--main--group">
           <p>{price}$</p>

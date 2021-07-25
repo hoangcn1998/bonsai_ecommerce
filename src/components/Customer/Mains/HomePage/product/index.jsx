@@ -1,11 +1,12 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { getProducts } from "../../../../../redux/actions/productAction";
+import { getRelatedProducts } from "../../../../../redux/actions/relatedProduct";
 import ItemProduct from "./ItemProduct";
 import "./style.scss";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
-import { getRelatedProducts } from "../../../../../redux/actions/relatedProduct";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../../../../redux/actions/productAction";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -36,6 +37,7 @@ function Products() {
 
   return (
     <div className="products">
+      <ToastContainer />
       <div className="products__header">
         <div className="products__header--line" />
         <h2 className="products__header--desc">Perfect for growing plants</h2>

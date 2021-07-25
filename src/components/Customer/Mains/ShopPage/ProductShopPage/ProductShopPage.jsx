@@ -1,11 +1,12 @@
 import { Grid } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import ItemProducts from "./ItemProducts/ItemProducts";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 import { getProducts } from "../../../../../redux/actions/productAction";
-import Pagination from '../../ShopPage/Pagination/Pagination'
 import { getRelatedProducts } from "../../../../../redux/actions/relatedProduct";
+import Pagination from '../../ShopPage/Pagination/Pagination';
+import ItemProducts from "./ItemProducts/ItemProducts";
 
 const ProductShopPage = (props) => {
   const { findCategory, sortPrice } = props;
@@ -25,7 +26,7 @@ const ProductShopPage = (props) => {
 
 
   const findProduct = dataProducts.filter(product => {
-    return product.categoryId == findCategory;
+    return product.categoryId === findCategory;
   });
 
   let currentProducts = findCategory === "all" ? dataProducts.slice(indexOfFirstProduct, indexOfLastProduct) : findProduct.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -85,6 +86,7 @@ const ProductShopPage = (props) => {
 
   return (
     <>
+      <ToastContainer />
       <div>
         <Grid
           container

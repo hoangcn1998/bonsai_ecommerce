@@ -153,35 +153,6 @@ $primary-color: #758A53;
     & > div {
       padding: 0 0.5rem;
     }
-
-    & > span {
-      position: relative;
-      @include center;
-
-      &::before {
-        font-family: FontAwesome;
-        content: "\f002";
-        position: absolute;
-        right: 1rem;
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-    }
-
-    &__search {
-      width: 20rem;
-      height: 3rem;
-      background-color: #F4F4F4;
-      border: none;
-      outline: none;
-      border-radius: 5rem;
-
-      &::-webkit-input-placeholder {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.3rem;
-        right: 1rem;
-      }
-    }
   }
 }
 
@@ -262,7 +233,6 @@ $primary-color: #758A53;
         display: flex;
         justify-content: center;
         width: 60%;
-        margin: 0 1rem;
 
         input {
           width: 100%;

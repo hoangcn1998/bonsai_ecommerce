@@ -37,7 +37,6 @@ const CartReducer = (state = stateDefault, action) => {
   switch (action.type) {
 
     case ADD_PRODUCT_TO_CART:
-      console.log(action.payload.name)
       toast.success(`Add bonsai ${action.payload.name} successfully!`, {
         position: "top-center",
         autoClose: 2000,

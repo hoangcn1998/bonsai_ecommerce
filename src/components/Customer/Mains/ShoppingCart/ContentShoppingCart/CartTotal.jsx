@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const CartTotal = ({ totalPrice, auth }) => {
   const history = useHistory();
@@ -10,7 +10,7 @@ const CartTotal = ({ totalPrice, auth }) => {
 
     const { accessToken } = auth || {};
 
-    if(totalPrice <= 0){
+    if (totalPrice <= 0) {
       setError("You have not selected a product!")
       if (!accessToken) {
         setError("Please login to checkout!")
@@ -18,8 +18,8 @@ const CartTotal = ({ totalPrice, auth }) => {
     } else {
       history.push('/Checkout')
     }
-  } 
-  
+  }
+
 
   return (
     <>
@@ -37,8 +37,8 @@ const CartTotal = ({ totalPrice, auth }) => {
           Apply
         </button>
       </div>
-        <button type="button" className="btn btn-success" onClick={handleCheckout}>
-          Checkout
+      <button type="button" className="btn btn-success" onClick={handleCheckout}>
+        Checkout
         </button>
       <p className="errorLogin"> {error}</p>
     </>
