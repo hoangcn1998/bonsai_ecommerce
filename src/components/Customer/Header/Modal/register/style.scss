@@ -2,6 +2,7 @@
 .form__signin{
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     position: fixed;
     bottom: 0;
@@ -9,12 +10,12 @@
     color: white;
 
     font-family: 'Roboto', sans-serif;
-    background-color: #758A53;
+    background-color: #758A53;  
     height: 100%;
-    width: 60%;
+    width: 100%;
     bottom: 0;
 
-    z-index: 2;
+    z-index: 3;
     transform: translateX(100%);
     overflow-y: auto;
 
@@ -24,7 +25,6 @@
     }
 
     &--title {
-        width: 80%;
         align-self: flex-start;
         font-size: 2rem;
         margin: 0 auto 1rem;
@@ -37,15 +37,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    width: 50%;
+
     margin: 0 auto;
 
-    width: 80%;
 
     .button__group {
         display: flex;
         justify-content: space-around;
-        // margin-bottom: 1rem;
 
         &--login, &--register {
             background-color:  #758A53 ;
@@ -74,9 +73,6 @@
         
             input {
                 padding: .6rem 1rem;
-                margin-bottom: .5rem;
-                border-radius: 3px;
-                border: none;
             }
         }
 
@@ -84,16 +80,12 @@
 
             input {
                 padding: .2rem 1rem;
-                margin-bottom: .5rem;
-                border-radius: 3px;
-                border: none;
             }
         }
 
         .button__submit {
             width: 13.5rem;
             display: block;
-            // margin-bottom: 1rem  ;
             color:  #758A53;
             font-size: 1.3rem;
             padding: .5rem 1rem;
@@ -112,11 +104,6 @@
             input::placeholder {
                 color: #758A53;
             }
-        }
-
-        input:focus {
-            outline: none;
-            border: 2px solid white
         }
 
         span {

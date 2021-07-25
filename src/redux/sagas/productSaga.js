@@ -1,16 +1,18 @@
 import { put, takeEvery, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { GET_PRODUCTS, DELETE_PRODUCTS } from "../actions-constants/products-constant";
+import { GET_PRODUCTS, DELETE_PRODUCTS_START } from "../actions-constants/products-constant";
 import actions from "../actions/index";
 import url from "../../urlApi"
 
 
 const { productActions } = actions;
-const { getProductsSc, getProductsEr, setDisplay, deleteProductsSc } = productActions;
+const { getProductsSc, getProductsEr, setDisplay,
+    deleteProductsSuccess,
+    deleteProductsError } = productActions;
 
 function* productSaga() {
     yield takeEvery(GET_PRODUCTS, fetchProduct);
-    yield takeEvery(DELETE_PRODUCTS, deleteItemProducts)
+    yield takeEvery(DELETE_PRODUCTS_START, deleteItemProducts)
 }
 
 function* fetchProduct() {
@@ -30,19 +32,23 @@ function getAllproduct() {
     return axios.get(`${url}products`)
 }
 
-function* deleteItemProducts(data) {
-    console.log(data)
+function* deleteItemProducts(action) {
+    const { payload: productId } = action || {};
+    console.log(`productId`, productId)
     try{
-        let res = yield call(deleteProducts, {data})
+        let res = yield call(deleteProducts, {productId})
         console.log(res)
+        if (parseInt(res.status) === 200) {
+            yield put(deleteProductsSuccess(productId));
+        }
     }catch (error) {
-        console.error()
+        console.log(`error message--->`, error);
+        yield put(deleteProductsError(error));
     }
 }
 
-function deleteProducts(data) {
-    console.log(data.data.payload)
-      return axios.delete(`${url}products/${data.data.payload}` )
+function deleteProducts({productId}) {
+      return axios.delete(`${url}products/${productId}` )
 }
 
 export default productSaga;

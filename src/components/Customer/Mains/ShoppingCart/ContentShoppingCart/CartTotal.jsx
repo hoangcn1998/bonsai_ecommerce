@@ -10,15 +10,14 @@ const CartTotal = ({ totalPrice, auth }) => {
 
     const { accessToken } = auth || {};
 
-    if(totalPrice <= 0){
-      setError("You have not selected a product!")
-      if (!accessToken) {
-        setError("Please login to checkout!")
-      }
-    } else {
+  if (!accessToken) {
+      setError("Please login to checkout!")
+    }
+    else {
       history.push('/Checkout')
     }
-  } 
+  }
+
   
 
   return (

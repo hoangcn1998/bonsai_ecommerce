@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import ProductContent from "./ProductContent/ProductContent";
 import ProductContentTabs from "./ProductContentTabs/ProductContentTabs";
@@ -9,6 +9,10 @@ const ProductDetails = () => {
 
   const product = useSelector(state => state.relatedProduts.relatedProducts)
   const { thumbnailUrl } = product || {};
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
 
   return (
     <section className="productDetails__container container">

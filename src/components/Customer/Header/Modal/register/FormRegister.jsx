@@ -51,24 +51,32 @@ const FormRegister = () => {
   return (
     <form className="form form__register" onSubmit={(e) => e.preventDefault()}>
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="First Name"
         {...register("firstName", { required: true, maxLength: 10 })}
       />
+      <br />
       {errors.firstName && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="Last Name"
         {...register("lastName", { required: true, maxLength: 10 })}
       />
+      <br />
       {errors.lastName && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="Email"
@@ -77,10 +85,13 @@ const FormRegister = () => {
           pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
         })}
       />
+      <br />
       {errors.email && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="Phone"
@@ -89,10 +100,13 @@ const FormRegister = () => {
           pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
         })}
       />
+      <br />
       {errors.phone && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="password"
         placeholder="Password"
@@ -102,6 +116,7 @@ const FormRegister = () => {
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g,
         })}
       />
+      <br />
       {errors.password?.type === "required" && (
         <span>Please enter valid data !</span>
       )}
@@ -111,6 +126,8 @@ const FormRegister = () => {
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="password"
         placeholder="Retype password"
@@ -120,6 +137,7 @@ const FormRegister = () => {
             value === password || "The passwords do not match",
         })}
       />
+      <br />
       {errors.retypePassword?.type === "required" && (
         <span>Please enter valid data !</span>
       )}
@@ -129,47 +147,62 @@ const FormRegister = () => {
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="Birth Day"
         {...register("birthDay", { required: true })}
       />
+      <br />
       {errors.birthDay && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="Sex"
         {...register("sex", { required: true })}
       />
+      <br />
       {errors.sex && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="Address"
         {...register("address", { required: true })}
       />
+      <br />
       {errors.address && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+      aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="District"
         {...register("district", { required: true })}
       />
+      <br />
       {errors.district && <span>Please enter valid data !</span>}
       <br />
 
       <input
+      className="form-control"
+          aria-describedby="inputGroup-sizing-default"
         autoComplete="on"
         type="text"
         placeholder="City"
         {...register("city", { required: true })}
       />
+      <br />
       {errors.city && <span>Please enter valid data !</span>}
       <br />
 

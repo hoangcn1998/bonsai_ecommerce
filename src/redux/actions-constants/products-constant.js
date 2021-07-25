@@ -5,5 +5,6 @@ export const GET_PRODUCTS_ER = "GET_PRODUCTS_ER";
 
 // ___________________________________________________________
 
-export const DELETE_PRODUCTS = "DELETE_PRODUCTS";
-
+export const DELETE_PRODUCTS_START = "DELETE_PRODUCTS_START";
+export const DELETE_PRODUCTS_SUCCESS = "DELETE_PRODUCTS_SUCCESS";
+export const DELETE_PRODUCTS_ERROR = "DELETE_PRODUCTS_ERROR";

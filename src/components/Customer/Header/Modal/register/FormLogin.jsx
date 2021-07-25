@@ -65,8 +65,10 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
   return (
     <React.Fragment>
       <ToastContainer />
-      <form className="form form__login" onSubmit={handleSubmit(onSubmitLogin)}>
+      <form  className="form form__login" onSubmit={handleSubmit(onSubmitLogin)}>
         <input
+          className="form-control"
+          aria-describedby="inputGroup-sizing-default"
           type="text"
           placeholder="Email"
           {...register("email", {
@@ -74,14 +76,18 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
             pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
           })}
         />
+        <br />
         {errors.email && <span>Please enter valid data !</span>}
         <br />
 
         <input
+          className="form-control"
+          aria-describedby="inputGroup-sizing-default"
           type="password"
           placeholder="Password"
           {...register("password", { required: true })}
         />
+        <br />
         {errors.password && <span>Please enter valid data !</span>}
         <br />
 
