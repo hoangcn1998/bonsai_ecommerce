@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import FormInformation from "./FormInfomation";
-import { connect, useDispatch } from "react-redux";
-import { addOrder, getOrder } from "../../../../../redux/actions/orderAction";
 import jwt_decode from "jwt-decode";
+import React, { useEffect, useState } from "react";
+import { connect, useDispatch } from "react-redux";
+import { addOrder } from "../../../../../redux/actions/orderAction";
+import FormInformation from "./FormInfomation";
 
 
 const ContentCheckout = ({ auth, cart }) => {
@@ -74,10 +74,10 @@ const ContentCheckout = ({ auth, cart }) => {
   return (
     <div className="container-fluid">
       <div className="row checkout">
-        <div style={{padding: '0px'}} className="col-lg-5">
+        <div style={{ padding: '0px' }} className="col-lg-5">
           <FormInformation dataUser={userState} submitDataUser={submitDataUser}></FormInformation>
         </div>
-        <div style={{padding: '0px'}} className="col-lg-7">
+        <div style={{ padding: '0px' }} className="col-lg-7">
           <div className="Order">
             <h1>Your Order</h1>
             <div className="Order__title">

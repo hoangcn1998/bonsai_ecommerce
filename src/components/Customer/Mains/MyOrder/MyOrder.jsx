@@ -1,13 +1,12 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import './style.scss';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from "react-redux";
+import { getOrder } from '../../../../redux/actions/orderAction';
+import Footer from '../../Footer/Footer';
 import Headers from '../../Header/Headers';
 import BannerProducts from '../Products/BannerProducts/BannerProducts';
 import Instagram from '../Products/Instagram/Instagram';
-import Footer from '../../Footer/Footer';
 import ContentMyOrders from './ContentMyOrder';
-import { connect, useDispatch } from "react-redux";
-import {getOrder} from '../../../../redux/actions/orderAction'
+import './style.scss';
 
 const MyOrders = ({ auth, orders }) => {
   const dispatch = useDispatch();
@@ -16,17 +15,17 @@ const MyOrders = ({ auth, orders }) => {
     if (accessToken) {
       dispatch(getOrder());
     }
-    }, [])
-    console.log(`orders`, orders)
-    return (
-      <>
-      <Headers/>
-      <BannerProducts/>
-      <ContentMyOrders orders={orders}/>
-      <Instagram/>
-      <Footer/>
-      </>
-    );
+  }, [])
+  console.log(`orders`, orders)
+  return (
+    <>
+      <Headers />
+      <BannerProducts />
+      <ContentMyOrders orders={orders} />
+      <Instagram />
+      <Footer />
+    </>
+  );
 };
 
 function mapStateToProps(state) {
