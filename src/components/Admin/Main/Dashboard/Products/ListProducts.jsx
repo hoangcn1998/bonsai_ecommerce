@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts, deleteProductsStart } from "../../../../../redux/actions/productAction";
 import axios from "axios";
 import urlApi from '../../../../../urlApi'
+import ConfirmationDialog from "../../../Common/ConfirmationDialog/ConfirmationDialog";
 
 function Image(image) {
   let style = {
@@ -14,13 +15,13 @@ function Image(image) {
   return <img style={style} alt={image.src} src={image.src}></img>;
 }
 
-function ButtonGroup({ params, deleteProduct }) {
+function ButtonGroup({ params, openConfirmModal }) {
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
       <button type="button" className="btn btn-primary">
         Edit
       </button>
-      <button type="button" className="btn btn-danger" onClick={() => deleteProduct(params)}>
+      <button type="button" className="btn btn-danger" onClick={() => openConfirmModal(params)}>
         Delete
       </button>
     </div>
@@ -28,7 +29,8 @@ function ButtonGroup({ params, deleteProduct }) {
 }
 
 function ListProducts() {
-
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
   const columns = [
     { field: "categoryId", headerName: "CategoryName", width: 180 },
     {
@@ -49,7 +51,7 @@ function ListProducts() {
       disableClickEventBubbling: true,
       width: 150,
       renderCell: (params) => {
-        return <ButtonGroup deleteProduct={deleteProduct} params={params}  ></ButtonGroup>;
+        return <ButtonGroup openConfirmModal={openConfirmModal} params={params}  ></ButtonGroup>;
       },
     },
   ];
@@ -112,7 +114,6 @@ function ListProducts() {
 
   // case 2:---------------------------------
   // ---------------get product---------------------
-
   const dispatch = useDispatch();
   const dataProducts = useSelector((state) => state.products.data);
   const isLoading = useSelector((state) => state.products.isLoading);
@@ -137,12 +138,19 @@ function ListProducts() {
   
   // ----------------- delete Products-------------------
 
-  const deleteProduct = (params) => {
-    console.log(params.id)
-    dispatch(deleteProductsStart(params.id))
+  const openConfirmModal = (params) => {
+    setOpenConfirm(true);
+    setSelectedProductId(params.id);
   }
 
+  const closeConfirm = () => {
+    setOpenConfirm(false);
+  }
 
+  const handleDelete = () => {
+    dispatch(deleteProductsStart(selectedProductId));
+    closeConfirm();
+  }
 
   // --------change rows = formatData(case2) or stateProduct(case1) to test------
   return (
@@ -153,6 +161,7 @@ function ListProducts() {
         pageSize={10}
         checkboxSelection
       />
+      <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete}/>
     </div>
   );
 }
