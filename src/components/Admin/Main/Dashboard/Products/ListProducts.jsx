@@ -2,8 +2,6 @@ import React, { useEffect, useState  } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, deleteProductsStart } from "../../../../../redux/actions/productAction";
-import axios from "axios";
-import urlApi from '../../../../../urlApi'
 import ConfirmationDialog from "../../../Common/ConfirmationDialog/ConfirmationDialog";
 
 function Image(image) {
@@ -56,64 +54,7 @@ function ListProducts() {
     },
   ];
 
-  // ----------get product and delete product ------------------
 
-  // case 1:-----------------------------
-  // ---------------get product----------------------
-  // useEffect(() => {
-  //   axios
-  //     .get(`${urlApi}products`)
-  //     .then(function (response) {
-  //       console.log(response)
-  //       const { data } = response;
-  //       const formatproducts = formatData(data);
-  //       console.log(formatproducts)
-  //       setStateProducts(formatproducts);
-  //     })
-  //     .catch(function (error) {
-  //       // handle error
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  // const [stateProduct, setStateProducts] = useState([]);
-
-  // const formatData =(products) => {
-  //   console.log(products)
-  //    return products.map((item) => {
-  //     const { categoryId, name, bigPicture, price, id, createdAt } = item;
-  //     return {
-  //       id,
-  //       categoryId: `category${categoryId}`,
-  //       bigPicture,
-  //       name,
-  //       price,
-  //       createdAt: new Date(createdAt).toDateString(),
-  //     };
-  //   });
-  // } 
-
-  // //  // ---------------delete product----------------------
-
-  //  const removeProduct = (Product) => {
-  //   console.log(Product)
-  //   return stateProduct.filter(product => product.id !== Product.id);
-  // }
-
-  // const deleteProduct = (params) => {
-  //   console.log(params.id)
-  //   axios.delete(`${urlApi}products/${params.id}`)
-  //     .then(function (response) {
-  //       const newProduct = removeProduct(params);
-  //       setStateProducts(newProduct)
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-
-  // case 2:---------------------------------
-  // ---------------get product---------------------
   const dispatch = useDispatch();
   const dataProducts = useSelector((state) => state.products.data);
   const isLoading = useSelector((state) => state.products.isLoading);
@@ -152,7 +93,6 @@ function ListProducts() {
     closeConfirm();
   }
 
-  // --------change rows = formatData(case2) or stateProduct(case1) to test------
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
