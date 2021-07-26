@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const CartTotal = ({ totalPrice, auth }) => {
   const history = useHistory();
@@ -18,8 +18,6 @@ const CartTotal = ({ totalPrice, auth }) => {
     }
   }
 
-  
-
   return (
     <>
       <div className="total__price">
@@ -36,8 +34,8 @@ const CartTotal = ({ totalPrice, auth }) => {
           Apply
         </button>
       </div>
-        <button type="button" className="btn btn-success" onClick={handleCheckout}>
-          Checkout
+      <button type="button" className="btn btn-success" onClick={handleCheckout}>
+        Checkout
         </button>
       <p className="errorLogin"> {error}</p>
     </>

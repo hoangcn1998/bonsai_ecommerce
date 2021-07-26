@@ -1,15 +1,10 @@
 #rating {
   font-size: 1.2rem !important;
-  margin-left: 1.7rem;
+  margin-left: 1rem;
 }
 
 #grid-products {
-  padding-top: 3rem;
   padding: 3rem 3rem 0 3rem;
-
-  & > * {
-    padding: 0 2rem;
-  }
 }
 
 .price-discount {
@@ -17,7 +12,7 @@
   top: 1rem;
   left: 2rem;
   background-color: #A9813C;
-  width: 4rem;
+  width: 3rem;
   height: 2rem;
   display: flex;
   justify-content: center;
@@ -27,7 +22,7 @@
 
   & > p {
     font-size: 1.2rem;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Playfair Display', serif;
     color: #fff;
   }
 }
@@ -52,7 +47,7 @@
     &--desc {
       padding: 0 0.6rem;
       font-size: 1.1rem;
-      font-family: "Roboto", sans-serif;
+      font-family: 'Playfair Display', serif;
     }
   }
 
@@ -88,7 +83,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 95%;
       border: 3px solid #f4f4f4;
       opacity: 0;
 
@@ -128,6 +123,7 @@
       display: flex;
       justify-content: center;
       flex-direction: column;
+      padding-bottom: 1.5rem;
 
       & > img {
         width: 100%;
@@ -141,8 +137,9 @@
       & > p {
         align-self: flex-start;
         font-size: 1.5rem;
-        font-family: "Roboto", sans-serif;
-        margin-top: -5rem;
+        font-family: 'Playfair Display', serif;
+        margin: 0 auto;
+        margin-top: -4rem;
         padding-bottom: 1rem;
         position: initial;
         z-index: 3;
@@ -159,7 +156,7 @@
 
         & p:first-child {
           font-size: 1.2rem;
-          font-family: "Roboto", sans-serif;
+          font-family: 'Playfair Display', serif;
           text-decoration: line-through;
           padding-right: 0.5rem;
         }
@@ -167,7 +164,7 @@
         & p:nth-child(2) {
           font-size: 1.2rem;
           font-weight: bold;
-          font-family: "Roboto", sans-serif;
+          font-family: 'Playfair Display', serif;
           color: #748a53;
         }
       }

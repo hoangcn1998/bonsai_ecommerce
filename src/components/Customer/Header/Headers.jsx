@@ -10,6 +10,7 @@ import { Link, useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { connect, useDispatch } from "react-redux";
 import { logout } from "../../../redux/actions/authAction";
+import SearchForm from "./SearchForm";
 
 function Header({ auth, cart, shouldOpenLoginModal }) {
 
@@ -66,10 +67,6 @@ function Header({ auth, cart, shouldOpenLoginModal }) {
     setIsLogin(false)
   }
 
-  const HandlerListOrder = () => {
-    history.push("/MyOrders")
-  }
-
   return (
     <div className="header ">
       <div
@@ -88,11 +85,7 @@ function Header({ auth, cart, shouldOpenLoginModal }) {
       <NavMenu></NavMenu>
       <div className="header-group">
         <span>
-          <input
-            type="text"
-            className="header-group__search"
-            placeholder="&nbsp;&nbsp;&nbsp;&nbsp;Search..."
-          />
+          <SearchForm />
         </span>
         <div className="header-group__cart">
           <Link to='/ShoppingCart'>
@@ -107,7 +100,7 @@ function Header({ auth, cart, shouldOpenLoginModal }) {
         <div className="header-group__collap header-group__collap-mobile " onClick={onToggleMenu}>
           <i className="fa fa-bars" aria-hidden="true" />
         </div>
-        { isLogin && <ProfileMenu name={name} handleLogout={onHandleLogout} />}
+        {isLogin && <ProfileMenu name={name} handleLogout={onHandleLogout} />}
         {!isLogin && <div className="header-group__collap" onClick={onToggleSignIn}>
           <i className="fa fa-sign-in" aria-hidden="true"></i>
         </div>}
