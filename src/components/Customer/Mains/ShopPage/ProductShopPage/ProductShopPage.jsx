@@ -26,7 +26,7 @@ const ProductShopPage = (props) => {
 
 
   const findProduct = dataProducts.filter(product => {
-    return product.categoryId === findCategory;
+    return product.categoryId == findCategory;
   });
 
   let currentProducts = findCategory === "all" ? dataProducts.slice(indexOfFirstProduct, indexOfLastProduct) : findProduct.slice(indexOfFirstProduct, indexOfLastProduct);
