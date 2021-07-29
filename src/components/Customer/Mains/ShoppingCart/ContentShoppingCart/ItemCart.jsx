@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch } from "react-redux";
-import { addProductToCart, decreaseProductToCart, deleteProductInCart } from '../../../../../redux/actions/cartAction'
+import { addProductToCart, decreaseProductToCart, deleteProductInCart } from '../../../../../redux/actions/cartAction';
+import ConfirmationDialog from '../../../../common/ConfirmationDialog/ConfirmationDialog'
 
 const ItemCart = ({ product }) => {
+
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const dispatch = useDispatch()
 
@@ -20,6 +24,7 @@ const ItemCart = ({ product }) => {
   }
 
   const handlerAddToCart = (product) => {
+    
     const increaseProduct = increaseQuantity(product)
     dispatch(addProductToCart(increaseProduct))
   }
@@ -33,10 +38,25 @@ const ItemCart = ({ product }) => {
     dispatch(deleteProductInCart(product))
   }
 
+  const openConfirmModal = (product) => {
+    setOpenConfirm(true);
+    setSelectedProductId(product.id)
+   
+  }
+
+  const closeConfirm = () => {
+    setOpenConfirm(false);
+  }
+
+  const handleDelete = () => {
+    dispatch(deleteProductInCart(selectedProductId))
+    closeConfirm();
+  }
+
   return (
     <tr className="shoppingcart__item">
       <th scope="row" className="shoppingcart__item--product">
-        <button onClick={() => handlerDeleteProductInCart(product)}>x</button>
+        <button onClick={() => openConfirmModal(product)}>x</button>
         <img
           alt={bigPicture}
           src={bigPicture}
@@ -57,6 +77,7 @@ const ItemCart = ({ product }) => {
         </div>
       </td>
       <td className="shoppingcart__item--total">${totalProduct}</td>
+      <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete} title={'product'}/>
     </tr >
   );
 };

@@ -1,9 +1,12 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, deleteProductsStart } from "../../../../../redux/actions/productAction";
-import ConfirmationDialog from "../../../Common/ConfirmationDialog/ConfirmationDialog";
+import ConfirmationDialog from "../../../../common/ConfirmationDialog/ConfirmationDialog";
 import React, { useEffect, useState } from "react";
+import styled from 'styled-components'
 
+const DataGridStyled = styled(DataGrid)`
+`
 
 function Image(image) {
   let style = {
@@ -30,6 +33,12 @@ function ButtonGroup({ params, openConfirmModal }) {
 function ListProducts() {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [sortModel, setSortModel] = React.useState([
+    {
+      field: 'createdAt',
+      sort: 'desc',
+    },
+  ]); 
   const columns = [
     { field: "categoryId", headerName: "CategoryName", width: 180 },
     {
@@ -74,7 +83,7 @@ function ListProducts() {
         bigPicture,
         name,
         price,
-        createdAt: new Date(createdAt).toDateString(),
+        createdAt: new Date(createdAt).toISOString()
       };
     });
   
@@ -95,14 +104,14 @@ function ListProducts() {
   }
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
+    <div style={{ height: "70vh", width: "100%" }}>
+      <DataGridStyled
         rows={formatData}
         columns={columns}
         pageSize={10}
-        checkboxSelection
+        sortModel={sortModel}
       />
-      <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete}/>
+      <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete} title={'product'}/>
     </div>
   );
 }

@@ -12,10 +12,12 @@ const CartTotal = ({ totalPrice, auth }) => {
 
   if (!accessToken) {
       setError("Please login to checkout!")
-    }
-    else {
+    } else if (totalPrice === 0) {
+      setError("Please choose a product!")
+    } else {
       history.push('/Checkout')
     }
+    
   }
 
   return (

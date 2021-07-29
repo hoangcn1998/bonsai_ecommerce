@@ -17,10 +17,10 @@ const ProductDetails = () => {
   return (
     <section className="productDetails__container container">
       <div className="row">
-        <div className="col-lg-6">
+        <div className="col-12 col-sm-6 col-md-6 col-lg-6">
           {product && <ProductSlideShow thumbnailUrl={thumbnailUrl} />}
         </div>
-        <div className="col-lg-6">
+        <div className="col-12 col-sm-6 col-md-6 col-lg-6">
           {product && <ProductContent product={product} />}
         </div>
       </div>

@@ -18,11 +18,11 @@
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  z-index: 3;
+  // z-index: 3;
 
   & > p {
     font-size: 1.2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Roboto', serif;
     color: #fff;
   }
 }
@@ -126,15 +126,15 @@
       padding-bottom: 1.5rem;
 
       & > img {
-        width: 100%;
         object-fit: cover;
-        position: initial;
-        z-index: 2;
-        width: 90%;
+        // position: initial;
+        // z-index: 2;
+        width: 80%;
 
       }
 
       & > p {
+        width: 100%;
         align-self: flex-start;
         font-size: 1.5rem;
         font-family: 'Playfair Display', serif;
@@ -147,8 +147,9 @@
 
       &--group {
         display: flex;
-        position: initial;
-        z-index: 3;
+        // position: initial;
+        // z-index: 3;
+        font-family: 'Roboto', serif;
 
         & p {
           padding-bottom: 1.5rem;
@@ -156,7 +157,6 @@
 
         & p:first-child {
           font-size: 1.2rem;
-          font-family: 'Playfair Display', serif;
           text-decoration: line-through;
           padding-right: 0.5rem;
         }
@@ -164,7 +164,6 @@
         & p:nth-child(2) {
           font-size: 1.2rem;
           font-weight: bold;
-          font-family: 'Playfair Display', serif;
           color: #748a53;
         }
       }
