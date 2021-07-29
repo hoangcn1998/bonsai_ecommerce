@@ -1,9 +1,49 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import urlApi from '../../../../../urlApi'
+import urlApi from '../../../../../urlApi';
+import { toast, ToastContainer } from "react-toastify";
 
-const FormRegister = () => {
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import styled from 'styled-components'
+
+const TextFieldStyled = styled(TextField)`
+    width: 100%;
+    padding:0;
+    margin: .5rem 0 0;
+    float: right;
+`
+
+const useStyles = makeStyles((theme) => ({
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+}));
+
+function DatePickers({onSelectBrithDay}) {
+  const classes = useStyles();
+
+  return (
+      <TextFieldStyled
+        id="date"
+        label="Birthday:"
+        type="date" 
+        defaultValue="2021-07-31"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={(e) => onSelectBrithDay(e.target.value)}
+      />
+  );
+}
+
+const FormRegister = ({ onRegisterSuccess }) => {
+  const [birthDay, setBithday] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -11,6 +51,10 @@ const FormRegister = () => {
     reset,
     watch,
   } = useForm();
+
+  const handlerSelectBrithDay = (value) => {
+    setBithday(value)
+  }
 
   const password = watch("password", "");
 
@@ -22,14 +66,13 @@ const FormRegister = () => {
       phone,
       password,
       retypePassword,
-      birthDay,
       sex,
       address,
       district,
       city,
     } = data;
     axios
-      .post(`${urlApi}/users`, {
+      .post(`${urlApi}users`, {
         firstName,
         lastName,
         email,
@@ -43,9 +86,27 @@ const FormRegister = () => {
         city,
         role: "user",
       })
-      .then(function (response) {})
+      .then(function ({ data }) {
+        console.log(data)
+        if (data) {
+          onRegisterSuccess();
+          showMessage('Register Success !')
+        }
+      })
       .catch(function (error) {});
     reset({ example: "", exampleRequired: "" });
+  }
+
+  const showMessage = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   return (
@@ -56,11 +117,9 @@ const FormRegister = () => {
         autoComplete="on"
         type="text"
         placeholder="First Name"
-        {...register("firstName", { required: true, maxLength: 10 })}
+        {...register("firstName", { required: true, maxLength: 40 })}
       />
-      <br />
-      {errors.firstName && <span>Please enter valid data !</span>}
-      <br />
+      {errors.firstName && <span>*Please enter valid data !</span>}
 
       <input
       className="form-control"
@@ -70,9 +129,7 @@ const FormRegister = () => {
         placeholder="Last Name"
         {...register("lastName", { required: true, maxLength: 10 })}
       />
-      <br />
-      {errors.lastName && <span>Please enter valid data !</span>}
-      <br />
+      {errors.lastName && <span>*Please enter valid data !</span>}
 
       <input
       className="form-control"
@@ -85,9 +142,7 @@ const FormRegister = () => {
           pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
         })}
       />
-      <br />
-      {errors.email && <span>Please enter valid data !</span>}
-      <br />
+      {errors.email && <span>*Please enter valid data !</span>}
 
       <input
       className="form-control"
@@ -100,9 +155,7 @@ const FormRegister = () => {
           pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
         })}
       />
-      <br />
-      {errors.phone && <span>Please enter valid data !</span>}
-      <br />
+      {errors.phone && <span>*Please enter valid data !</span>}
 
       <input
       className="form-control"
@@ -116,14 +169,12 @@ const FormRegister = () => {
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g,
         })}
       />
-      <br />
       {errors.password?.type === "required" && (
-        <span>Please enter valid data !</span>
+        <span>*Please enter valid data !</span>
       )}
       {errors.password?.type === "pattern" && (
-        <span>8 characters: letter, number, special characters!</span>
+        <span>*8 least characters: letter, number, special characters!</span>
       )}
-      <br />
 
       <input
       className="form-control"
@@ -137,38 +188,20 @@ const FormRegister = () => {
             value === password || "The passwords do not match",
         })}
       />
-      <br />
       {errors.retypePassword?.type === "required" && (
-        <span>Please enter valid data !</span>
+        <span>*Please enter valid data !</span>
       )}
       {errors.retypePassword?.type === "validate" && (
-        <span>The passwords do not match! </span>
+        <span>*The passwords do not match! </span>
       )}
-      <br />
 
-      <input
-      className="form-control"
-      aria-describedby="inputGroup-sizing-default"
-        autoComplete="on"
-        type="text"
-        placeholder="Birth Day"
-        {...register("birthDay", { required: true })}
-      />
-      <br />
-      {errors.birthDay && <span>Please enter valid data !</span>}
-      <br />
+      <DatePickers onSelectBrithDay={handlerSelectBrithDay}/>
 
-      <input
-      className="form-control"
-      aria-describedby="inputGroup-sizing-default"
-        autoComplete="on"
-        type="text"
-        placeholder="Sex"
-        {...register("sex", { required: true })}
-      />
-      <br />
-      {errors.sex && <span>Please enter valid data !</span>}
-      <br />
+      <select {...register("sex")}>
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+        <option value="other">Other</option>
+      </select>
 
       <input
       className="form-control"
@@ -178,9 +211,7 @@ const FormRegister = () => {
         placeholder="Address"
         {...register("address", { required: true })}
       />
-      <br />
-      {errors.address && <span>Please enter valid data !</span>}
-      <br />
+      {errors.address && <span>*Please enter valid data !</span>}
 
       <input
       className="form-control"
@@ -190,9 +221,7 @@ const FormRegister = () => {
         placeholder="District"
         {...register("district", { required: true })}
       />
-      <br />
-      {errors.district && <span>Please enter valid data !</span>}
-      <br />
+      {errors.district && <span>*Please enter valid data !</span>}
 
       <input
       className="form-control"
@@ -202,9 +231,7 @@ const FormRegister = () => {
         placeholder="City"
         {...register("city", { required: true })}
       />
-      <br />
-      {errors.city && <span>Please enter valid data !</span>}
-      <br />
+      {errors.city && <span>**Please enter valid data !</span>}
 
       <button
         type="submit"
@@ -213,7 +240,6 @@ const FormRegister = () => {
       >
         Submit
       </button>
-      <br></br>
     </form>
   );
 };

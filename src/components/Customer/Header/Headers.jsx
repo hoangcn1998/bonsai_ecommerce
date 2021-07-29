@@ -12,7 +12,7 @@ import { connect, useDispatch } from "react-redux";
 import { logout } from "../../../redux/actions/authAction";
 import SearchForm from "./SearchForm";
 
-function Header({ auth, cart, shouldOpenLoginModal }) {
+function Header({ auth, cart, shouldOpenLoginModal, authError }) {
 
   const dispatch = useDispatch();
   const quantityProductInCart = cart.data.length;
@@ -23,6 +23,12 @@ function Header({ auth, cart, shouldOpenLoginModal }) {
   const [showSignIn, setShowSignIn] = useState(false);
   const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if ((!auth || !auth.length) && authError) {
+      dispatch(logout())
+    }
+  }, [auth])
 
   useEffect(() => {
     const { accessToken } = auth || {};
@@ -118,9 +124,9 @@ function Header({ auth, cart, shouldOpenLoginModal }) {
 function mapStateToProps(state) {
   const {
     cart,
-    auth: { data },
+    auth: { data, error: authError },
   } = state;
-  return { cart, auth: data };
+  return { cart, auth: data, authError };
 }
 
 export default connect(mapStateToProps)(Header);

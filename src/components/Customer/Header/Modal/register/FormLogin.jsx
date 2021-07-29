@@ -76,10 +76,8 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
             pattern: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g,
           })}
         />
-        <br />
-        {errors.email && <span>Please enter valid data !</span>}
-        <br />
-
+        {errors.email && <span>*Please enter valid data !</span>}
+      
         <input
           className="form-control"
           aria-describedby="inputGroup-sizing-default"
@@ -87,14 +85,11 @@ const FormLogin = ({ onCloseModal, auth, error }) => {
           placeholder="Password"
           {...register("password", { required: true })}
         />
-        <br />
-        {errors.password && <span>Please enter valid data !</span>}
-        <br />
+        {errors.password && <span>*Please enter valid data !</span>}
 
         <button type="submit" className="button__submit">
           Login
         </button>
-        <br />
       </form>
     </React.Fragment>
   );

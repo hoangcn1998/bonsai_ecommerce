@@ -30,16 +30,20 @@ const LoginRegister = (prop) => {
     }
   }
 
+  const handleRegisterSuccess = () => {
+    setShowLogin(true)
+  }
+
   return (
-    <div className="form__signin" style={setStyle()}>
+    <div className="form__signin container" style={setStyle()}>
       <i
-        className="fa fa-times form__signin--close"
+        className="fa fa-times form__signin--close "
         aria-hidden="true"
         onClick={onHandleClick}
       ></i>
-      <p className="form__signin--title">Join With Ours</p>
-      <div className="form__content">
-        <div className="button__group">
+      <p className="form__signin--title ">Join With Ours</p>
+      <div className="form__content ">
+        <div className="button__group ">
           <button
             onClick={() => setShowLogin(true)}
             type="button"
@@ -63,7 +67,7 @@ const LoginRegister = (prop) => {
             />
           )}
         </div>
-        <div>{!showLogin && <FormRegister />}</div>
+        <div>{!showLogin && <FormRegister onRegisterSuccess={handleRegisterSuccess} />}</div>
       </div>
     </div>
   );

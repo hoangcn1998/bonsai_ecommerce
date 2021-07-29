@@ -41,7 +41,7 @@ export default function Products() {
             <ListProducts></ListProducts>
           </TabPanel>
           <TabPanel value="2">
-            <FormProducts></FormProducts>
+            <FormProducts onChangeTab={(tab) => {setValue(tab)}}></FormProducts>
           </TabPanel>
         </Paper>
       </TabContext>

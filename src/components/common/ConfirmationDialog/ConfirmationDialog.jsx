@@ -11,7 +11,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
 
 function ConfirmationDialogRaw(props) {
-  const { onOk, onClose, value: valueProp, open, ...other } = props;
+  const { onOk, onClose, value: valueProp, open, title, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef(null);
 
@@ -43,9 +43,9 @@ function ConfirmationDialogRaw(props) {
       open={open}
       {...other}
     >
-      <DialogTitle id="confirmation-dialog-title">Phone Ringtone</DialogTitle>
+      <DialogTitle id="confirmation-dialog-title">Confirmation</DialogTitle>
       <DialogContent dividers>
-       Confirm?
+       <h1>Are you sure you want to delete this {title}?</h1>
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={handleCancel} color="primary">
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ConfirmationDialog({ open, onClose, onOk }) {
+export default function ConfirmationDialog({ open, onClose, onOk, title }) {
   const classes = useStyles();
   // const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('Dione');
@@ -108,6 +108,7 @@ export default function ConfirmationDialog({ open, onClose, onOk }) {
           on
           value={value}
           onOk={onOk}
+          title={title}
         />
     </div>
   );
