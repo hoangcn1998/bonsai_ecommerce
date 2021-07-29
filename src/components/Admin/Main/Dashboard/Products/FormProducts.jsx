@@ -11,6 +11,8 @@ const FormProducts = ({ onChangeTab }) => {
     reset,
   } = useForm();
 
+  const patternUrl = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
   const categoryId = (CategoriesName) => {
     switch (CategoriesName) {
       case "Cactus":
@@ -89,7 +91,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="Products Price"
-        {...register("ProductsPrice", { required: true })}
+        {...register("ProductsPrice", { required: true, pattern: /[0-9]+(\\.[0-9][0-9]?)?/g })}
       />
       {errors.ProductsPrice && <span> * Please enter valid data !</span>}
       <br />
@@ -97,7 +99,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="Products Sale(value to 0 from 1)"
-        {...register("ProductsSale", { required: true })}
+        {...register("ProductsSale", { required: true, pattern: /[0-9]+(\\.[0-9][0-9]?)?/g })}
       />
       {errors.ProductsSale && <span> * Please enter valid data !</span>}
       <br />
@@ -105,7 +107,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="Big picture"
-        {...register("BigPicture", { required: true })}
+        {...register("BigPicture", { required: true, pattern: patternUrl  })}
       />
       {errors.BigPicture && <span> * Please enter valid data !</span>}
       <br />
@@ -113,7 +115,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(1) "
-        {...register("ThumbnailUrl1", { required: true })}
+        {...register("ThumbnailUrl1", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl1 && <span> * Please enter valid data !</span>}
       <br />
@@ -121,7 +123,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(2) "
-        {...register("ThumbnailUrl2", { required: true })}
+        {...register("ThumbnailUrl2", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl2 && <span> * Please enter valid data !</span>}
       <br />
@@ -129,7 +131,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(3) "
-        {...register("ThumbnailUrl3", { required: true })}
+        {...register("ThumbnailUrl3", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl3 && <span> * Please enter valid data !</span>}
       <br />
@@ -137,7 +139,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(4) "
-        {...register("ThumbnailUrl4", { required: true })}
+        {...register("ThumbnailUrl4", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl4 && <span> * Please enter valid data !</span>}
       <br />

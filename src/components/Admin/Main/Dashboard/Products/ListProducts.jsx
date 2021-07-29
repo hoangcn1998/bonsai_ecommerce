@@ -45,9 +45,10 @@ function ListProducts() {
         return <Image src={params.row.bigPicture}></Image>;
       },
     },
-    { field: "name", headerName: "Name", width: 200 },
-    { field: "id", headerName: "Id", width: 150 },
+    { field: "name", headerName: "Name", width: 180 },
+    { field: "id", headerName: "Id", width: 110 },
     { field: "price", headerName: "Price", width: 120 },
+    { field: "sale", headerName: "Sale", width: 120 },
     { field: "createdAt", headerName: "CreatedAt", width: 150 },
     {
       field: "action",
@@ -93,13 +94,14 @@ function ListProducts() {
 
   const formatData = dataProducts.map((item) => {
 
-      const { categoryId, name, bigPicture, price, id, createdAt } = item;
+      const { categoryId, name, bigPicture, price, id, createdAt, sale } = item;
       return {
         id,
         categoryId: categoryName(categoryId),
         bigPicture,
         name,
         price,
+        sale,
         createdAt: new Date(createdAt).toISOString()
       };
     });
