@@ -11,9 +11,25 @@ const ProductContent = ({ product }) => {
 
   const { price, sale, description, name, categoryId } = product || {};
 
+  const categoryName = (categoryId) => {
+    switch (categoryId) {
+      case 1:
+        return  "Cactus"
+      case 2:
+        return "Succulent"
+      case 3:
+        return "Flower"
+      case 4:
+        return "Feng Shui Tree"
+      default:
+        break;
+    }
+  }
+
   const salePrice = price - (price * sale);
 
   const [countProductDetails, setCountProductDetails] = useState(0);
+
 
   //get value related product
 
@@ -99,7 +115,7 @@ const ProductContent = ({ product }) => {
           <span>SKU:</span> PD 031
         </p>
         <p>
-          <span>Categories:</span> Category{categoryId}
+          <span>Categories:</span> {categoryName(categoryId)}
         </p>
         <p>
           <span>Tags:</span> Cactus, Flower, Indoor.

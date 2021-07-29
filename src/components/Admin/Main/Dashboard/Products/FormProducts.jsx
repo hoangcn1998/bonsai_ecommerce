@@ -11,9 +11,29 @@ const FormProducts = ({ onChangeTab }) => {
     reset,
   } = useForm();
 
+  const categoryId = (CategoriesName) => {
+    switch (CategoriesName) {
+      case "Cactus":
+          return 1
+        break;
+      case "Succulent":
+        return 2
+        break;
+      case "Flower":
+        return 3
+        break;
+      case "Feng Shui Tree":
+        return 4
+        break;
+    
+      default:
+        break;
+    }
+  }
+
   function onSubmit(data) {
     const {
-      CategoriesId,
+      CategoriesName,
       ProductsName,
       ProductsPrice,
       ProductsSale,
@@ -27,7 +47,7 @@ const FormProducts = ({ onChangeTab }) => {
 
     axios
       .post(`${url}products`, {
-        categoryId: CategoriesId,
+        categoryId: categoryId(CategoriesName),
         name: ProductsName,
         price: ProductsPrice,
         sale: ProductsSale,
@@ -52,10 +72,10 @@ const FormProducts = ({ onChangeTab }) => {
     <form className="form__products--add" onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
-        placeholder="Categories Id"
-        {...register("CategoriesId", { required: true })}
+        placeholder="Categories Name"
+        {...register("CategoriesName", { required: true })}
       />
-      {errors.CategoriesId && <span> * Please enter valid data !</span>}
+      {errors.CategoriesName && <span> * Please enter valid data !</span>}
       <br />
 
       <input

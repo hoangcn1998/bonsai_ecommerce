@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import axios from "axios";
-import urlApi from '../../../../../urlApi'
+import urlApi from '../../../../../urlApi';
+import ConfirmationDialog from "../../../../common/ConfirmationDialog/ConfirmationDialog";
 
-function ButtonGroup({ params, deleteCategory }) {
+function ButtonGroup({ params, openConfirmModal }) {
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
       <button type="button" className="btn btn-primary">
         Edit
       </button>
-      <button type="button" className="btn btn-danger" onClick={() => deleteCategory(params)}>
+      <button type="button" className="btn btn-danger" onClick={() => openConfirmModal(params)}>
         Delete
       </button>
     </div>
@@ -17,6 +18,10 @@ function ButtonGroup({ params, deleteCategory }) {
 }
 
 function ListCategories() {
+
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+ 
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
     { field: "name", headerName: "Name", width: 200 },
@@ -29,7 +34,7 @@ function ListCategories() {
       width: 200,
       renderCell: (params) => {
         console.log(params)
-        return <ButtonGroup deleteCategory={deleteCategory} params={params}></ButtonGroup>;
+        return <ButtonGroup openConfirmModal={openConfirmModal} params={params}></ButtonGroup>;
       },
     },
   ];
@@ -49,6 +54,12 @@ function ListCategories() {
   }, []);
 
   const [stateCategories, setStateCategories] = useState([]);
+  const [sortModel, setSortModel] = React.useState([
+    {
+      field: 'createdAt',
+      sort: 'desc',
+    },
+  ]); 
 
   const formatData = (categories) => {
     return categories.map((item) => {
@@ -56,28 +67,37 @@ function ListCategories() {
       return {
         id,
         name,
-        createdAt: new Date(createdAt).toDateString(),
-        updatedAt: new Date(updatedAt).toDateString(),
+        createdAt: new Date(createdAt).toISOString(),
+        updatedAt: new Date(createdAt).toISOString(),
       };
     });
   };
   // ----------------------delete category----------------------
 
   const removeCategory = (category) => {
-    return stateCategories.filter(cate => cate.id !== category.id);
+    return stateCategories.filter(cate => cate.id !== category);
   }
 
-  const deleteCategory = (params) => {
-    axios.delete(`${urlApi}categories/${params.id}`)
-      .then(function (response) {
-        const newCategories = removeCategory(params);
-        setStateCategories(newCategories)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const openConfirmModal = (params) => {
+        setOpenConfirm(true);
+        setSelectedCategory(params.id)
   }
 
+  const closeConfirm = () => {
+        setOpenConfirm(false);
+  }
+
+  const handleDelete = () => {
+        axios.delete(`${urlApi}categories/${selectedCategory}`)
+        .then(function (response) {
+          const newCategories = removeCategory(selectedCategory);
+          setStateCategories(newCategories)
+        })
+        .catch(function (error) {
+          console.log(error);
+        }); 
+        closeConfirm();
+  }
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -85,8 +105,9 @@ function ListCategories() {
         rows={stateCategories}
         columns={columns}
         pageSize={5}
-        checkboxSelection
+        sortModel={sortModel}
       />
+       <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete} title={'Category'}/>
     </div>
   );
 }

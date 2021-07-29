@@ -3,10 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts, deleteProductsStart } from "../../../../../redux/actions/productAction";
 import ConfirmationDialog from "../../../../common/ConfirmationDialog/ConfirmationDialog";
 import React, { useEffect, useState } from "react";
-import styled from 'styled-components'
-
-const DataGridStyled = styled(DataGrid)`
-`
 
 function Image(image) {
   let style = {
@@ -75,11 +71,32 @@ function ListProducts() {
     dispatch(getProducts());
   }, []);
 
+  const categoryName = (categoryId) => {
+    switch (categoryId) {
+      case 1:
+          return "Cactus"
+        break;
+      case 2:
+        return "Succulent"
+        break;
+      case 3:
+        return "Flower"
+        break;
+      case 4:
+        return "Feng Shui Tree"
+        break;
+    
+      default:
+        break;
+    }
+  }
+
   const formatData = dataProducts.map((item) => {
+
       const { categoryId, name, bigPicture, price, id, createdAt } = item;
       return {
         id,
-        categoryId: `category${categoryId}`,
+        categoryId: categoryName(categoryId),
         bigPicture,
         name,
         price,
@@ -105,7 +122,7 @@ function ListProducts() {
 
   return (
     <div style={{ height: "70vh", width: "100%" }}>
-      <DataGridStyled
+      <DataGrid
         rows={formatData}
         columns={columns}
         pageSize={10}

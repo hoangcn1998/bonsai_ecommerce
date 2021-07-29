@@ -40,7 +40,7 @@ export default function Categories() {
             <ListCategories />
           </TabPanel>
           <TabPanel value="2">
-            <FormCategories />
+            <FormCategories onChangeTab={(tab) => {setValue(tab)}} />
           </TabPanel>
         </Paper>
       </TabContext>
