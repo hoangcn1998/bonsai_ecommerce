@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts, deleteProductsStart } from "../../../../../redux/actions/productAction";
 import ConfirmationDialog from "../../../../common/ConfirmationDialog/ConfirmationDialog";
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import urlApi from '../../../../../urlApi';
 
 function Image(image) {
   let style = {
@@ -66,38 +68,41 @@ function ListProducts() {
   const dataProducts = useSelector((state) => state.products.data);
   const isLoading = useSelector((state) => state.products.isLoading);
 
-  console.log(`isLoading`, isLoading)
+
+  //-------------------------- get categoryName---------------------------
+
+  const [category, setCategory] = useState(null);
+
   
   useEffect(() => {
     dispatch(getProducts());
   }, []);
 
-  const categoryName = (categoryId) => {
-    switch (categoryId) {
-      case 1:
-          return "Cactus"
-        break;
-      case 2:
-        return "Succulent"
-        break;
-      case 3:
-        return "Flower"
-        break;
-      case 4:
-        return "Feng Shui Tree"
-        break;
-    
-      default:
-        break;
-    }
+  useEffect( () => {
+    axios.get(`${urlApi}categories`)
+          .then(function (response) {
+            setCategory(response.data)
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+  }, []);
+
+  const getCategoryName = categoryId => {
+    // get list categories => categories
+    const categories = category || [];
+    const cate = categories.find(item => item.id === categoryId);
+    return (cate && cate.name) || '';
   }
 
   const formatData = dataProducts.map((item) => {
 
       const { categoryId, name, bigPicture, price, id, createdAt, sale } = item;
+      const categoryName = getCategoryName(categoryId)
       return {
         id,
-        categoryId: categoryName(categoryId),
+        categoryId: categoryName,
         bigPicture,
         name,
         price,
