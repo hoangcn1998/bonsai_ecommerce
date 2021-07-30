@@ -1,10 +1,11 @@
 import { DataGrid } from "@material-ui/data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, deleteProductsStart } from "../../../../../redux/actions/productAction";
+import { getProducts, deleteProductsStart, getItemProduct } from "../../../../../redux/actions/productAction";
 import ConfirmationDialog from "../../../../common/ConfirmationDialog/ConfirmationDialog";
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import urlApi from '../../../../../urlApi';
+import EditForm from "./EditForm";
 
 function Image(image) {
   let style = {
@@ -15,10 +16,10 @@ function Image(image) {
   return <img style={style} alt={image.src} src={image.src}></img>;
 }
 
-function ButtonGroup({ params, openConfirmModal }) {
+function ButtonGroup({ params, openConfirmModal, getDataProduct }) {
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
-      <button type="button" className="btn btn-primary">
+      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onClick={() => getDataProduct(params)}>
         Edit
       </button>
       <button type="button" className="btn btn-danger" onClick={() => openConfirmModal(params)}>
@@ -29,8 +30,10 @@ function ButtonGroup({ params, openConfirmModal }) {
 }
 
 function ListProducts() {
+
   const [openConfirm, setOpenConfirm] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+
   const [sortModel, setSortModel] = React.useState([
     {
       field: 'createdAt',
@@ -58,7 +61,7 @@ function ListProducts() {
       disableClickEventBubbling: true,
       width: 150,
       renderCell: (params) => {
-        return <ButtonGroup openConfirmModal={openConfirmModal} params={params}  ></ButtonGroup>;
+        return <ButtonGroup getDataProduct={getDataProduct} openConfirmModal={openConfirmModal} params={params}  ></ButtonGroup>;
       },
     },
   ];
@@ -127,6 +130,13 @@ function ListProducts() {
     closeConfirm();
   }
 
+  // ---------------- get data product----------------------
+
+  const getDataProduct = (params) => {
+      dispatch(getItemProduct(params))
+  }
+
+
   return (
     <div style={{ height: "70vh", width: "100%" }}>
       <DataGrid
@@ -136,6 +146,7 @@ function ListProducts() {
         sortModel={sortModel}
       />
       <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete} title={'product'}/>
+      <EditForm/>
     </div>
   );
 }

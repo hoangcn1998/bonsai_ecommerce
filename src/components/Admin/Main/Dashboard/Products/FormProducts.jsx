@@ -98,6 +98,10 @@ const FormProducts = ({ onChangeTab }) => {
 
       <input
         type="text"
+        type="number"
+        max="1"
+        min="0"
+        step="0.05"
         placeholder="Products Sale(value to 0 from 1)"
         {...register("ProductsSale", { required: true, pattern: /[0-9]+(\\.[0-9][0-9]?)?/g })}
       />

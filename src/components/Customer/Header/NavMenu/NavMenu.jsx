@@ -1,17 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const NavMenu = () => {
+
+  const history = useHistory();
+
+  function onRedirectHome() {
+    history.push(`/HomePage`)
+  }
+
+  function onRedirectShop() {
+    history.push(`/ShopPage`)
+  }
+
   return (
     <ul className="header__menu">
-      <li className="header__menu--item">
-        <Link to="/HomePage">Home</Link>
-      </li>
-
-      <li className="header__menu--item">
-        <Link to="/ShopPage">Shop</Link>
-      </li>
-
+      <li onClick={onRedirectHome} className="header__menu--item">Home</li>
+      <li onClick={onRedirectShop} className="header__menu--item">Shop</li>
       <li className="header__menu--item">Features</li>
       <li className="header__menu--item">Portfolio</li>
       <li className="header__menu--item">Blog</li>
