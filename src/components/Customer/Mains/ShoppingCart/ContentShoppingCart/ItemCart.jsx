@@ -59,7 +59,7 @@ const ItemCart = ({ product }) => {
 
   return (
     <tr className="shoppingcart__item">
-      <th style={style} scope="row" className="shoppingcart__item--product">
+      <th style={style} className="shoppingcart__item--product">
         <button onClick={() => openConfirmModal(product)}>x</button>
         <img
           alt={bigPicture}

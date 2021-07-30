@@ -74,10 +74,10 @@ const ContentCheckout = ({ auth, cart }) => {
   return (
     <div className="container-fluid">
       <div className="row checkout">
-        <div style={{ padding: '0px' }} className="col-lg-5">
+        <div style={{ padding: '0px' }} className="col-sm-12 col-md-5 order2">
           <FormInformation dataUser={userState} submitDataUser={submitDataUser}></FormInformation>
         </div>
-        <div style={{ padding: '0px' }} className="col-lg-7">
+        <div style={{ padding: '0px' }} className="col-sm-12 col-md-7">
           <div className="Order">
             <h1>Your Order</h1>
             <div className="Order__title">
