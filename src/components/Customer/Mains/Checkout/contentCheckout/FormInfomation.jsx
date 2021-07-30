@@ -6,8 +6,8 @@ import { useHistory } from "react-router";
 
 const FormInformation = ({ dataUser ,submitDataUser }) => {
 
-  const { fullName = '' , phone = '', address = '', id = "" , district = '', city = ''} = dataUser || {};
-  const deleveryAddress = `${address} / ${district} / ${city}`;
+  const { fullName = '' , phone = '', address= "", id = "" , district= "", city= ""} = dataUser || {};
+  const deleveryAddress = `${address} ${district} ${city}`;
   const [stateId, setStateId] = useState(id);
 
   useEffect(() => {

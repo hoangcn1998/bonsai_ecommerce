@@ -17,9 +17,9 @@ const ContentShoppingCart = ({ cart }) => {
   const data = cart.map((product, index) => <ItemCart product={product} index={index} key={index} />)
 
   return (
-    <div className="container ">
+    <div className="container-fluid">
       <div className="row ContentShoppingCart">
-        <div className="col-lg-8 shoppingcart">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-8 shoppingcart">
           <table className="table shoppingcart__title">
             <thead>
               <tr>
@@ -42,7 +42,7 @@ const ContentShoppingCart = ({ cart }) => {
             </tbody>
           </table>
         </div>
-        <div className="col-lg-4 cartTotal">
+        <div className="col-12 col-sm-12 col-md-12 col-lg-4 cartTotal">
           <CartTotal totalPrice={calcualteTotalPrice(cart)} />
         </div>
       </div>
