@@ -19,7 +19,7 @@
        
         th {
             padding: 0;
-            padding-bottom: 1rem;
+            padding: 1rem 0;
         }
 
         &--product {
@@ -74,11 +74,8 @@
         &--quantity {
             margin-top: 2rem;
            display: block;
+          
         }
-
-         &--total {
-             text-align: end;
-         }
     }
     
 }
@@ -125,4 +122,3 @@
     font-size: 1.1rem;
     text-align: center;
 }
-
