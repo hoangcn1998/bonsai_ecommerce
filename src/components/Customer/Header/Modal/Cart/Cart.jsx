@@ -20,7 +20,7 @@ function ModalCart(props) {
   function setStyle() {
     if (showCart) {
       return {
-        transform: "translateX(0%)",
+        transform: "translateX(-200%)",
         transition: "all 0.3s",
       };
     } else {

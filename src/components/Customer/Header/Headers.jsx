@@ -18,8 +18,8 @@ function Header({ auth, cart, shouldOpenLoginModal, authError }) {
   const quantityProductInCart = cart.data.length;
   const history = useHistory();
 
-  const [showCart, setShowCart] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showCart, setShowCart] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [name, setName] = useState('');
   const [isLogin, setIsLogin] = useState(false);
@@ -48,23 +48,23 @@ function Header({ auth, cart, shouldOpenLoginModal, authError }) {
     }
   }, [shouldOpenLoginModal])
 
-  function onToggleCart() {
-    setShowCart(!showCart);
-  }
+  // function onToggleCart() {
+  //   setShowCart(!showCart);
+  // }
 
-  function onToggleMenu() {
-    if (onHandleToggleMenu) {
-      onHandleToggleMenu();
-    }
-  }
+  // function onToggleMenu() {
+  //   if (onHandleToggleMenu) {
+  //     onHandleToggleMenu();
+  //   }
+  // }
 
   function onToggleSignIn() {
     setShowSignIn(!showSignIn);
   }
 
-  function onHandleToggleMenu() {
-    setShowMenu(!showMenu);
-  }
+  // function onHandleToggleMenu() {
+  //   setShowMenu(!showMenu);
+  // }
 
   function onHandleLogout() {
     dispatch(logout())
@@ -75,14 +75,14 @@ function Header({ auth, cart, shouldOpenLoginModal, authError }) {
 
   return (
     <div className="header ">
-      <div
+      {/* <div
         className={showCart ? "header__overlay" : ""}
         onClick={onToggleCart}
-      ></div>
-      <div
+      ></div> */}
+      {/* <div
         className={showMenu ? "menu__overlay" : ""}
         onClick={onToggleMenu}
-      ></div>
+      ></div> */}
       <div
         className={showSignIn ? "signin__overlay" : ""}
         onClick={onToggleSignIn}
@@ -99,13 +99,13 @@ function Header({ auth, cart, shouldOpenLoginModal, authError }) {
           </Link>
           <div className="header-group__cart--count">{quantityProductInCart}</div>
         </div>
-        <div className="header-group__cart  header-group__cart-mobile" onClick={onToggleCart}>
+        {/* <div className="header-group__cart  header-group__cart-mobile" onClick={onToggleCart}>
           <i className="fa fa-shopping-basket" aria-hidden="true" />
           <div className="header-group__cart--count">2</div>
-        </div>
-        <div className="header-group__collap header-group__collap-mobile " onClick={onToggleMenu}>
+        </div> */}
+        {/* <div className="header-group__collap header-group__collap-mobile " onClick={onToggleMenu}>
           <i className="fa fa-bars" aria-hidden="true" />
-        </div>
+        </div> */}
         {isLogin && <ProfileMenu name={name} handleLogout={onHandleLogout} />}
         {!isLogin && <div className="header-group__collap" onClick={onToggleSignIn}>
           <i className="fa fa-sign-in" aria-hidden="true"></i>
@@ -115,8 +115,8 @@ function Header({ auth, cart, shouldOpenLoginModal, authError }) {
         showSignIn={showSignIn}
         onToggleSignIn={onToggleSignIn}
       ></LoginRegister>
-      <ModalCart showCart={showCart} onToggleCart={onToggleCart} />
-      <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu} />
+      {/* <ModalCart showCart={showCart} onToggleCart={onToggleCart} /> */}
+      {/* <ModalMenu showMenu={showMenu} onHandleToggleMenu={onHandleToggleMenu} /> */}
     </div>
   );
 }

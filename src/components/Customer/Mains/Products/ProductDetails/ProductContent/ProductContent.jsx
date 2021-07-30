@@ -1,7 +1,9 @@
 import Rating from "@material-ui/lab/Rating";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from '../../../../../../redux/actions/cartAction';
+import axios from 'axios';
+import urlApi from '../../../../../../urlApi'
 
 
 
@@ -14,7 +16,26 @@ const ProductContent = ({ product }) => {
   const salePrice = price - (price * sale);
 
   const [countProductDetails, setCountProductDetails] = useState(0);
+  const [category, setCategory] = useState(null);
 
+  useEffect( () => {
+    axios.get(`${urlApi}categories`)
+          .then(function (response) {
+            console.log(response.data)
+            setCategory(response.data)
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+  }, []);
+
+  const getCategoryName = categoryId => {
+    // get list categories => categories
+    const newCategory = category || [] ;
+    const cate = newCategory.find(item => item.id === categoryId);
+    return (cate && cate.name) || '';
+  }
   //get value related product
 
   function handlerClickMinus() {
@@ -99,7 +120,7 @@ const ProductContent = ({ product }) => {
           <span>SKU:</span> PD 031
         </p>
         <p>
-          <span>Categories:</span> Category{categoryId}
+          <span>Categories:</span> {getCategoryName(categoryId)}
         </p>
         <p>
           <span>Tags:</span> Cactus, Flower, Indoor.

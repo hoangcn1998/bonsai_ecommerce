@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import url from "../../../../../urlApi";
@@ -11,9 +11,13 @@ const FormProducts = ({ onChangeTab }) => {
     reset,
   } = useForm();
 
+  const patternUrl = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
   function onSubmit(data) {
+
+    console.log(data)
     const {
-      CategoriesId,
+      CategoriesName,
       ProductsName,
       ProductsPrice,
       ProductsSale,
@@ -27,10 +31,10 @@ const FormProducts = ({ onChangeTab }) => {
 
     axios
       .post(`${url}products`, {
-        categoryId: CategoriesId,
+        categoryId: parseInt(CategoriesName),
         name: ProductsName,
-        price: ProductsPrice,
-        sale: ProductsSale,
+        price: parseInt(ProductsPrice),
+        sale: parseInt(ProductsSale),
         bigPicture: BigPicture,
         thumbnailUrl: [
           ThumbnailUrl1,
@@ -48,14 +52,32 @@ const FormProducts = ({ onChangeTab }) => {
 
     reset({ example: "", exampleRequired: "" });
   }
+
+  // ---------get category-----------------
+
+  const [category, setCategory] = useState(null);
+  const datacategory = category || [];
+
+  useEffect( () => {
+    axios.get(`${url}categories`)
+          .then(function (response) {
+            console.log(response.data)
+            setCategory(response.data)
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+  }, []);
+
+  const dataOption = datacategory.map((item, index) =>  <option key={index} value={item.id}>{item.name}</option> )
+
   return (
     <form className="form__products--add" onSubmit={(e) => e.preventDefault()}>
-      <input
-        type="text"
-        placeholder="Categories Id"
-        {...register("CategoriesId", { required: true })}
-      />
-      {errors.CategoriesId && <span> * Please enter valid data !</span>}
+      <select {...register("CategoriesName", { required: true })}>
+        <option value="">Category name</option>
+        {dataOption}  
+      </select>
+      {errors.CategoriesName && <span> * Please choose a category !</span>}
       <br />
 
       <input
@@ -69,7 +91,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="Products Price"
-        {...register("ProductsPrice", { required: true })}
+        {...register("ProductsPrice", { required: true, pattern: /[0-9]+(\\.[0-9][0-9]?)?/g })}
       />
       {errors.ProductsPrice && <span> * Please enter valid data !</span>}
       <br />
@@ -77,7 +99,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="Products Sale(value to 0 from 1)"
-        {...register("ProductsSale", { required: true })}
+        {...register("ProductsSale", { required: true, pattern: /[0-9]+(\\.[0-9][0-9]?)?/g })}
       />
       {errors.ProductsSale && <span> * Please enter valid data !</span>}
       <br />
@@ -85,7 +107,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="Big picture"
-        {...register("BigPicture", { required: true })}
+        {...register("BigPicture", { required: true, pattern: patternUrl  })}
       />
       {errors.BigPicture && <span> * Please enter valid data !</span>}
       <br />
@@ -93,7 +115,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(1) "
-        {...register("ThumbnailUrl1", { required: true })}
+        {...register("ThumbnailUrl1", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl1 && <span> * Please enter valid data !</span>}
       <br />
@@ -101,7 +123,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(2) "
-        {...register("ThumbnailUrl2", { required: true })}
+        {...register("ThumbnailUrl2", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl2 && <span> * Please enter valid data !</span>}
       <br />
@@ -109,7 +131,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(3) "
-        {...register("ThumbnailUrl3", { required: true })}
+        {...register("ThumbnailUrl3", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl3 && <span> * Please enter valid data !</span>}
       <br />
@@ -117,7 +139,7 @@ const FormProducts = ({ onChangeTab }) => {
       <input
         type="text"
         placeholder="thumbnail Url(4) "
-        {...register("ThumbnailUrl4", { required: true })}
+        {...register("ThumbnailUrl4", { required: true, pattern: patternUrl })}
       />
       {errors.ThumbnailUrl4 && <span> * Please enter valid data !</span>}
       <br />

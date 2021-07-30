@@ -291,16 +291,20 @@ $primary-color: #758A53;
     }
 
     &-group {
-      span {
 
-        input {
-          padding: 0 1rem;
-          font-size: 1rem;
-        }
+      & input {
+      width: 20rem;
+      height: 3rem;
+      background-color: #F4F4F4;
+      border: none;
+      outline: none;
+      border-radius: 5rem;
 
-        &::-webkit-input-placeholder {
-          font-size: 1rem;
-        }
+      &::-webkit-input-placeholder {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        right: 1rem;
+      }
       }
     }
   }
@@ -318,6 +322,7 @@ $primary-color: #758A53;
       border: none;
       outline: none;
       border-radius: 5rem;
+      padding: 0 2rem;
 
       &::-webkit-input-placeholder {
         font-family: 'Playfair Display', serif;

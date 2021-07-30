@@ -3,7 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import url from "../../../../../urlApi";
 
-const FormCategories = () => {
+const FormCategories = ({ onChangeTab }) => {
   const {
     register,
     handleSubmit,
@@ -16,7 +16,9 @@ const FormCategories = () => {
       .post(`${url}/categories`, {
         name: data.CategoriesName,
       })
-      .then(function (response) {})
+      .then(function (response) {
+        onChangeTab('1')
+      })
       .catch(function (error) {});
 
     reset({ example: "", exampleRequired: "" });

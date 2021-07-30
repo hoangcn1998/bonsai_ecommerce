@@ -2,13 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
+import styled from 'styled-components'
+
+const DialogContentStyled = styled(DialogContent)`
+    color:  #758A53;
+    font-size: 1.1rem;
+`
+const DialogTitleStyled = styled(DialogTitle)`
+    color:  #758A53;
+    font-size: 1.5rem;
+`
+const ButtonStyled = styled(Button)`
+    color:  red;
+`
 
 function ConfirmationDialogRaw(props) {
   const { onOk, onClose, value: valueProp, open, title, ...other } = props;
@@ -43,17 +53,17 @@ function ConfirmationDialogRaw(props) {
       open={open}
       {...other}
     >
-      <DialogTitle id="confirmation-dialog-title">Confirmation</DialogTitle>
-      <DialogContent dividers>
+      <DialogTitleStyled id="confirmation-dialog-title">Confirmation</DialogTitleStyled>
+      <DialogContentStyled dividers>
        <h1>Are you sure you want to delete this {title}?</h1>
-      </DialogContent>
+      </DialogContentStyled>
       <DialogActions>
         <Button autoFocus onClick={handleCancel} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleOk} color="primary">
+        <ButtonStyled onClick={handleOk} color="primary">
           Ok
-        </Button>
+        </ButtonStyled>
       </DialogActions>
     </Dialog>
   );

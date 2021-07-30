@@ -46,6 +46,23 @@
         border-color: #719ECE;
         box-shadow: 0 0 10px #719ECE;
      }
+
+     select {
+         width: 75%;
+         height: 43px;
+         border: 1px solid rgba(0, 0, 0, 0.116);
+         outline: none;
+         border-radius: 5px;
+
+         padding: 0 .3rem;
+         font-size: 1rem;
+         color: rgba(0, 0, 0, 0.65);
+     }
+
+     select > option {
+         font-size: 1rem;
+         padding: 1rem 0.5rem;
+     }
 }
 
 .admin__button--logout {
