@@ -5,14 +5,14 @@
 }
 
 .menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   font-family: 'Roboto', sans-serif;
   background-color: #fff;
   height: 100%;
   bottom: 0;
-  width: 100%;
+  width: 50%;
   z-index: 2;
   transform: translateX(-100%);
 

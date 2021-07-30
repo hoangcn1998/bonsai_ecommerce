@@ -53,9 +53,13 @@ const ItemCart = ({ product }) => {
     closeConfirm();
   }
 
+  let style = {
+    verticalAlign: 'baseline',
+  }
+
   return (
     <tr className="shoppingcart__item">
-      <th scope="row" className="shoppingcart__item--product">
+      <th style={style} scope="row" className="shoppingcart__item--product">
         <button onClick={() => openConfirmModal(product)}>x</button>
         <img
           alt={bigPicture}
@@ -63,8 +67,8 @@ const ItemCart = ({ product }) => {
         />
         <span>{name}</span>
       </th>
-      <td className="shoppingcart__item--price">${salePrice}</td>
-      <td>
+      <td  style={style} className="shoppingcart__item--price">${salePrice}</td>
+      <td  style={style}>
         <div
           className="btn-group mr-2 shoppingcart__item--quantity"
           role="group"
@@ -76,7 +80,7 @@ const ItemCart = ({ product }) => {
           <button className="btn btn-light" onClick={() => handlerAddToCart(product)}>+</button>
         </div>
       </td>
-      <td className="shoppingcart__item--total">${totalProduct}</td>
+      <td   style={style} className="shoppingcart__item--total">${totalProduct}</td>
       <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete} title={'product'}/>
     </tr >
   );

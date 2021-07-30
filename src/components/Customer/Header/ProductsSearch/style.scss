@@ -10,7 +10,7 @@
 
 .products-search {
   position: absolute;
-  top: 120%;
+  top: 12%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -23,5 +23,5 @@
   display: none;
   transition: all 0.5s;
   max-width: 80%;
+  z-index: 1;
 }
-
