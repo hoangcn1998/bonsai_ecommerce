@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import DescriptionProducts from "./DescriptionProducts";
 import ReviewProducts from "./ReviewProducts";
+import axios from "axios";
 
-const ProductContentTabs = () => {
+const ProductContentTabs = (props) => {
   const [showDescription, setShowDescription] = useState(true);
-
   //get data related product
   const relatedProduct = useSelector(state => state.relatedProduts.relatedProducts);
   const { description, thumbnailUrl } = relatedProduct;
@@ -13,6 +13,7 @@ const ProductContentTabs = () => {
   const style = {
     cursor: "pointer",
   }
+
   return (
     <div className="productDetails__content--tabs">
       <div className="producDetails__tabs">
@@ -23,7 +24,7 @@ const ProductContentTabs = () => {
       </div>
       <div className="productDetails__tabs--content">
         {showDescription && <DescriptionProducts description={description} thumbnailUrl={thumbnailUrl}></DescriptionProducts>}
-        {!showDescription && <ReviewProducts></ReviewProducts>}
+        {!showDescription && <ReviewProducts relatedProduct={relatedProduct} />}
       </div>
     </div>
   );

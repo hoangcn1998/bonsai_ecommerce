@@ -1,6 +1,6 @@
 .productDetails__container {
     padding: 2.5rem 0 ;
-
+    font-family: "Playfair Display", serif;
     .slide-container {
         height: 500px;
          .each-slide {
@@ -180,7 +180,6 @@
         .tabs__content--reviews {
           
             border: 2px solid rgba(0, 0, 0, 0.13);
-            padding: 4rem;
         
             .title {
                 font-size: 150%;
@@ -192,7 +191,9 @@
                 font-size: 120%;
                 font-weight: bold;
                 padding: 1rem 0;
-                
+                padding-top: 2rem;
+                padding-left: 2rem;
+
                 .star {
                     margin-left: 1rem;
                     
@@ -204,7 +205,7 @@
             }
 
             .comment {
-
+              padding-left: 2rem;
                 .form-group {
                     font-size: 120%;
                     font-weight: bold;
@@ -231,7 +232,7 @@
 
                 button {
                     width: 15%;
-                    
+                    margin-bottom: 2rem;
                 }
             }
         }

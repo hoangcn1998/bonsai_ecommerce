@@ -8,9 +8,8 @@ const ProductsReducer = (state = stateDefault, action) => {
     case SET_DISPLAY:
 
       return { ...state, display: action.payload };
-      
-    case GET_PRODUCTS_SC:
 
+    case GET_PRODUCTS_SC:
       return { ...state, data: action.payload, errorMessage: null }
 
     case GET_PRODUCTS_ER:
@@ -21,14 +20,14 @@ const ProductsReducer = (state = stateDefault, action) => {
 
     case DELETE_PRODUCTS_START:
 
-        return { ...state, isLoading: true };
-    
+      return { ...state, isLoading: true };
+
     case DELETE_PRODUCTS_SUCCESS:
 
       const products = [...state.data];
       const afterDeleteProducts = products.filter(pro => pro.id !== action.payload)
 
-        return { ...state, isLoading: false, data: afterDeleteProducts}
+      return { ...state, isLoading: false, data: afterDeleteProducts }
 
     case DELETE_PRODUCTS_ERROR:
 

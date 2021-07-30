@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 import { addProductToCart, decreaseProductToCart, deleteProductInCart } from '../../../../../redux/actions/cartAction';
 import ConfirmationDialog from '../../../../common/ConfirmationDialog/ConfirmationDialog'
 
@@ -24,7 +25,7 @@ const ItemCart = ({ product }) => {
   }
 
   const handlerAddToCart = (product) => {
-    
+
     const increaseProduct = increaseQuantity(product)
     dispatch(addProductToCart(increaseProduct))
   }
@@ -41,7 +42,7 @@ const ItemCart = ({ product }) => {
   const openConfirmModal = (product) => {
     setOpenConfirm(true);
     setSelectedProductId(product.id)
-   
+
   }
 
   const closeConfirm = () => {
@@ -59,6 +60,7 @@ const ItemCart = ({ product }) => {
 
   return (
     <tr className="shoppingcart__item">
+      <ToastContainer />
       <th style={style} className="shoppingcart__item--product">
         <button onClick={() => openConfirmModal(product)}>x</button>
         <img
@@ -67,8 +69,8 @@ const ItemCart = ({ product }) => {
         />
         <span>{name}</span>
       </th>
-      <td  style={style} className="shoppingcart__item--price">${salePrice}</td>
-      <td  style={style}>
+      <td style={style} className="shoppingcart__item--price">${salePrice}</td>
+      <td style={style}>
         <div
           className="btn-group mr-2 shoppingcart__item--quantity"
           role="group"
@@ -80,8 +82,8 @@ const ItemCart = ({ product }) => {
           <button className="btn btn-light" onClick={() => handlerAddToCart(product)}>+</button>
         </div>
       </td>
-      <td   style={style} className="shoppingcart__item--total">${totalProduct}</td>
-      <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete} title={'product'}/>
+      <td style={style} className="shoppingcart__item--total">${totalProduct}</td>
+      <ConfirmationDialog open={openConfirm} onClose={closeConfirm} onOk={handleDelete} title={'product'} />
     </tr >
   );
 };
