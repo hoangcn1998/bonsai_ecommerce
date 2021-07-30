@@ -6,8 +6,7 @@ import { useHistory } from "react-router";
 
 const FormInformation = ({ dataUser ,submitDataUser }) => {
 
-  const { fullName = '' , phone = '', address= "", id = "" , district= "", city= ""} = dataUser || {};
-  const deleveryAddress = `${address} ${district} ${city}`;
+  const { fullName = '' , phone = '', id = '', deliveryAddress} = dataUser || {};
   const [stateId, setStateId] = useState(id);
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const FormInformation = ({ dataUser ,submitDataUser }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
   const history = useHistory();
@@ -53,17 +52,14 @@ const FormInformation = ({ dataUser ,submitDataUser }) => {
         defaultValue={phone}
         {...register("phoneNumber", { required: true, pattern: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g, })} />
       {errors.phoneNumber && <span>* Please enter Phone number !</span>}
-
-
       <input
         autoComplete="on"
         type="text"
-        className="form-control"
+        className="form-control"  
         placeholder="Delivery address"
-        defaultValue={deleveryAddress}
+        defaultValue={deliveryAddress}
         {...register("deleveryAddress", { required: true, maxLength: 50 })} />
       {errors.deleveryAddress && <span>* Please enter Delivery address !</span>}
-
       <textarea
         className="form-control"
         rows="5"

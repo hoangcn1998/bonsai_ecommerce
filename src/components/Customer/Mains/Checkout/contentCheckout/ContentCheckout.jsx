@@ -71,11 +71,20 @@ const ContentCheckout = ({ auth, cart }) => {
     dispatch(addOrder(dataOrder))
   }
 
+  const formatAdress = (userState) => {
+    const { address= "", district= "", city= ""} = userState || {};
+    const deliveryAddress = `${address} / ${district} / ${city}`;
+    if (userState) {
+      userState.deliveryAddress = deliveryAddress;
+    }
+    return userState;
+  }
+
   return (
     <div className="container-fluid">
       <div className="row checkout">
         <div style={{ padding: '0px' }} className="col-sm-12 col-md-5 order2">
-          <FormInformation dataUser={userState} submitDataUser={submitDataUser}></FormInformation>
+          <FormInformation dataUser={formatAdress(userState)} submitDataUser={submitDataUser}></FormInformation>
         </div>
         <div style={{ padding: '0px' }} className="col-sm-12 col-md-7">
           <div className="Order">
