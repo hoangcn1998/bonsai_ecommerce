@@ -5,19 +5,18 @@ import { useHistory } from "react-router-dom";
 const CartTotal = ({ totalPrice, auth }) => {
   const history = useHistory();
   const [error, setError] = useState('');
-  console.log(totalPrice)
   const handleCheckout = e => {
 
     const { accessToken } = auth || {};
 
-  if (!accessToken) {
+    if (!accessToken) {
       setError("Please login to checkout!")
     } else if (totalPrice === 0) {
       setError("Please choose a product!")
     } else {
       history.push('/Checkout')
     }
-    
+
   }
 
   return (

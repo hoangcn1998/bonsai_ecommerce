@@ -1,8 +1,8 @@
 import React from "react";
-import "../style.scss";
-import ItemCart from "./ItemCart";
-import CartTotal from "./CartTotal";
 import { connect } from "react-redux";
+import "../style.scss";
+import CartTotal from "./CartTotal";
+import ItemCart from "./ItemCart";
 
 const ContentShoppingCart = ({ cart }) => {
 

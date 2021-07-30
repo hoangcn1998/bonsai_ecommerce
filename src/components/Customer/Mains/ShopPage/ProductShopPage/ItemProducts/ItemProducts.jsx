@@ -10,7 +10,6 @@ function ItemProducts({ product, onRedirectDetail }) {
   const { name, price, bigPicture, sale, rating } = product;
   const [selectProduct, setSelectProduct] = useState(null);
   const dispatch = useDispatch();
-
   let salePrice = price - price * sale;
   let percentSale = sale * 100;
 
@@ -34,7 +33,6 @@ function ItemProducts({ product, onRedirectDetail }) {
     const increaseProduct = increaseQuantity(product)
     dispatch(addProductToCart(increaseProduct))
   }
-
 
   return (
     <Grid item lg={3} md={4} sm={6} xs={12} className="products__main">
@@ -65,9 +63,11 @@ function ItemProducts({ product, onRedirectDetail }) {
               style={{ marginLeft: "1rem" }}
               name="customized-empty"
               defaultValue={rating}
+              value={rating || 0}
               precision={0.5}
               emptyIcon={<StarBorderIcon fontSize="inherit" />}
               size="small"
+              readOnly
             />
           </Box>
         </div>

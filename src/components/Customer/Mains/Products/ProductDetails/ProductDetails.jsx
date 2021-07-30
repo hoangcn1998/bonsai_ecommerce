@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProductContent from "./ProductContent/ProductContent";
 import ProductContentTabs from "./ProductContentTabs/ProductContentTabs";
@@ -35,11 +35,3 @@ const ProductDetails = () => {
 
 
 export default ProductDetails;
-// function mapStateToProps(state) {
-//   const {
-//     products: { data },
-//   } = state;
-//   return { products: data };
-// }
-
-// export default connect(mapStateToProps)(ProductDetails);
